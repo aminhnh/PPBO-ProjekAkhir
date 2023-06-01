@@ -85,6 +85,6 @@ public class Player extends Entity{
                 image = run.get(spriteNum);
                 break;
         }
-        g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, x, y, gp.tileSize*2, 2*gp.tileSize, null);
     }
 }

@@ -1,5 +1,7 @@
 package main;
 import Entity.Player;
+import tile.TileManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,14 +9,17 @@ import java.awt.event.ActionListener;
 
 public class GamePanel extends JPanel implements Runnable{
     // Screen Settings
-    final int originalTileSize = 24;  // 24x24
-    final int scale = 3;
+    final int originalTileSize = 16;  // 16x16 24x24
+    final int scale = 3; // 48
     public final int tileSize = originalTileSize * scale;
-    final int maxScreenCol = 12;
-    final int maxScreenRow = 9;
-    final int screenWidth = tileSize * maxScreenCol;
-    final int screenHeight = tileSize * maxScreenRow;
+    public final int maxScreenCol = 12;
+    public final int maxScreenRow = 9;
+    public final int screenWidth = tileSize * maxScreenCol;
+    public final int screenHeight = tileSize * maxScreenRow;
+    // FPS
     int FPS =  60;
+
+    TileManager tileManager = new TileManager(this);
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
     Player player = new Player(this, keyHandler);
@@ -67,6 +72,7 @@ public class GamePanel extends JPanel implements Runnable{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g; // konversi g jd Graphics2D karena ada lebih bynk function
+        tileManager.draw(g2);
         player.draw(g2);
         g2.dispose(); // stlh drawing selesai, hapus Graphics2D ini (good for memory)
     }
