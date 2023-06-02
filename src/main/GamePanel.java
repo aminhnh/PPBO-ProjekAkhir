@@ -10,10 +10,10 @@ import java.awt.event.ActionListener;
 public class GamePanel extends JPanel implements Runnable{
     // Screen Settings
     final int originalTileSize = 16;  // 16x16 24x24
-    final int scale = 3; // 48
+    public final int scale = 3; // 48
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 12;
-    public final int maxScreenRow = 9;
+    public final int maxScreenRow = 10;
     public final int screenWidth = tileSize * maxScreenCol;
     public final int screenHeight = tileSize * maxScreenRow;
     // FPS
@@ -60,7 +60,7 @@ public class GamePanel extends JPanel implements Runnable{
             }
             // Menampilkan FPS - Jika 1 detik sudah berlalu, cek berapa kali update telah dilakukan
             if (timer >= 1000000000){
-                System.out.println("FPS : "+ drawCount);
+//                System.out.println("FPS : "+ drawCount);
                 drawCount = 0;
                 timer = 0;
             }

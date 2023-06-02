@@ -12,17 +12,24 @@ import java.util.Arrays;
 public class Player extends Entity{
     GamePanel gp;
     KeyHandler keyHandler;
+    public final static int scale = 2;
+//    public boolean onFloor = true;
+    public boolean onAir = false;
+    public boolean isJumping = false;
+    public double velocity, floor;
     public Player(GamePanel gp, KeyHandler keyHandler) {
         this.gp = gp;
         this.keyHandler = keyHandler;
+        this.velocity = 0;
         setDefaultValues();
         getPlayerImage();
+        floor = (gp.tileSize+6)*2;
     }
     public void setDefaultValues(){
-        x = 100;
-        y = 100;
+        x = gp.tileSize*2;
+        y = (gp.tileSize+6)*2;
         speed = 4;
-        direction = "down";
+        direction = "run";
     }
     public void getPlayerImage(){
         try {
@@ -36,7 +43,7 @@ public class Player extends Entity{
 
             up1 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_06.png"));
             up2 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_07.png"));
-            up = new ArrayList<>(Arrays.asList(up1, up2, up1, up2, up1, up2));
+            up = new ArrayList<>(Arrays.asList(up1, up1, up1, up1, up1, up1));
 
             down1 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_18.png"));
             down2 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_19.png"));
@@ -51,27 +58,56 @@ public class Player extends Entity{
         }
     }
     public void update(){
+        System.out.println("Y = "+y+"  v = "+velocity);
         if(keyHandler.upPressed){
             direction = "up";
-//            y -= speed;
         } else if (keyHandler.downPressed){
             direction = "down";
-//            y += speed;
         } else {
             direction = "run";
         }
         spriteCounter++;
-        if (spriteCounter > 5){ //animasinya 12 fps
+        if (spriteCounter > 5){
             spriteNum++;
             if (spriteNum > 5){
                 spriteNum=0;
             }
             spriteCounter = 0;
+            jumpCounter++;
+        }
+
+        if (keyHandler.upPressed && onFloor() && !isJumping){
+            // saat tekan naik
+            velocity = 15;
+            isJumping = true;
+        }
+        if (velocity > 0){
+            // dino lompat
+            move(speed);
+            velocity--;
+            onAir = true;
+        }
+        if (velocity == 0 && onAir){
+            // saat di puncak lompat
+            velocity = -15;
+        }
+        if (velocity < 0 ){
+            // dino turun
+            move(-speed);
+            velocity++;
+            onAir = false;
+        }
+        if (velocity == 0 && onFloor()){
+            isJumping = false;
         }
     }
+    public void move(double v){
+        y -= v;
+    }
+    public boolean onFloor(){
+        return y <= floor;
+    }
     public void draw(Graphics2D g2){
-//        g2.setColor(Color.white);
-//        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
 
         BufferedImage image = null;
         switch (direction){
@@ -85,6 +121,12 @@ public class Player extends Entity{
                 image = run.get(spriteNum);
                 break;
         }
-        g2.drawImage(image, x, y, gp.tileSize*2, 2*gp.tileSize, null);
+//        g2.setColor(Color.white);
+//        g2.fillRect(gp.tileSize*3, gp.tileSize*4, gp.tileSize, gp.tileSize); //Floor reference
+        // Fill ukuran sprite player
+//        g2.fillRect(x, y, gp.tileSize*Player.scale, gp.tileSize*Player.scale);
+
+        // Draw Dino on screen
+        g2.drawImage(image, (int) x, (int) y, gp.tileSize*Player.scale, gp.tileSize*Player.scale, null);
     }
 }
