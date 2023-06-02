@@ -45,13 +45,17 @@ public class TileManager {
             int col = 0;
             int row = 0;
             while(col < gp.maxScreenCol && row < gp.maxScreenRow) {
-                String line = br.readLine(); //read a line of text
+                // Mengambil satu baris dari file .txt
+                String line = br.readLine();
+
                 while (col < gp.maxScreenCol){
+                    // Kolom di split, diubah menjadi integer, & masukkan ke array mapTileNumber
                     String[] numbers = line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNumber[col][row] = num;
                     col++;
                 }
+                // Jika setiap kolom pada satu baris sudah diakses, lanjutkan ke baris selanjutnya
                 if (col == gp.maxScreenCol){
                     col = 0;
                     row++;
