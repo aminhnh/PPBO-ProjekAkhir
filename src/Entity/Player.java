@@ -58,11 +58,15 @@ public class Player extends Entity{
         }
     }
     public void update(){
-        System.out.println("Y = "+y+"  v = "+velocity);
+//        System.out.println("Y = "+y+"  v = "+velocity);
         if(keyHandler.upPressed){
             direction = "up";
         } else if (keyHandler.downPressed){
             direction = "down";
+        } else if (keyHandler.leftPressed){
+            x-=speed;
+        } else if (keyHandler.rightPressed) {
+            x+=speed;
         } else {
             direction = "run";
         }
@@ -124,7 +128,7 @@ public class Player extends Entity{
 //        g2.setColor(Color.white);
 //        g2.fillRect(gp.tileSize*3, gp.tileSize*4, gp.tileSize, gp.tileSize); //Floor reference
         // Fill ukuran sprite player
-//        g2.fillRect(x, y, gp.tileSize*Player.scale, gp.tileSize*Player.scale);
+//        g2.fillRect((int)x, (int)y, gp.tileSize*Player.scale, gp.tileSize*Player.scale);
 
         // Draw Dino on screen
         g2.drawImage(image, (int) x, (int) y, gp.tileSize*Player.scale, gp.tileSize*Player.scale, null);
