@@ -1,5 +1,6 @@
 package main;
 import Entity.Player;
+import tile.ObstacleManager;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -23,6 +24,8 @@ public class GamePanel extends JPanel implements Runnable{
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
     Player player = new Player(this, keyHandler);
+    public CollisionChecker collisionChecker = new CollisionChecker(this);
+    ObstacleManager obstacleManager = new ObstacleManager(this, player, player);
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -68,12 +71,21 @@ public class GamePanel extends JPanel implements Runnable{
     }
     public void update(){
         player.update();
+        obstacleManager.update();
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g; // konversi g jd Graphics2D karena ada lebih bynk function
+
+        // Tile
         tileManager.draw(g2);
+
+        // Obstacle
+        obstacleManager.draw(g2);
+
+        // Player
         player.draw(g2);
+
         g2.dispose(); // stlh drawing selesai, hapus Graphics2D ini (good for memory)
     }
 }

@@ -24,6 +24,12 @@ public class Player extends Entity{
         setDefaultValues();
         getPlayerImage();
         floor = (gp.tileSize+6)*2;
+
+        solidArea = new Rectangle();
+        solidArea.x = 9*gp.scale;
+        solidArea.y = 8*gp.scale;
+        solidArea.width = 14*gp.scale;
+        solidArea.height = 19*gp.scale;
     }
     public void setDefaultValues(){
         x = gp.tileSize*2;
@@ -57,6 +63,11 @@ public class Player extends Entity{
             e.printStackTrace();
         }
     }
+
+    // Solid Area absolute position on screen
+    public int getSolidAreaX(){ return (int) (solidArea.x + x); }
+    public int getSolidAreaY(){ return (int) (solidArea.y + y); }
+
     public void update(){
 //        System.out.println("Y = "+y+"  v = "+velocity);
         if(keyHandler.upPressed){
@@ -104,6 +115,8 @@ public class Player extends Entity{
         if (velocity == 0 && onFloor()){
             isJumping = false;
         }
+
+        gp.collisionChecker.checkCollision(this);
     }
     public void move(double v){
         y -= v;
@@ -132,5 +145,7 @@ public class Player extends Entity{
 
         // Draw Dino on screen
         g2.drawImage(image, (int) x, (int) y, gp.tileSize*Player.scale, gp.tileSize*Player.scale, null);
+        // Draw solidArea
+        g2.fillRect(getSolidAreaX(), getSolidAreaY(), solidArea.width, solidArea.height);
     }
 }
