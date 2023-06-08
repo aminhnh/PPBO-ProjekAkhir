@@ -9,6 +9,7 @@ import java.net.URL;
 public class Sound {
     Clip clip;
     URL soundURL[] = new URL[30];
+    private long clipTimePosition;
 
     public Sound(){
         soundURL[0] = getClass().getResource("/sounds/chiptune-grooving.wav");
@@ -24,18 +25,28 @@ public class Sound {
         } catch (Exception e){
             e.printStackTrace();
         }
+
+        // Jika merupakan musik (bukan sfx), kecilin audionya
+        if (i == 0){
+            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(-20.0f);
+        }
     }
     public void play(){
-        // Mulai audio
         clip.start();
     }
     public void loop(){
-        // Reduce volume by 20 decibels.
-        FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(-20.0f);
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
     public void stop(){
         clip.stop();
+    }
+    public void pause(){
+        clipTimePosition = clip.getMicrosecondPosition();
+        clip.stop();
+    }
+    public void resume(){
+        clip.setMicrosecondPosition(clipTimePosition);
+        clip.start();
     }
 }

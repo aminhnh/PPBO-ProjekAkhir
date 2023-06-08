@@ -37,7 +37,7 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_ENTER){
                 if(gp.ui.menuNum == 0){
                     gp.gameState = gp.playState;
-                    gp.playMusic(0);
+                    gp.playMusic();
                 } else if (gp.ui.menuNum == 1){
                     // TODO: add credits gamestate & ui
                 } else if (gp.ui.menuNum == 2){
@@ -48,7 +48,6 @@ public class KeyHandler implements KeyListener {
 
         // PLAY STATE
         else if (gp.gameState == gp.playState){
-            System.out.println("in play state");
             if (code == KeyEvent.VK_UP){
                 upPressed = true;
             }
@@ -64,7 +63,7 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_ESCAPE){
                 System.out.println("pressed escape");
                 gp.gameState = gp.pauseState;
-                System.out.println("cur: "+gp.gameState+"-----------------------");
+                gp.music.pause();
             }
         }
 
@@ -72,6 +71,7 @@ public class KeyHandler implements KeyListener {
         else if (gp.gameState == gp.pauseState){
             if (code == KeyEvent.VK_ESCAPE){
                 gp.gameState = gp.playState;
+                gp.music.resume();
             }
         }
     }

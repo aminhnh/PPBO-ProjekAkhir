@@ -126,17 +126,17 @@ public class GamePanel extends JPanel implements Runnable{
         // Setelah drawing selesai, hapus Graphics2D ini (good for memory)
         g2.dispose();
     }
-    public void playMusic(int i){
-        music.setFile(i);
+    public void playMusic(){
+        music.setFile(0);
         music.play();
         music.loop();
-    }
-    public void stopMusic(){
-        music.stop();
     }
     public void playSFX(int i){
         sfx.setFile(i);
         sfx.play();
+    }
+    public void stopMusic(){
+        music.stop();
     }
 
 }
