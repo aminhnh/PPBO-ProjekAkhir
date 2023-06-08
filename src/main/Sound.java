@@ -26,13 +26,13 @@ public class Sound {
         }
     }
     public void play(){
-        // Reduce volume by 20 decibels.
         // Mulai audio
         clip.start();
     }
     public void loop(){
+        // Reduce volume by 20 decibels.
         FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(-15.0f);
+        gainControl.setValue(-20.0f);
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
     public void stop(){
