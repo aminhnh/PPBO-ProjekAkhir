@@ -1,13 +1,14 @@
 package tile;
 
 import main.GamePanel;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+// CLASS UNTUK MENGATUR SUSUNAN TILE PADA LAYAR (nanti mungkin dihapus)
 
 public class TileManager {
     GamePanel gp;
@@ -22,6 +23,7 @@ public class TileManager {
         loadMap("/maps/map.txt");
     }
     public void getTileImage(){
+        // Me-load gambar setiap tile
         try {
             tile[0] = new Tile();
             tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/sky.png"));
@@ -37,6 +39,7 @@ public class TileManager {
         }
     }
     public void loadMap(String filePath){
+        // Me-load map (susunan tile)
         try{
             InputStream io = getClass().getResourceAsStream(filePath);
             BufferedReader br = new BufferedReader(new InputStreamReader(io));
@@ -67,17 +70,21 @@ public class TileManager {
         }
     }
     public void draw(Graphics2D g2){
-//        g2.drawImage(tile[0].image, 0, 0, gp.tileSize, gp.tileSize, null);
-//        g2.drawImage(tile[1].image, 48, 0, gp.tileSize, gp.tileSize, null);
-        //
+        //g2.drawImage(tile[0].image, 0, 0, gp.tileSize, gp.tileSize, null);
+        //g2.drawImage(tile[1].image, 48, 0, gp.tileSize, gp.tileSize, null);
+
+        // Set background
         g2.setColor(Color.white);
         g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
         int col = 0;
         int row = 0;
-        // x & y untuk lokasi tile di render
+
+        // x & y menandai lokasi tile pada layar
         int x = 0;
         int y = 0;
 
+        // Loop untuk menampilkan setiap tile
         while(col < gp.maxScreenCol && row < gp.maxScreenRow){
             int tileNum = mapTileNumber[col][row];
 

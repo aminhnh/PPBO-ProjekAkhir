@@ -19,23 +19,26 @@ public class Obstacle {
         this.width = gp.tileSize;
         this.height = gp.tileSize;
 
-
+        // SolidArea merupakan collider box obstacle
         this.solidArea = new Rectangle();
         solidArea.x = x;
         solidArea.y = getSolidAreaY();
         solidArea.width = gp.tileSize;
         solidArea.height = (int) (gp.tileSize*0.4);
 
-        getImage();
+        getObstacleImage();
         System.out.println("Obstacle Spawned");
     }
-    public void getImage(){
+    public void getObstacleImage(){
+        // Me-load image
         try {
             this.image = ImageIO.read(getClass().getResourceAsStream("/tiles/spike.png"));
         } catch (IOException e){
             e.printStackTrace();
         }
     }
+
+    // Me-return posisi solidArea pada layar
     public int getSolidAreaX(){
         return x;
     }

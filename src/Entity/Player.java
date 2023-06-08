@@ -9,11 +9,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+// CLASS PLAYER MENGATUR SEGALA TTNG PLAYER
+
 public class Player extends Entity{
     GamePanel gp;
     KeyHandler keyHandler;
     public final static int scale = 2;
-//    public boolean onFloor = true;
     public boolean onAir = false;
     public boolean isJumping = false;
     public double velocity, floor;
@@ -25,6 +26,7 @@ public class Player extends Entity{
         getPlayerImage();
         floor = (gp.tileSize+6)*2;
 
+        // SolidArea itu collision box untuk player (area yg dideteksi jika menabrak collision box obstacle)
         solidArea = new Rectangle();
         solidArea.x = 9*gp.scale;
         solidArea.y = 8*gp.scale;
@@ -38,6 +40,7 @@ public class Player extends Entity{
         direction = "run";
     }
     public void getPlayerImage(){
+        // Method untuk nge-load gambar player
         try {
             run1 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_05.png"));
             run2 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_06.png"));
@@ -64,12 +67,12 @@ public class Player extends Entity{
         }
     }
 
-    // Solid Area absolute position on screen
+    // Me-return lokasi solidArea pada layar
     public int getSolidAreaX(){ return (int) (solidArea.x + x); }
     public int getSolidAreaY(){ return (int) (solidArea.y + y); }
 
     public void update(){
-//        System.out.println("Y = "+y+"  v = "+velocity);
+        //System.out.println("Y = "+y+"  v = "+velocity);
         if(keyHandler.upPressed){
             direction = "up";
         } else if (keyHandler.downPressed){
@@ -91,6 +94,8 @@ public class Player extends Entity{
             jumpCounter++;
         }
 
+
+        // Kode dibawah ini mengatur dino lompat
         if (keyHandler.upPressed && onFloor() && !isJumping){
             // saat tekan naik
             velocity = 15;
@@ -116,7 +121,6 @@ public class Player extends Entity{
             isJumping = false;
         }
 
-        gp.collisionChecker.checkCollision(this);
     }
     public void move(double v){
         y -= v;
@@ -138,10 +142,8 @@ public class Player extends Entity{
                 image = run.get(spriteNum);
                 break;
         }
-//        g2.setColor(Color.white);
-//        g2.fillRect(gp.tileSize*3, gp.tileSize*4, gp.tileSize, gp.tileSize); //Floor reference
         // Fill ukuran sprite player
-//        g2.fillRect((int)x, (int)y, gp.tileSize*Player.scale, gp.tileSize*Player.scale);
+        //g2.fillRect((int)x, (int)y, gp.tileSize*Player.scale, gp.tileSize*Player.scale);
 
         // Draw Dino on screen
         g2.drawImage(image, (int) x, (int) y, gp.tileSize*Player.scale, gp.tileSize*Player.scale, null);

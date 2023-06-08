@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+// ABSTRACT CLASS UNTUK ENTITY (player dan makhluk lain jika perlu)
+
 public abstract class Entity {
     public int x, y, speed;
     public BufferedImage run1, run2, run3, run4, run5, run6;

@@ -2,23 +2,22 @@ package main;
 import Entity.Player;
 import tile.ObstacleManager;
 import tile.TileManager;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+// CLASS UNTUK MENGATUR GAME
 
 public class GamePanel extends JPanel implements Runnable{
     // Screen Settings
-    final int originalTileSize = 16;  // 16x16 24x24
-    public final int scale = 3; // 48
-    public final int tileSize = originalTileSize * scale;
-    public final int maxScreenCol = 12;
-    public final int maxScreenRow = 10;
+    final int originalTileSize = 16;  // 16x16px
+    public final int scale = 3;
+    public final int tileSize = originalTileSize * scale; // 16x3 = 48
+    public final int maxScreenCol = 12; // Banyak kolom tile
+    public final int maxScreenRow = 10; // Banyak baris tile
     public final int screenWidth = tileSize * maxScreenCol;
     public final int screenHeight = tileSize * maxScreenRow;
     // FPS
-    int FPS =  60;
+    int FPS =  60; // Berapa kali game di-update per detik
 
     TileManager tileManager = new TileManager(this);
     KeyHandler keyHandler = new KeyHandler();
@@ -30,16 +29,19 @@ public class GamePanel extends JPanel implements Runnable{
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
-        this.setDoubleBuffered(true); // tile/barang diluar layar akan di load
+        this.setDoubleBuffered(true); // Tile diluar layar akan di load
         this.addKeyListener(keyHandler);
         this.setFocusable(true); // fokus menerima input
     }
     public void startGameThread(){
         gameThread = new Thread(this);
-        gameThread.start(); // Dengan memulai thread, run() di class ini (this) akan dijalankan
+        // Dengan memulai thread, run() di class ini (this) akan dijalankan
+        gameThread.start();
     }
     @Override
     public void run() {
+        // Method ini memanggil update() 60 kali per detik (sesuai dengan FPS)
+
         double drawInterval = 1000000000/FPS ; // 1 miliar nanosecond (1 detik)/FPS
         double delta = 0;
         long lastTime = System.nanoTime();
@@ -61,15 +63,17 @@ public class GamePanel extends JPanel implements Runnable{
                 delta--;
                 drawCount++;
             }
+
             // Menampilkan FPS - Jika 1 detik sudah berlalu, cek berapa kali update telah dilakukan
             if (timer >= 1000000000){
-//                System.out.println("FPS : "+ drawCount);
+                //System.out.println("FPS : "+ drawCount);
                 drawCount = 0;
                 timer = 0;
             }
         }
     }
     public void update(){
+        // Memanggil method update pada player dan obstacleManager 60 kali per detik
         player.update();
         obstacleManager.update();
     }
@@ -86,6 +90,7 @@ public class GamePanel extends JPanel implements Runnable{
         // Player
         player.draw(g2);
 
-        g2.dispose(); // stlh drawing selesai, hapus Graphics2D ini (good for memory)
+        // Setelah drawing selesai, hapus Graphics2D ini (good for memory)
+        g2.dispose();
     }
 }

@@ -1,13 +1,11 @@
 package tile;
 
-import Entity.Entity;
 import Entity.Player;
 import main.GamePanel;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
+
+// CLASS YANG MENGATUR OBSTACLE
 
 public class ObstacleManager {
     GamePanel gp;
@@ -52,7 +50,7 @@ public class ObstacleManager {
         int oy1 = obs.y;
         int oy2 = obs.y + obs.solidArea.height;
 
-//        System.out.println("PX1: "+px1+ " PX2: "+px2+" OX1: "+ox1+" OX2 "+ox2);
+        //System.out.println("PX1: "+px1+ " PX2: "+px2+" OX1: "+ox1+" OX2 "+ox2);
         // Intersection antara player dan obstacle
         if (px1 < ox2 && px2 > ox1 && py1 < oy2 && py2 > oy1){
             System.out.println("GAME OVER");
@@ -60,16 +58,14 @@ public class ObstacleManager {
     }
 
     public void draw(Graphics2D g2){
-//        g2.setColor(Color.white);
-//        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
-        // TODO buat loop untuk nampilin setiap elemen di list obstacles
+        // Loop untuk menampilkan setiap obstacle di ArrayList obstacles
         for (Obstacle obs: obstacles) {
             g2.fillRect(obs.solidArea.x, obs.getSolidAreaY(), obs.width, obs.solidArea.height);
             g2.drawImage(obs.image, obs.x, obs.y, gp.tileSize, gp.tileSize, null);
         }
-//        g2.fillRect(obstacles[0].x, obstacles[0].y, obstacles[0].width, obstacles[0].height);
-//        g2.drawImage(obstacles[0].image, x, y, gp.tileSize, gp.tileSize, null);
 
+        //g2.fillRect(obstacles[0].x, obstacles[0].y, obstacles[0].width, obstacles[0].height);
+        //g2.drawImage(obstacles[0].image, x, y, gp.tileSize, gp.tileSize, null);
     }
 }
