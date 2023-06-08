@@ -2,6 +2,8 @@ package tile;
 
 import Entity.Player;
 import main.GamePanel;
+import main.Sound;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -35,14 +37,23 @@ public class ObstacleManager {
             spawnCounter++;
             spawnObstacle();
         }
+        moveObstacles();
+        deleteOffscreenObstacles();
     }
-    // TODO: move obstacles
-    // move every obstacle to the left by the speed
-    // change speed
+    // TODO: move other tiles
+    // TODO: change speed to be faster as time passes
+    // TODO: randomize obstacles distance
     public void spawnObstacle(){
-        obstacles.add(new Obstacle(gp, gp.tileSize*(4 + (2*spawnCounter)), gp.tileSize*3));
+        obstacles.add(new Obstacle(gp, gp.screenWidth, gp.tileSize*3));
     }
-
+    public void moveObstacles(){
+        for (Obstacle obs: obstacles) {
+            obs.x -= speed;
+        }
+    }
+    public void deleteOffscreenObstacles(){
+        obstacles.removeIf(obs -> obs.x < -(gp.tileSize+10));
+    }
     public void checkCollision(Player player, Obstacle obs){
         int px1 = player.getSolidAreaX() ;
         int px2 = player.getSolidAreaX() + player.solidArea.width;
@@ -57,8 +68,8 @@ public class ObstacleManager {
         //System.out.println("PX1: "+px1+ " PX2: "+px2+" OX1: "+ox1+" OX2 "+ox2);
         // Intersection antara player dan obstacle
         if (px1 < ox2 && px2 > ox1 && py1 < oy2 && py2 > oy1){
+            // TODO: Add game over functionality
             System.out.println("GAME OVER");
-
         }
     }
 

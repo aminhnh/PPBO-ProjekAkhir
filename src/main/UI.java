@@ -114,6 +114,7 @@ public class UI {
         int y = gp.screenHeight/4;
 
         g2.drawString(text, x, y);
+        // TODO: Add options?
     }
     public void drawFPS(){
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 24F));

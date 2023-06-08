@@ -27,7 +27,6 @@ public class Obstacle {
         solidArea.height = (int) (gp.tileSize*0.4);
 
         getObstacleImage();
-        System.out.println("Obstacle Spawned");
     }
     public void getObstacleImage(){
         // Me-load image
