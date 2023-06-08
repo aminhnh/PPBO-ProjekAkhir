@@ -62,7 +62,7 @@ public class ObstacleManager {
 
         // Loop untuk menampilkan setiap obstacle di ArrayList obstacles
         for (Obstacle obs: obstacles) {
-            g2.fillRect(obs.solidArea.x, obs.getSolidAreaY(), obs.width, obs.solidArea.height);
+            //g2.fillRect(obs.solidArea.x, obs.getSolidAreaY(), obs.width, obs.solidArea.height);
             g2.drawImage(obs.image, obs.x, obs.y, gp.tileSize, gp.tileSize, null);
         }
 

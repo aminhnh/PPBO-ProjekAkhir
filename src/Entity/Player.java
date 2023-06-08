@@ -149,6 +149,6 @@ public class Player extends Entity{
         // Draw Dino on screen
         g2.drawImage(image, (int) x, (int) y, gp.tileSize*Player.scale, gp.tileSize*Player.scale, null);
         // Draw solidArea
-        g2.fillRect(getSolidAreaX(), getSolidAreaY(), solidArea.width, solidArea.height);
+        //g2.fillRect(getSolidAreaX(), getSolidAreaY(), solidArea.width, solidArea.height);
     }
 }
