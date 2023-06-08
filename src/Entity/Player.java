@@ -97,7 +97,8 @@ public class Player extends Entity{
 
         // Kode dibawah ini mengatur dino lompat
         if (keyHandler.upPressed && onFloor() && !isJumping){
-            // saat tekan naik
+            // saat tekan naik & player di lantai:
+            gp.playSFX(1);
             velocity = 15;
             isJumping = true;
         }

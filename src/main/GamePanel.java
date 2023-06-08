@@ -16,12 +16,17 @@ public class GamePanel extends JPanel implements Runnable{
     public final int maxScreenRow = 10; // Banyak baris tile
     public final int screenWidth = tileSize * maxScreenCol;
     public final int screenHeight = tileSize * maxScreenRow;
+
     // FPS
     int FPS =  60; // Berapa kali game di-update per detik
 
+    // SYSTEM
     TileManager tileManager = new TileManager(this);
     KeyHandler keyHandler = new KeyHandler();
+    Sound sound = new Sound();
     Thread gameThread;
+
+    // ENTITY & OBJECT
     Player player = new Player(this, keyHandler);
     ObstacleManager obstacleManager = new ObstacleManager(this, player, player);
 
@@ -33,6 +38,7 @@ public class GamePanel extends JPanel implements Runnable{
         this.setFocusable(true); // fokus menerima input
     }
     public void startGameThread(){
+        playMusic(0);
         gameThread = new Thread(this);
         // Dengan memulai thread, run() di class ini (this) akan dijalankan
         gameThread.start();
@@ -76,6 +82,8 @@ public class GamePanel extends JPanel implements Runnable{
         player.update();
         obstacleManager.update();
     }
+
+    // Method untuk menampilkan objek dll. pads screen
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g; // konversi g jd Graphics2D karena ada lebih bynk function
@@ -92,4 +100,17 @@ public class GamePanel extends JPanel implements Runnable{
         // Setelah drawing selesai, hapus Graphics2D ini (good for memory)
         g2.dispose();
     }
+    public void playMusic(int i){
+        sound.setFile(i);
+        sound.play();
+        sound.loop();
+    }
+    public void stopMusic(){
+        sound.stop();
+    }
+    public void playSFX(int i){
+        sound.setFile(i);
+        sound.play();
+    }
+
 }
