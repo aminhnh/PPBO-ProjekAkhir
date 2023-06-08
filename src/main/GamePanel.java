@@ -23,7 +23,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     // SYSTEM
     TileManager tileManager = new TileManager(this);
-    KeyHandler keyHandler = new KeyHandler();
+    KeyHandler keyHandler = new KeyHandler(this);
     Sound music = new Sound();
     Sound sfx = new Sound();
     public UI ui = new UI(this);
@@ -33,6 +33,11 @@ public class GamePanel extends JPanel implements Runnable{
     Player player = new Player(this, keyHandler);
     ObstacleManager obstacleManager = new ObstacleManager(this, player, player);
 
+    // GAME STATE
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
+
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
@@ -40,8 +45,11 @@ public class GamePanel extends JPanel implements Runnable{
         this.addKeyListener(keyHandler);
         this.setFocusable(true); // fokus menerima input
     }
-    public void startGameThread(){
+    public void setupGame(){
         playMusic(0);
+        gameState = playState;
+    }
+    public void startGameThread(){
         gameThread = new Thread(this);
         // Dengan memulai thread, run() di class ini (this) akan dijalankan
         gameThread.start();
@@ -50,7 +58,7 @@ public class GamePanel extends JPanel implements Runnable{
     public void run() {
         // Method ini memanggil update() 60 kali per detik (sesuai dengan FPS)
 
-        double drawInterval = 1000000000/FPS ; // 1 miliar nanosecond (1 detik)/FPS
+        double drawInterval = 1000000000.0/FPS ; // 1 miliar nanosecond (1 detik)/FPS
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
@@ -83,8 +91,13 @@ public class GamePanel extends JPanel implements Runnable{
     }
     public void update(){
         // Memanggil method update pada player dan obstacleManager 60 kali per detik
-        player.update();
-        obstacleManager.update();
+        if (gameState == playState){
+            player.update();
+            obstacleManager.update();
+        }
+        if (gameState == pauseState){
+            // Do nothing
+        }
     }
 
     // Method untuk menampilkan objek dll. pads screen

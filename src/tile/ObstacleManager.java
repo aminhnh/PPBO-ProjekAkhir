@@ -54,6 +54,7 @@ public class ObstacleManager {
         // Intersection antara player dan obstacle
         if (px1 < ox2 && px2 > ox1 && py1 < oy2 && py2 > oy1){
             System.out.println("GAME OVER");
+
         }
     }
 
