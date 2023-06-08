@@ -23,7 +23,8 @@ public class GamePanel extends JPanel implements Runnable{
     // SYSTEM
     TileManager tileManager = new TileManager(this);
     KeyHandler keyHandler = new KeyHandler();
-    Sound sound = new Sound();
+    Sound music = new Sound();
+    Sound sfx = new Sound();
     Thread gameThread;
 
     // ENTITY & OBJECT
@@ -101,16 +102,16 @@ public class GamePanel extends JPanel implements Runnable{
         g2.dispose();
     }
     public void playMusic(int i){
-        sound.setFile(i);
-        sound.play();
-        sound.loop();
+        music.setFile(i);
+        music.play();
+        music.loop();
     }
     public void stopMusic(){
-        sound.stop();
+        music.stop();
     }
     public void playSFX(int i){
-        sound.setFile(i);
-        sound.play();
+        sfx.setFile(i);
+        sfx.play();
     }
 
 }
