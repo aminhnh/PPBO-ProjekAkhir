@@ -18,7 +18,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int screenHeight = tileSize * maxScreenRow;
 
     // FPS
-    int FPS =  60; // Berapa kali game di-update per detik
+    public final int FPS =  60; // Berapa kali game di-update per detik
     public int actualFPS;
 
     // SYSTEM

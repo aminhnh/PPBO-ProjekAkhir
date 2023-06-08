@@ -81,7 +81,8 @@ public class Player extends Entity{
             x-=speed;
         } else if (keyHandler.rightPressed) {
             x+=speed;
-        } else {
+        }
+        if (!keyHandler.upPressed){
             direction = "run";
         }
         spriteCounter++;

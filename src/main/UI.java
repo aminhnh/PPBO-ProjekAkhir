@@ -98,6 +98,7 @@ public class UI {
             if (menuNum == 2) {
                 g2.drawString(">", x - 30, y);
             }
+            // TODO: Add player images (4)
         }
         else if (titleScreenState == titleScreenCredits){
             // TODO: Create credits screen

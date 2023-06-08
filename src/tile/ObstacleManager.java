@@ -11,7 +11,7 @@ public class ObstacleManager {
     GamePanel gp;
     ArrayList<Obstacle> obstacles;
     Player player1, player2;
-    int x, y, spawnCounter;
+    int x, y, updateCounter, spawnCounter, speed;
 
     public ObstacleManager(GamePanel gp, Player player1, Player player2){
         this.gp = gp;
@@ -21,22 +21,26 @@ public class ObstacleManager {
         this.player1 = player1;
         this.player2 = player2;
         spawnCounter = 0;
+        updateCounter = 0;
+        speed = 4;
     }
     public void update(){
-        spawnCounter++;
+        updateCounter++;
+        // Check collision pada semua obstacles
         for (Obstacle obs : obstacles) {
             checkCollision(player1, obs);
         }
-        if(spawnCounter%60 == 1){
+        // Tambah obstacle setiap satu detik
+        if(updateCounter%gp.FPS == 1){
+            spawnCounter++;
             spawnObstacle();
         }
     }
-    // TODO
-    // Every few seconds, spawn a new obstacle
+    // TODO: move obstacles
     // move every obstacle to the left by the speed
     // change speed
     public void spawnObstacle(){
-        obstacles.add(new Obstacle(gp, gp.tileSize*4 + spawnCounter, gp.tileSize*3));
+        obstacles.add(new Obstacle(gp, gp.tileSize*(4 + (2*spawnCounter)), gp.tileSize*3));
     }
 
     public void checkCollision(Player player, Obstacle obs){
