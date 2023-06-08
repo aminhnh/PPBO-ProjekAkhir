@@ -18,22 +18,59 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
-        if (code == KeyEvent.VK_UP){
-            upPressed = true;
+        // TITLE STATE
+        if (gp.gameState == gp.titleState){
+            // Saat scrolling opsi menu
+            if (code == KeyEvent.VK_UP || code == KeyEvent.VK_W){
+                gp.ui.menuNum--;
+                if (gp.ui.menuNum < 0){
+                    gp.ui.menuNum = 2;
+                }
+            }
+            if (code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S){
+                gp.ui.menuNum++;
+                if (gp.ui.menuNum > 2){
+                    gp.ui.menuNum = 0;
+                }
+            }
+            // Saat memilih menu (tekan enter)
+            if (code == KeyEvent.VK_ENTER){
+                if(gp.ui.menuNum == 0){
+                    gp.gameState = gp.playState;
+                    gp.playMusic(0);
+                } else if (gp.ui.menuNum == 1){
+                    // TODO: add credits gamestate & ui
+                } else if (gp.ui.menuNum == 2){
+                    System.exit(0);
+                }
+            }
         }
-        if (code == KeyEvent.VK_DOWN){
-            downPressed = true;
-        }
-        if (code == KeyEvent.VK_LEFT){
-            leftPressed = true;
-        }
-        if (code == KeyEvent.VK_RIGHT){
-            rightPressed = true;
-        }
-        if (code == KeyEvent.VK_ESCAPE){
-            if (gp.gameState == gp.playState){
+
+        // PLAY STATE
+        else if (gp.gameState == gp.playState){
+            System.out.println("in play state");
+            if (code == KeyEvent.VK_UP){
+                upPressed = true;
+            }
+            if (code == KeyEvent.VK_DOWN){
+                downPressed = true;
+            }
+            if (code == KeyEvent.VK_LEFT){
+                leftPressed = true;
+            }
+            if (code == KeyEvent.VK_RIGHT){
+                rightPressed = true;
+            }
+            if (code == KeyEvent.VK_ESCAPE){
+                System.out.println("pressed escape");
                 gp.gameState = gp.pauseState;
-            } else if (gp.gameState == gp.pauseState){
+                System.out.println("cur: "+gp.gameState+"-----------------------");
+            }
+        }
+
+        // PAUSED STATE
+        else if (gp.gameState == gp.pauseState){
+            if (code == KeyEvent.VK_ESCAPE){
                 gp.gameState = gp.playState;
             }
         }
