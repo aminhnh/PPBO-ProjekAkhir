@@ -19,7 +19,7 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         // TITLE STATE
-        if (gp.gameState == gp.titleState){
+        if (gp.gameState == gp.titleState && gp.ui.titleScreenState == gp.ui.titleScreenMenu){
             // Saat scrolling opsi menu
             if (code == KeyEvent.VK_UP || code == KeyEvent.VK_W){
                 gp.ui.menuNum--;
@@ -39,7 +39,7 @@ public class KeyHandler implements KeyListener {
                     gp.gameState = gp.playState;
                     gp.playMusic();
                 } else if (gp.ui.menuNum == 1){
-                    // TODO: add credits gamestate & ui
+                    gp.ui.titleScreenState = gp.ui.titleScreenCredits;
                 } else if (gp.ui.menuNum == 2){
                     System.exit(0);
                 }

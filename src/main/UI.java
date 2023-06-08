@@ -10,6 +10,14 @@ public class UI {
     Font arial_16B;
     Font pixellari, minecraft, upheavtt;
     public int menuNum = 0;
+
+    // Title Screen Sub-state
+    public int titleScreenState = 0;
+    public final int titleScreenMenu = 0;
+    public final int titleScreenCredits = 1;
+    public final int titleScreenCharacter = 2;
+
+
     public UI(GamePanel gp) {
         this.gp = gp;
         arial_16B = new Font("Arial", Font.BOLD, 16);
@@ -44,50 +52,58 @@ public class UI {
             drawPauseScreen();
         }
     }
-    public void drawTitleScreen(){
-        // Background Color
-        g2.setColor(new Color(80, 187, 255));
-        g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
+    public void drawTitleScreen() {
+        if (titleScreenState == titleScreenMenu) {
+            // Background Color
+            g2.setColor(new Color(80, 187, 255));
+            g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
-        // Title text settings
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 60F));
-        String text = "DINO PARTY";
-        int x = getXforCenteredText(text);
-        int y = gp.tileSize*3;
+            // Title text settings
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 60F));
+            String text = "DINO PARTY";
+            int x = getXforCenteredText(text);
+            int y = gp.tileSize * 3;
 
-        // Shadow
-        g2.setColor(Color.black);
-        g2.drawString(text, x+2,y+2);
+            // Shadow
+            g2.setColor(Color.black);
+            g2.drawString(text, x + 2, y + 2);
 
-        // Draw title text
-        g2.setColor(Color.white);
-        g2.drawString(text, x, y);
+            // Draw title text
+            g2.setColor(Color.white);
+            g2.drawString(text, x, y);
 
-        // Menu
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
+            // Menu
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
 
-        text = "PLAY";
-        x = getXforCenteredText(text);
-        y += gp.tileSize*2;
-        g2.drawString(text, x, y);
-        if (menuNum == 0){
-            g2.drawString(">", x-30,y);
+            text = "PLAY";
+            x = getXforCenteredText(text);
+            y += gp.tileSize * 2;
+            g2.drawString(text, x, y);
+            if (menuNum == 0) {
+                g2.drawString(">", x - 30, y);
+            }
+
+            text = "CREDITS";
+            x = getXforCenteredText(text);
+            y += gp.tileSize / 2;
+            g2.drawString(text, x, y);
+            if (menuNum == 1) {
+                g2.drawString(">", x - 30, y);
+            }
+
+            text = "QUIT";
+            x = getXforCenteredText(text);
+            y += gp.tileSize / 2;
+            g2.drawString(text, x, y);
+            if (menuNum == 2) {
+                g2.drawString(">", x - 30, y);
+            }
         }
-
-        text = "CREDITS";
-        x = getXforCenteredText(text);
-        y += gp.tileSize/2;
-        g2.drawString(text, x, y);
-        if (menuNum == 1){
-            g2.drawString(">", x-30,y);
+        else if (titleScreenState == titleScreenCredits){
+            // TODO: Create credits screen
         }
-
-        text = "QUIT";
-        x = getXforCenteredText(text);
-        y += gp.tileSize/2;
-        g2.drawString(text, x, y);
-        if (menuNum == 2){
-            g2.drawString(">", x-30,y);
+        else if (titleScreenState == titleScreenCharacter){
+            // TODO: Create character picker screen
         }
     }
     public void drawPauseScreen(){
