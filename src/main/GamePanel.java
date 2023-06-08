@@ -19,12 +19,14 @@ public class GamePanel extends JPanel implements Runnable{
 
     // FPS
     int FPS =  60; // Berapa kali game di-update per detik
+    public int actualFPS;
 
     // SYSTEM
     TileManager tileManager = new TileManager(this);
     KeyHandler keyHandler = new KeyHandler();
     Sound music = new Sound();
     Sound sfx = new Sound();
+    public UI ui = new UI(this);
     Thread gameThread;
 
     // ENTITY & OBJECT
@@ -72,6 +74,7 @@ public class GamePanel extends JPanel implements Runnable{
 
             // Menampilkan FPS - Jika 1 detik sudah berlalu, cek berapa kali update telah dilakukan
             if (timer >= 1000000000){
+                actualFPS = drawCount;
                 //System.out.println("FPS : "+ drawCount);
                 drawCount = 0;
                 timer = 0;
@@ -97,6 +100,9 @@ public class GamePanel extends JPanel implements Runnable{
 
         // Player
         player.draw(g2);
+
+        // UI
+        ui.draw(g2);
 
         // Setelah drawing selesai, hapus Graphics2D ini (good for memory)
         g2.dispose();
