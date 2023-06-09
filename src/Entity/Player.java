@@ -28,7 +28,7 @@ public class Player extends Entity{
 
         // SolidArea itu collision box untuk player (area yg dideteksi jika menabrak collision box obstacle)
         solidArea = new Rectangle();
-        solidArea.width = 10*gp.scale;
+        solidArea.width = 7*gp.scale;
         solidArea.height = 19*gp.scale;
         solidArea.x = x - (gp.tileSize*Player.scale/2) - (solidArea.width/2);
         solidArea.y = 8*gp.scale;
@@ -36,7 +36,7 @@ public class Player extends Entity{
     public void setDefaultValues(){
         x = gp.tileSize*2;
         y = (gp.tileSize+6)*2;
-        speed = 4;
+        speed = 5;
         direction = "run";
     }
     public void getPlayerImage(){
@@ -100,7 +100,7 @@ public class Player extends Entity{
         if (keyHandler.upPressed && onFloor() && !isJumping){
             // saat tekan naik & player di lantai:
             gp.playSFX(1);
-            velocity = 15;
+            velocity = 20;
             isJumping = true;
         }
         if (velocity > 0){
@@ -111,7 +111,7 @@ public class Player extends Entity{
         }
         if (velocity == 0 && onAir){
             // saat di puncak lompat
-            velocity = -15;
+            velocity = -20;
         }
         if (velocity < 0 ){
             // dino turun

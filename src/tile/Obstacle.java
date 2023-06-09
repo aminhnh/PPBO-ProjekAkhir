@@ -21,9 +21,9 @@ public class Obstacle {
 
         // SolidArea merupakan collider box obstacle
         this.solidArea = new Rectangle();
-        solidArea.x = x;
+        solidArea.x = (int) (gp.tileSize*0.2*0.5);
         solidArea.y = getSolidAreaY();
-        solidArea.width = gp.tileSize;
+        solidArea.width = (int) (gp.tileSize*0.9);
         solidArea.height = (int) (gp.tileSize*0.2);
 
         getObstacleImage();

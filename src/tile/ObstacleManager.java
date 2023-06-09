@@ -24,7 +24,7 @@ public class ObstacleManager {
         this.player2 = player2;
         spawnCounter = 0;
         updateCounter = 0;
-        speed = 4;
+        speed = 5;
     }
     public void update(){
         updateCounter++;
@@ -78,7 +78,7 @@ public class ObstacleManager {
         // Loop untuk menampilkan setiap obstacle di ArrayList obstacles
         for (Obstacle obs: obstacles) {
             g2.setColor(Color.white);
-            g2.fillRect(obs.getSolidAreaX(), obs.getSolidAreaY(), obs.width, obs.solidArea.height);
+            g2.fillRect(obs.getSolidAreaX(), obs.getSolidAreaY(), obs.solidArea.width, obs.solidArea.height);
             g2.drawImage(obs.image, obs.x, obs.y, gp.tileSize, gp.tileSize, null);
         }
 
