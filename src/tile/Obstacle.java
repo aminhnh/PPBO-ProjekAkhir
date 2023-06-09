@@ -24,7 +24,7 @@ public class Obstacle {
         solidArea.x = x;
         solidArea.y = getSolidAreaY();
         solidArea.width = gp.tileSize;
-        solidArea.height = (int) (gp.tileSize*0.4);
+        solidArea.height = (int) (gp.tileSize*0.2);
 
         getObstacleImage();
     }
@@ -42,6 +42,6 @@ public class Obstacle {
         return x;
     }
     public int getSolidAreaY(){
-        return (int) ( y + (0.6*gp.tileSize));
+        return (int) ( y + (0.8*gp.tileSize));
     }
 }

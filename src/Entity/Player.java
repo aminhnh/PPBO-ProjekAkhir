@@ -28,10 +28,10 @@ public class Player extends Entity{
 
         // SolidArea itu collision box untuk player (area yg dideteksi jika menabrak collision box obstacle)
         solidArea = new Rectangle();
-        solidArea.x = 9*gp.scale;
-        solidArea.y = 8*gp.scale;
-        solidArea.width = 14*gp.scale;
+        solidArea.width = 10*gp.scale;
         solidArea.height = 19*gp.scale;
+        solidArea.x = x - (gp.tileSize*Player.scale/2) - (solidArea.width/2);
+        solidArea.y = 8*gp.scale;
     }
     public void setDefaultValues(){
         x = gp.tileSize*2;
@@ -150,6 +150,6 @@ public class Player extends Entity{
         // Draw Dino on screen
         g2.drawImage(image, (int) x, (int) y, gp.tileSize*Player.scale, gp.tileSize*Player.scale, null);
         // Draw solidArea
-        //g2.fillRect(getSolidAreaX(), getSolidAreaY(), solidArea.width, solidArea.height);
+        g2.fillRect(getSolidAreaX(), getSolidAreaY(), solidArea.width, solidArea.height);
     }
 }
