@@ -14,17 +14,20 @@ import java.util.Arrays;
 public class Player extends Entity{
     GamePanel gp;
     KeyHandler keyHandler;
+    PlayerSkin skin;
     public final static int scale = 2;
     public boolean onAir = false;
     public boolean isJumping = false;
     public double velocity, floor;
-    public Player(GamePanel gp, KeyHandler keyHandler) {
+    public Player(GamePanel gp, KeyHandler keyHandler, String color) {
         this.gp = gp;
         this.keyHandler = keyHandler;
         this.velocity = 0;
-        setDefaultValues();
-        getPlayerImage();
         floor = (gp.tileSize+6)*2;
+        setDefaultValues();
+
+        // Set skin player
+        skin = new PlayerSkin("green");
 
         // SolidArea itu collision box untuk player (area yg dideteksi jika menabrak collision box obstacle)
         solidArea = new Rectangle();
@@ -38,33 +41,6 @@ public class Player extends Entity{
         y = (gp.tileSize+6)*2;
         speed = 5;
         direction = "run";
-    }
-    public void getPlayerImage(){
-        // Method untuk nge-load gambar player
-        try {
-            run1 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_05.png"));
-            run2 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_06.png"));
-            run3 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_07.png"));
-            run4 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_08.png"));
-            run5 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_09.png"));
-            run6 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_10.png"));
-            run = new ArrayList<>(Arrays.asList(run1, run2, run3, run4, run5, run6));
-
-            up1 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_06.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_07.png"));
-            up = new ArrayList<>(Arrays.asList(up1, up1, up1, up1, up1, up1));
-
-            down1 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_18.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_19.png"));
-            down3 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_20.png"));
-            down4 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_21.png"));
-            down5 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_22.png"));
-            down6 = ImageIO.read(getClass().getResourceAsStream("/player/dino_blue_23.png"));
-            down = new ArrayList<>(Arrays.asList(down1, down2, down3, down4, down5, down6));
-
-        } catch (IOException e){
-            e.printStackTrace();
-        }
     }
 
     // Me-return lokasi solidArea pada layar
@@ -81,8 +57,7 @@ public class Player extends Entity{
             x-=speed;
         } else if (keyHandler.rightPressed) {
             x+=speed;
-        }
-        if (!keyHandler.upPressed){
+        } else if (!keyHandler.upPressed && !keyHandler.downPressed){
             direction = "run";
         }
         spriteCounter++;
@@ -135,13 +110,13 @@ public class Player extends Entity{
         BufferedImage image = null;
         switch (direction){
             case "up":
-                image = up.get(spriteNum);
+                image = skin.up.get(spriteNum);
                 break;
             case "down":
-                image = down.get(spriteNum);
+                image = skin.down.get(spriteNum);
                 break;
             case "run":
-                image = run.get(spriteNum);
+                image = skin.run.get(spriteNum);
                 break;
         }
         // Fill ukuran sprite player
