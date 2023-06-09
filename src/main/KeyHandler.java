@@ -60,7 +60,7 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_RIGHT){
                 rightPressed = true;
             }
-            if (code == KeyEvent.VK_ESCAPE){
+            if (code == KeyEvent.VK_ESCAPE || code == KeyEvent.VK_SPACE){
                 System.out.println("pressed escape");
                 gp.gameState = gp.pauseState;
                 gp.music.pause();
