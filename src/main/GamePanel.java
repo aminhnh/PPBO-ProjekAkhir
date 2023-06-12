@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
 
     // ENTITY & OBJECT
-    Player player = new Player(this, keyHandler);
+    Player player = new Player(this, keyHandler, "green");
     ObstacleManager obstacleManager = new ObstacleManager(this, player, player);
 
     // GAME STATE
