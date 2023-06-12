@@ -102,6 +102,37 @@ public class UI {
         }
         else if (titleScreenState == titleScreenCredits){
             // TODO: Create credits screen
+            g2.setColor(new Color(6, 9, 8));
+            g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+            g2.setColor(Color.white);
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 24F));
+
+            String credit = "Made By : ";
+            int creditX = getXforCenteredText(credit);
+            int creditY = gp.tileSize * 3;
+            g2.drawString(credit, creditX, creditY);
+
+            String line1 = "Aminah Nurul Huda";
+            int line1X = getXforCenteredText(line1);
+            int line1Y = creditY + gp.tileSize * 1;
+            g2.drawString(line1, line1X, line1Y);
+
+            String line2 = "Amanda Farliana Setyasari";
+            int line2X = getXforCenteredText(line2);
+            int line2Y = line1Y + gp.tileSize * 1;
+            g2.drawString(line2, line2X, line2Y);
+
+            String line3 = "Salwa Jasmine A'aliyah";
+            int line3X = getXforCenteredText(line3);
+            int line3Y = line2Y + gp.tileSize * 1;
+            g2.drawString(line3, line3X, line3Y);
+
+            String line4 = "Risma Saputri";
+            int line4X = getXforCenteredText(line4);
+            int line4Y = line3Y + gp.tileSize * 1;
+            g2.drawString(line4, line4X, line4Y);
+
         }
         else if (titleScreenState == titleScreenCharacter){
             // TODO: Create character picker screen
