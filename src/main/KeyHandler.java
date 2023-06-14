@@ -22,6 +22,7 @@ public class KeyHandler implements KeyListener {
         if (gp.gameState == gp.titleState && gp.ui.titleScreenState == gp.ui.titleScreenMenu){
             // Saat scrolling opsi menu
             if (code == KeyEvent.VK_UP || code == KeyEvent.VK_W){
+                gp.playSFXCursorMove(2);
                 gp.ui.menuNum--;
                 if (gp.ui.menuNum < 0){
                     gp.ui.menuNum = 2;
@@ -29,6 +30,7 @@ public class KeyHandler implements KeyListener {
             }
             if (code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S){
                 gp.ui.menuNum++;
+                gp.playSFXCursorMove(2);
                 if (gp.ui.menuNum > 2){
                     gp.ui.menuNum = 0;
                 }
@@ -36,11 +38,18 @@ public class KeyHandler implements KeyListener {
             // Saat memilih menu (tekan enter)
             if (code == KeyEvent.VK_ENTER){
                 if(gp.ui.menuNum == 0){
+                    gp.playSFXCursorMove(2);
                     gp.gameState = gp.playState;
                     gp.playMusic();
                 } else if (gp.ui.menuNum == 1){
+                    gp.playSFXCursorMove(2);
                     gp.ui.titleScreenState = gp.ui.titleScreenCredits;
-                } else if (gp.ui.menuNum == 2){
+                } else if (gp.ui.menuNum == 2) {
+                    gp.playSFXCursorMove(2);
+                    gp.ui.titleScreenState = gp.ui.titleScreenSettings;
+                    gp.ui.menuNum = 0;
+                } else if (gp.ui.menuNum == 3){
+                    gp.playSFXCursorMove(2);
                     System.exit(0);
                 }
             }
@@ -48,6 +57,7 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_ENTER){
                 gp.ui.titleScreenState = gp.ui.titleScreenMenu;
             }
+
         }
 
         // PLAY STATE
@@ -76,6 +86,52 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_ESCAPE){
                 gp.gameState = gp.playState;
                 gp.music.resume();
+            }
+            if (code == KeyEvent.VK_UP || code == KeyEvent.VK_W){
+                gp.playSFXCursorMove(2);
+                gp.ui.menuNum--;
+                if (gp.ui.menuNum < 0){
+                    gp.ui.menuNum = 1;
+                }
+            }
+            if (code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S){
+                gp.playSFXCursorMove(2);
+                gp.ui.menuNum++;
+                if (gp.ui.menuNum > 1){
+                    gp.ui.menuNum = 0;
+                }
+            }
+            if (code == KeyEvent.VK_ENTER){
+                if(gp.ui.menuNum == 0){
+                    gp.ui.titleScreenState = gp.ui.titleScreenMenu;
+                } else if (gp.ui.menuNum == 1){
+                    gp.ui.titleScreenState = gp.ui.titleScreenMenu;
+                } else if (gp.ui.menuNum == 2) {
+                    gp.ui.titleScreenState = gp.ui.titleScreenMenu;
+                }
+            }
+
+            if (code == KeyEvent.VK_LEFT){
+                if (gp.ui.menuNum == 0 && gp.music.volumeScale > 0) {
+                    gp.music.volumeScale--;
+                    gp.music.checkVolume();
+                }
+                if (gp.ui.menuNum == 1 && gp.sfx.volumeScale > 0) {
+                    gp.sfx.volumeScale--;
+                    gp.sfxMoveCursor.volumeScale--;
+                    gp.sfx.checkVolume();
+                }
+            }
+            if (code == KeyEvent.VK_RIGHT){
+                if (gp.ui.menuNum == 0 && gp.music.volumeScale < 5) {
+                    gp.music.volumeScale++;
+                    gp.music.checkVolume();
+                }
+                if (gp.ui.menuNum == 1 && gp.sfx.volumeScale < 5) {
+                    gp.sfx.volumeScale++;
+                    gp.sfxMoveCursor.volumeScale++;
+                    gp.sfx.checkVolume();
+                }
             }
         }
     }
