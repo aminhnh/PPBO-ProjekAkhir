@@ -49,7 +49,7 @@ public class Player extends Entity{
 
     public void update(){
         //System.out.println("Y = "+y+"  v = "+velocity);
-        if(keyHandler.upPressed){
+        if(keyHandler.upPressed || isJumping){
             direction = "up";
         } else if (keyHandler.downPressed){
             direction = "down";
@@ -57,7 +57,7 @@ public class Player extends Entity{
             x-=speed;
         } else if (keyHandler.rightPressed) {
             x+=speed;
-        } else if (!keyHandler.upPressed && !keyHandler.downPressed){
+        } else{
             direction = "run";
         }
         spriteCounter++;
@@ -125,6 +125,6 @@ public class Player extends Entity{
         // Draw Dino on screen
         g2.drawImage(image, (int) x, (int) y, gp.tileSize*Player.scale, gp.tileSize*Player.scale, null);
         // Draw solidArea
-        g2.fillRect(getSolidAreaX(), getSolidAreaY(), solidArea.width, solidArea.height);
+        //g2.fillRect(getSolidAreaX(), getSolidAreaY(), solidArea.width, solidArea.height);
     }
 }

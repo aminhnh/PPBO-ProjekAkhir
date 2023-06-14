@@ -12,7 +12,7 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     Font arial_16B;
-    Font pixellari, minecraft, upheavtt;
+    Font pixellari, minecraft, upheavtt, fontMenu, fontCredits, fontTitle;
     public int menuNum = 0;
     PlayerSkin[] playerSkins;
 
@@ -29,6 +29,9 @@ public class UI {
         setupFonts();
         playerSkins = new PlayerSkin[4];
         setUpPlayerSkins();
+        fontMenu = upheavtt.deriveFont(Font.PLAIN, 32F);
+        fontCredits = pixellari.deriveFont(Font.PLAIN, 20F);
+        fontTitle = upheavtt.deriveFont(Font.PLAIN, 60F);
     }
     public void draw(Graphics2D g2){
         this.g2 = g2;
@@ -107,7 +110,7 @@ public class UI {
             g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
             g2.setColor(Color.white);
-            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 24F));
+            g2.setFont(fontMenu);
 
             String credit = "Made By : ";
             int creditX = getXforCenteredText(credit);
