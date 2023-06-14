@@ -32,9 +32,6 @@ public class UI {
     }
     public void draw(Graphics2D g2){
         this.g2 = g2;
-
-
-        g2.setFont(upheavtt);
         if (gp.gameState == gp.titleState){
             drawTitleScreen();
         }
@@ -52,7 +49,7 @@ public class UI {
             g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
             // Title text settings
-            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 60F));
+            g2.setFont(fontTitle);
             String text = "DINO PARTY";
             int x = getXforCenteredText(text);
             int y = (int)(gp.tileSize * 2.5);
@@ -78,7 +75,7 @@ public class UI {
             g2.drawImage(playerSkins[3].up1, x, y, -playerSize,playerSize, null);
 
             // Menu
-            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
+            g2.setFont(fontMenu);
 
             text = "PLAY";
             x = getXforCenteredText(text);
@@ -106,8 +103,7 @@ public class UI {
 
         }
         else if (titleScreenState == titleScreenCredits){
-            // TODO: Create credits screen
-            g2.setColor(new Color(6, 9, 8));
+            g2.setColor(new Color(80, 187, 255));
             g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
             g2.setColor(Color.white);
@@ -115,28 +111,51 @@ public class UI {
 
             String credit = "Made By : ";
             int creditX = getXforCenteredText(credit);
-            int creditY = gp.tileSize * 3;
+            int creditY = (int) (gp.tileSize*1.5);
             g2.drawString(credit, creditX, creditY);
 
+            g2.setFont(fontCredits);
             String line1 = "Aminah Nurul Huda";
             int line1X = getXforCenteredText(line1);
-            int line1Y = creditY + gp.tileSize * 1;
+            int line1Y = creditY + gp.tileSize;
             g2.drawString(line1, line1X, line1Y);
 
             String line2 = "Amanda Farliana Setyasari";
             int line2X = getXforCenteredText(line2);
-            int line2Y = line1Y + gp.tileSize * 1;
+            int line2Y = line1Y + gp.tileSize/2;
             g2.drawString(line2, line2X, line2Y);
 
             String line3 = "Salwa Jasmine A'aliyah";
             int line3X = getXforCenteredText(line3);
-            int line3Y = line2Y + gp.tileSize * 1;
+            int line3Y = line2Y + gp.tileSize/2;
             g2.drawString(line3, line3X, line3Y);
 
             String line4 = "Risma Saputri";
             int line4X = getXforCenteredText(line4);
-            int line4Y = line3Y + gp.tileSize * 1;
+            int line4Y = line3Y + gp.tileSize/2;
             g2.drawString(line4, line4X, line4Y);
+
+
+            g2.setFont(fontMenu);
+            String text = "Dosen Pengampu:";
+            int x = getXforCenteredText(text);
+            int y = line4Y + gp.tileSize*2;
+            g2.drawString(text, x, y);
+
+            g2.setFont(fontCredits);
+            text = "Margareta Hardiyanti, S.Kom., M.Eng.";
+            y += gp.tileSize;
+            x = getXforCenteredText(text);
+            g2.drawString(text, x, y);
+
+            // "BACK" option
+            g2.setFont(fontMenu);
+            text = "BACK";
+            x = getXforCenteredText(text);
+            y += gp.tileSize*1.5 ;
+
+            g2.drawString(text, x, y);
+            g2.drawString(">", x - 30, y);
 
         }
         else if (titleScreenState == titleScreenCharacter){
@@ -144,7 +163,7 @@ public class UI {
         }
     }
     public void drawPauseScreen(){
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 60F));
+        g2.setFont(fontTitle);
         String text = "PAUSE";
         int x = getXforCenteredText(text);
         int y = gp.screenHeight/4;

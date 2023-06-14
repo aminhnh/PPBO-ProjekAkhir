@@ -44,6 +44,10 @@ public class KeyHandler implements KeyListener {
                     System.exit(0);
                 }
             }
+        } else if (gp.gameState == gp.titleState && gp.ui.titleScreenState == gp.ui.titleScreenCredits){
+            if (code == KeyEvent.VK_ENTER){
+                gp.ui.titleScreenState = gp.ui.titleScreenMenu;
+            }
         }
 
         // PLAY STATE
