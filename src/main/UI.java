@@ -234,6 +234,21 @@ public class UI {
     }
     public void drawGameOverScreen(){
         // TODO: draw game over
+        g2.setColor(Color.white);
+
+        g2.setFont(fontCredits);
+        String text = "GAME OVER";
+        int x = getXforCenteredText(text);
+        int y = gp.tileSize;
+        g2.drawString(text, x, y);
+
+        g2.setFont(fontTitle);
+        text = "Blue Wins!";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+
+
     }
     public void drawFPS(){
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 24F));
