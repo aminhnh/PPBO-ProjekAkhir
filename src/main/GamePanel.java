@@ -97,7 +97,10 @@ public class GamePanel extends JPanel implements Runnable{
             player.update();
             obstacleManager.update();
         }
-        if (gameState == pauseState){
+        else if (gameState == gameOverState){
+
+        }
+        else if (gameState == pauseState){
             // Do nothing
         }
     }
@@ -110,7 +113,8 @@ public class GamePanel extends JPanel implements Runnable{
         // Awal game (title screen)
         if (gameState == titleState){
             ui.draw(g2);
-        } else {
+        }
+        else {
             // Tile
             tileManager.draw(g2);
 
@@ -123,7 +127,6 @@ public class GamePanel extends JPanel implements Runnable{
             // UI
             ui.draw(g2);
         }
-
 
         // Setelah drawing selesai, hapus Graphics2D ini (good for memory)
         g2.dispose();
@@ -146,4 +149,12 @@ public class GamePanel extends JPanel implements Runnable{
         music.stop();
     }
 
+    public void exitGame(){
+        System.exit(0);
+    }
+    public void resetGame(){
+        player.setDefaultValues();
+        obstacleManager.resetObstacles();
+        gameState = playState;
+    }
 }

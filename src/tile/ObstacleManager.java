@@ -57,22 +57,26 @@ public class ObstacleManager {
     public void checkCollision(Player player, Obstacle obs){
         int px1 = player.getSolidAreaX() ;
         int px2 = player.getSolidAreaX() + player.solidArea.width;
-        int ox1 = obs.x;
-        int ox2 = obs.x + obs.solidArea.width;
+        int ox1 = obs.getSolidAreaX();
+        int ox2 = obs.getSolidAreaX() + obs.solidArea.width;
 
         int py1 = player.getSolidAreaY();
         int py2 = player.getSolidAreaY() + player.solidArea.height;
-        int oy1 = obs.y;
-        int oy2 = obs.y + obs.solidArea.height;
+        int oy1 = obs.getSolidAreaY();
+        int oy2 = obs.getSolidAreaY() + obs.solidArea.height;
 
-        //System.out.println("PX1: "+px1+ " PX2: "+px2+" OX1: "+ox1+" OX2 "+ox2);
         // Intersection antara player dan obstacle
         if (px1 < ox2 && px2 > ox1 && py1 < oy2 && py2 > oy1){
             // TODO: Add game over functionality
+            gp.stopMusic();
+            gp.playSFX(3);
+            gp.gameState = gp.gameOverState;
+
+            // DEBUG
             System.out.println("GAME OVER");
+            //System.out.println("PX1: "+px1+ " PX2: "+px2+" OX1: "+ox1+" OX2 "+ox2);
         }
     }
-
     public void draw(Graphics2D g2){
 
         // Loop untuk menampilkan setiap obstacle di ArrayList obstacles
@@ -84,5 +88,11 @@ public class ObstacleManager {
 
         //g2.fillRect(obstacles[0].x, obstacles[0].y, obstacles[0].width, obstacles[0].height);
         //g2.drawImage(obstacles[0].image, x, y, gp.tileSize, gp.tileSize, null);
+    }
+    public void resetObstacles(){
+        obstacles.clear();
+        x = gp.tileSize*4;
+        y = gp.tileSize*3;
+        speed = 5;
     }
 }

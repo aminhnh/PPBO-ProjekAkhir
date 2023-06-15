@@ -47,6 +47,7 @@ public class UI {
         }
     }
     public void drawTitleScreen() {
+        // MAIN MENU
         if (titleScreenState == titleScreenMenu) {
             // Background Color
             g2.setColor(new Color(80, 187, 255));
@@ -97,14 +98,28 @@ public class UI {
                 g2.drawString(">", x - 30, y);
             }
 
-            text = "QUIT";
+            text = "SETTINGS";
             x = getXforCenteredText(text);
             y += gp.tileSize / 2;
-            g2.drawString(text,x, y);
+            g2.drawString(text, x, y);
             if (menuNum == 2) {
                 g2.drawString(">", x - 30, y);
             }
 
+            text = "QUIT";
+            x = getXforCenteredText(text);
+            y += gp.tileSize / 2;
+            g2.drawString(text,x, y);
+            if (menuNum == 3) {
+                g2.drawString(">", x - 30, y);
+            }
+
+        }
+        // CREDITS
+        else if (titleScreenState == titleScreenSettings){
+            g2.setColor(new Color(80, 187, 255));
+            g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+            drawSettings();
         }
         else if (titleScreenState == titleScreenCredits){
             g2.setColor(new Color(80, 187, 255));
@@ -139,7 +154,6 @@ public class UI {
             int line4Y = line3Y + gp.tileSize/2;
             g2.drawString(line4, line4X, line4Y);
 
-
             g2.setFont(fontMenu);
             String text = "Dosen Pengampu:";
             int x = getXforCenteredText(text);
@@ -167,21 +181,26 @@ public class UI {
     public void drawPauseScreen(){
         g2.setColor(new Color(0, 0, 0, 150));
         g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
         g2.setFont(fontTitle);
-        String text = "PAUSE";
+        String text = "PAUSED";
         g2.setColor(Color.white);
         int x = getXforCenteredText(text);
         int y = gp.screenHeight/4;
-
         g2.drawString(text, x, y);
-        x = 170;
-        y = (int)(gp.tileSize);
+
+        drawSettings();
+    }
+    public void drawSettings(){
+        g2.setColor(Color.white);
+        int x = 170;
+        int y = (int)(gp.tileSize);
         int rectX;
         int rectY = (int)(gp.tileSize);
 
         //MUSIC + BAR
         g2.setFont(fontMenu);
-        text = "MUSIC";
+        String text = "MUSIC";
         y += gp.tileSize * 3;
         g2.drawString(text, x, y);
         if (menuNum == 0) {

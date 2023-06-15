@@ -19,19 +19,20 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         // TITLE STATE
+        // Menu
         if (gp.gameState == gp.titleState && gp.ui.titleScreenState == gp.ui.titleScreenMenu){
             // Saat scrolling opsi menu
             if (code == KeyEvent.VK_UP || code == KeyEvent.VK_W){
                 gp.playSFXCursorMove(2);
                 gp.ui.menuNum--;
                 if (gp.ui.menuNum < 0){
-                    gp.ui.menuNum = 2;
+                    gp.ui.menuNum = 3;
                 }
             }
             if (code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S){
                 gp.ui.menuNum++;
                 gp.playSFXCursorMove(2);
-                if (gp.ui.menuNum > 2){
+                if (gp.ui.menuNum > 3){
                     gp.ui.menuNum = 0;
                 }
             }
@@ -41,20 +42,23 @@ public class KeyHandler implements KeyListener {
                     gp.playSFXCursorMove(2);
                     gp.gameState = gp.playState;
                     gp.playMusic();
-                } else if (gp.ui.menuNum == 1){
+                } else if (gp.ui.menuNum == 1) {
                     gp.playSFXCursorMove(2);
                     gp.ui.titleScreenState = gp.ui.titleScreenCredits;
-                } else if (gp.ui.menuNum == 2) {
+                    gp.ui.menuNum = 0;
+                } else if (gp.ui.menuNum == 2){
                     gp.playSFXCursorMove(2);
                     gp.ui.titleScreenState = gp.ui.titleScreenSettings;
                     gp.ui.menuNum = 0;
                 } else if (gp.ui.menuNum == 3){
                     gp.playSFXCursorMove(2);
-                    System.exit(0);
+                    gp.exitGame();
                 }
             }
+        // Credits
         } else if (gp.gameState == gp.titleState && gp.ui.titleScreenState == gp.ui.titleScreenCredits){
             if (code == KeyEvent.VK_ENTER){
+                gp.playSFXCursorMove(2);
                 gp.ui.titleScreenState = gp.ui.titleScreenMenu;
             }
 
@@ -75,17 +79,16 @@ public class KeyHandler implements KeyListener {
                 rightPressed = true;
             }
             if (code == KeyEvent.VK_ESCAPE || code == KeyEvent.VK_SPACE){
-                System.out.println("pressed escape");
                 gp.gameState = gp.pauseState;
                 gp.music.pause();
             }
         }
 
         // PAUSED STATE
-        else if (gp.gameState == gp.pauseState){
-            if (code == KeyEvent.VK_ESCAPE){
-                gp.gameState = gp.playState;
+        else if (gp.gameState == gp.pauseState || gp.ui.titleScreenState == gp.ui.titleScreenSettings){
+            if (gp.gameState == gp.pauseState && code == KeyEvent.VK_ESCAPE){
                 gp.music.resume();
+                gp.gameState = gp.playState;
             }
             if (code == KeyEvent.VK_UP || code == KeyEvent.VK_W){
                 gp.playSFXCursorMove(2);
@@ -132,6 +135,12 @@ public class KeyHandler implements KeyListener {
                     gp.sfxMoveCursor.volumeScale++;
                     gp.sfx.checkVolume();
                 }
+            }
+        }
+        // GAMEOVER
+        else if (gp.gameState == gp.gameOverState){
+            if(code == KeyEvent.VK_ENTER || code == KeyEvent.VK_SPACE){
+                gp.resetGame();
             }
         }
     }

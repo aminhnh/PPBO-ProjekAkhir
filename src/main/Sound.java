@@ -18,6 +18,7 @@ public class Sound {
         soundURL[0] = getClass().getResource("/sounds/chiptune-grooving.wav");
         soundURL[1] = getClass().getResource("/sounds/sfx_jump.wav");
         soundURL[2] = getClass().getResource("/sounds/cursor.wav");
+        soundURL[3] = getClass().getResource("/sounds/sfx_dead.wav");
     }
 
     public void setFile(int i){

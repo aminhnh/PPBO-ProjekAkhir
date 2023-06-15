@@ -13,12 +13,10 @@ public class PlayerSkin {
     public ArrayList<BufferedImage> run, down, up;
     String color;
     public PlayerSkin(String color){
-        System.out.println("masuk player skin cons");
         this.color = color.toLowerCase();
         getPlayerImage();
     }
     public void getPlayerImage(){
-        System.out.println("masuk get player image");
         try {
             run1 = ImageIO.read(getClass().getResourceAsStream("/player/dino_"+color+"_05.png"));
             run2 = ImageIO.read(getClass().getResourceAsStream("/player/dino_"+color+"_06.png"));
