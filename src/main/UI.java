@@ -20,7 +20,8 @@ public class UI {
     public int titleScreenState = 0;
     public final int titleScreenMenu = 0;
     public final int titleScreenCredits = 1;
-    public final int titleScreenCharacter = 2;
+    public final int titleScreenSettings = 2;
+    public final int titleScreenCharacter = 3;
 
 
     public UI(GamePanel gp) {
@@ -99,7 +100,7 @@ public class UI {
             text = "QUIT";
             x = getXforCenteredText(text);
             y += gp.tileSize / 2;
-            g2.drawString(text, x, y);
+            g2.drawString(text,x, y);
             if (menuNum == 2) {
                 g2.drawString(">", x - 30, y);
             }
@@ -159,20 +160,50 @@ public class UI {
 
             g2.drawString(text, x, y);
             g2.drawString(">", x - 30, y);
-
-        }
-        else if (titleScreenState == titleScreenCharacter){
+        } else if (titleScreenState == titleScreenCharacter){
             // TODO: Create character picker screen
         }
     }
     public void drawPauseScreen(){
+        g2.setColor(new Color(0, 0, 0, 150));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
         g2.setFont(fontTitle);
         String text = "PAUSE";
+        g2.setColor(Color.white);
         int x = getXforCenteredText(text);
         int y = gp.screenHeight/4;
 
         g2.drawString(text, x, y);
-        // TODO: Add options?
+        x = 170;
+        y = (int)(gp.tileSize);
+        int rectX;
+        int rectY = (int)(gp.tileSize);
+
+        //MUSIC + BAR
+        g2.setFont(fontMenu);
+        text = "MUSIC";
+        y += gp.tileSize * 3;
+        g2.drawString(text, x, y);
+        if (menuNum == 0) {
+            g2.drawString(">", x - 30, y);
+        }
+        rectX = gp.tileSize + gp.tileSize * 5;
+        rectY += gp.tileSize * 2.5;
+        g2.drawRect(rectX, rectY, 120, 24);
+        int volumeWidth = 24 * gp.music.volumeScale;
+        g2.fillRect(rectX, rectY, volumeWidth, 24);
+
+        //SOUND + BAR
+        text = "SOUND";
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+        if (menuNum == 1) {
+            g2.drawString(">", x - 30, y);
+        }
+        rectY += gp.tileSize;
+        g2.drawRect(rectX, rectY, 120, 24);
+        volumeWidth = 24 * gp.sfx.volumeScale;
+        g2.fillRect(rectX, rectY, volumeWidth, 24);
     }
     public void drawFPS(){
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 24F));

@@ -26,6 +26,7 @@ public class GamePanel extends JPanel implements Runnable{
     KeyHandler keyHandler = new KeyHandler(this);
     Sound music = new Sound();
     Sound sfx = new Sound();
+    Sound sfxMoveCursor = new Sound();
     public UI ui = new UI(this);
     Thread gameThread;
 
@@ -135,6 +136,11 @@ public class GamePanel extends JPanel implements Runnable{
     public void playSFX(int i){
         sfx.setFile(i);
         sfx.play();
+    }
+
+    public void playSFXCursorMove(int i) {
+        sfxMoveCursor.setFile(i);
+        sfxMoveCursor.play();
     }
     public void stopMusic(){
         music.stop();
