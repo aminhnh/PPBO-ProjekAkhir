@@ -37,158 +37,153 @@ public class UI {
     public void draw(Graphics2D g2){
         this.g2 = g2;
         if (gp.gameState == gp.titleState){
-            drawTitleScreen();
+            if (titleScreenState == titleScreenMenu){
+                drawMenuScreen();
+            }
+            else if (titleScreenState == titleScreenCredits){
+                drawCreditsScreen();
+            } else if (titleScreenState == titleScreenSettings) {
+                drawSettingsScreen();
+            } else if (titleScreenState == titleScreenCharacter) {
+                drawCharacterScreen();
+            }
         }
-        if (gp.gameState == gp.playState){
+        else if (gp.gameState == gp.playState){
             drawFPS();
         }
-        if (gp.gameState == gp.pauseState){
+        else if (gp.gameState == gp.pauseState){
             drawPauseScreen();
         }
-    }
-    public void drawTitleScreen() {
-        // MAIN MENU
-        if (titleScreenState == titleScreenMenu) {
-            // Background Color
-            g2.setColor(new Color(80, 187, 255));
-            g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
-
-            // Title text settings
-            g2.setFont(fontTitle);
-            String text = "DINO PARTY";
-            int x = getXforCenteredText(text);
-            int y = (int)(gp.tileSize * 2.5);
-
-            // Shadow
-            g2.setColor(Color.black);
-            g2.drawString(text, x + 2, y + 2);
-
-            // Draw title text
-            g2.setColor(Color.white);
-            g2.drawString(text, x, y);
-
-            // Player images
-            int playerSize = gp.tileSize*2;
-            y += gp.tileSize;
-            x = (gp.screenWidth - (playerSize*4))/2;
-            g2.drawImage(playerSkins[0].up1, x, y, playerSize,playerSize, null);
-            x += gp.tileSize*2;
-            g2.drawImage(playerSkins[1].up1, x, y, playerSize,playerSize, null);
-            x += gp.tileSize*4;
-            g2.drawImage(playerSkins[2].up1, x, y, -playerSize,playerSize, null);
-            x += gp.tileSize*2;
-            g2.drawImage(playerSkins[3].up1, x, y, -playerSize,playerSize, null);
-
-            // Menu
-            g2.setFont(fontMenu);
-
-            text = "PLAY";
-            x = getXforCenteredText(text);
-            y += gp.tileSize * 3;
-            g2.drawString(text, x, y);
-            if (menuNum == 0) {
-                g2.drawString(">", x - 30, y);
-            }
-
-            text = "CREDITS";
-            x = getXforCenteredText(text);
-            y += gp.tileSize / 2;
-            g2.drawString(text, x, y);
-            if (menuNum == 1) {
-                g2.drawString(">", x - 30, y);
-            }
-
-            text = "SETTINGS";
-            x = getXforCenteredText(text);
-            y += gp.tileSize / 2;
-            g2.drawString(text, x, y);
-            if (menuNum == 2) {
-                g2.drawString(">", x - 30, y);
-            }
-
-            text = "QUIT";
-            x = getXforCenteredText(text);
-            y += gp.tileSize / 2;
-            g2.drawString(text,x, y);
-            if (menuNum == 3) {
-                g2.drawString(">", x - 30, y);
-            }
-
-        }
-        // CREDITS
-        else if (titleScreenState == titleScreenSettings){
-            g2.setColor(new Color(80, 187, 255));
-            g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
-            drawSettings();
-        }
-        else if (titleScreenState == titleScreenCredits){
-            g2.setColor(new Color(80, 187, 255));
-            g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
-
-            g2.setColor(Color.white);
-            g2.setFont(fontMenu);
-
-            String credit = "Made By : ";
-            int creditX = getXforCenteredText(credit);
-            int creditY = (int) (gp.tileSize*1.5);
-            g2.drawString(credit, creditX, creditY);
-
-            g2.setFont(fontCredits);
-            String line1 = "Aminah Nurul Huda";
-            int line1X = getXforCenteredText(line1);
-            int line1Y = creditY + gp.tileSize;
-            g2.drawString(line1, line1X, line1Y);
-
-            String line2 = "Amanda Farliana Setyasari";
-            int line2X = getXforCenteredText(line2);
-            int line2Y = line1Y + gp.tileSize/2;
-            g2.drawString(line2, line2X, line2Y);
-
-            String line3 = "Salwa Jasmine A'aliyah";
-            int line3X = getXforCenteredText(line3);
-            int line3Y = line2Y + gp.tileSize/2;
-            g2.drawString(line3, line3X, line3Y);
-
-            String line4 = "Risma Saputri";
-            int line4X = getXforCenteredText(line4);
-            int line4Y = line3Y + gp.tileSize/2;
-            g2.drawString(line4, line4X, line4Y);
-
-            g2.setFont(fontMenu);
-            String text = "Dosen Pengampu:";
-            int x = getXforCenteredText(text);
-            int y = line4Y + gp.tileSize*2;
-            g2.drawString(text, x, y);
-
-            g2.setFont(fontCredits);
-            text = "Margareta Hardiyanti, S.Kom., M.Eng.";
-            y += gp.tileSize;
-            x = getXforCenteredText(text);
-            g2.drawString(text, x, y);
-
-            // "BACK" option
-            g2.setFont(fontMenu);
-            text = "BACK";
-            x = getXforCenteredText(text);
-            y += gp.tileSize*1.5 ;
-
-            g2.drawString(text, x, y);
-            g2.drawString(">", x - 30, y);
-        } else if (titleScreenState == titleScreenCharacter){
-            // TODO: Create character picker screen
+        else if (gp.gameState == gp.gameOverState){
+            drawGameOverScreen();
         }
     }
-    public void drawPauseScreen(){
-        g2.setColor(new Color(0, 0, 0, 150));
+    public void drawMenuScreen() {
+        // Background Color
+        g2.setColor(new Color(80, 187, 255));
         g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
+        // Title text settings
         g2.setFont(fontTitle);
-        String text = "PAUSED";
-        g2.setColor(Color.white);
+        String text = "DINO PARTY";
         int x = getXforCenteredText(text);
-        int y = gp.screenHeight/4;
+        int y = (int)(gp.tileSize * 2.5);
+
+        // Shadow
+        g2.setColor(Color.black);
+        g2.drawString(text, x + 2, y + 2);
+
+        // Draw title text
+        g2.setColor(Color.white);
         g2.drawString(text, x, y);
 
+        // Player images
+        int playerSize = gp.tileSize*2;
+        y += gp.tileSize;
+        x = (gp.screenWidth - (playerSize*4))/2;
+        g2.drawImage(playerSkins[0].up1, x, y, playerSize,playerSize, null);
+        x += gp.tileSize*2;
+        g2.drawImage(playerSkins[1].up1, x, y, playerSize,playerSize, null);
+        x += gp.tileSize*4;
+        g2.drawImage(playerSkins[2].up1, x, y, -playerSize,playerSize, null);
+        x += gp.tileSize*2;
+        g2.drawImage(playerSkins[3].up1, x, y, -playerSize,playerSize, null);
+
+        // Menu
+        g2.setFont(fontMenu);
+
+        text = "PLAY";
+        x = getXforCenteredText(text);
+        y += gp.tileSize * 3;
+        g2.drawString(text, x, y);
+        if (menuNum == 0) {
+            g2.drawString(">", x - 30, y);
+        }
+
+        text = "CREDITS";
+        x = getXforCenteredText(text);
+        y += gp.tileSize / 2;
+        g2.drawString(text, x, y);
+        if (menuNum == 1) {
+            g2.drawString(">", x - 30, y);
+        }
+
+        text = "SETTINGS";
+        x = getXforCenteredText(text);
+        y += gp.tileSize / 2;
+        g2.drawString(text, x, y);
+        if (menuNum == 2) {
+            g2.drawString(">", x - 30, y);
+        }
+
+        text = "QUIT";
+        x = getXforCenteredText(text);
+        y += gp.tileSize / 2;
+        g2.drawString(text,x, y);
+        if (menuNum == 3) {
+            g2.drawString(">", x - 30, y);
+        }
+    }
+    public void drawCharacterScreen(){
+        // TODO: make character picker
+    }
+    public void drawCreditsScreen(){
+        g2.setColor(new Color(80, 187, 255));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+        g2.setColor(Color.white);
+        g2.setFont(fontMenu);
+
+        String credit = "Made By : ";
+        int creditX = getXforCenteredText(credit);
+        int creditY = (int) (gp.tileSize*1.5);
+        g2.drawString(credit, creditX, creditY);
+
+        g2.setFont(fontCredits);
+        String line1 = "Aminah Nurul Huda";
+        int line1X = getXforCenteredText(line1);
+        int line1Y = creditY + gp.tileSize;
+        g2.drawString(line1, line1X, line1Y);
+
+        String line2 = "Amanda Farliana Setyasari";
+        int line2X = getXforCenteredText(line2);
+        int line2Y = line1Y + gp.tileSize/2;
+        g2.drawString(line2, line2X, line2Y);
+
+        String line3 = "Salwa Jasmine A'aliyah";
+        int line3X = getXforCenteredText(line3);
+        int line3Y = line2Y + gp.tileSize/2;
+        g2.drawString(line3, line3X, line3Y);
+
+        String line4 = "Risma Saputri";
+        int line4X = getXforCenteredText(line4);
+        int line4Y = line3Y + gp.tileSize/2;
+        g2.drawString(line4, line4X, line4Y);
+
+        g2.setFont(fontMenu);
+        String text = "Dosen Pengampu:";
+        int x = getXforCenteredText(text);
+        int y = line4Y + gp.tileSize*2;
+        g2.drawString(text, x, y);
+
+        g2.setFont(fontCredits);
+        text = "Margareta Hardiyanti, S.Kom., M.Eng.";
+        y += gp.tileSize;
+        x = getXforCenteredText(text);
+        g2.drawString(text, x, y);
+
+        // "BACK" option
+        g2.setFont(fontMenu);
+        text = "BACK";
+        x = getXforCenteredText(text);
+        y += gp.tileSize*1.5 ;
+
+        g2.drawString(text, x, y);
+        g2.drawString(">", x - 30, y);
+    }
+    public void drawSettingsScreen(){
+        g2.setColor(new Color(80, 187, 255));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
         drawSettings();
     }
     public void drawSettings(){
@@ -223,6 +218,22 @@ public class UI {
         g2.drawRect(rectX, rectY, 120, 24);
         volumeWidth = 24 * gp.sfx.volumeScale;
         g2.fillRect(rectX, rectY, volumeWidth, 24);
+    }
+    public void drawPauseScreen(){
+        g2.setColor(new Color(0, 0, 0, 150));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+        g2.setFont(fontTitle);
+        String text = "PAUSED";
+        g2.setColor(Color.white);
+        int x = getXforCenteredText(text);
+        int y = gp.screenHeight/4;
+        g2.drawString(text, x, y);
+
+        drawSettings();
+    }
+    public void drawGameOverScreen(){
+        // TODO: draw game over
     }
     public void drawFPS(){
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 24F));

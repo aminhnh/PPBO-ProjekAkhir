@@ -43,6 +43,7 @@ public class ObstacleManager {
     // TODO: move other tiles
     // TODO: change speed to be faster as time passes
     // TODO: randomize obstacles distance
+
     public void spawnObstacle(){
         obstacles.add(new Obstacle(gp, gp.screenWidth, gp.tileSize*3));
     }
@@ -67,13 +68,12 @@ public class ObstacleManager {
 
         // Intersection antara player dan obstacle
         if (px1 < ox2 && px2 > ox1 && py1 < oy2 && py2 > oy1){
-            // TODO: Add game over functionality
             gp.stopMusic();
             gp.playSFX(3);
             gp.gameState = gp.gameOverState;
 
             // DEBUG
-            System.out.println("GAME OVER");
+            //System.out.println("GAME OVER");
             //System.out.println("PX1: "+px1+ " PX2: "+px2+" OX1: "+ox1+" OX2 "+ox2);
         }
     }
@@ -85,9 +85,6 @@ public class ObstacleManager {
             //g2.fillRect(obs.getSolidAreaX(), obs.getSolidAreaY(), obs.solidArea.width, obs.solidArea.height);
             g2.drawImage(obs.image, obs.x, obs.y, gp.tileSize, gp.tileSize, null);
         }
-
-        //g2.fillRect(obstacles[0].x, obstacles[0].y, obstacles[0].width, obstacles[0].height);
-        //g2.drawImage(obstacles[0].image, x, y, gp.tileSize, gp.tileSize, null);
     }
     public void resetObstacles(){
         obstacles.clear();

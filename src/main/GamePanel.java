@@ -82,10 +82,10 @@ public class GamePanel extends JPanel implements Runnable{
                 drawCount++;
             }
 
-            // Menampilkan FPS - Jika 1 detik sudah berlalu, cek berapa kali update telah dilakukan
+            // Jika 1 detik sudah berlalu, simpan berapa kali update telah dilakukan
+            // dan reset counter
             if (timer >= 1000000000){
                 actualFPS = drawCount;
-                //System.out.println("FPS : "+ drawCount);
                 drawCount = 0;
                 timer = 0;
             }
@@ -98,7 +98,7 @@ public class GamePanel extends JPanel implements Runnable{
             obstacleManager.update();
         }
         else if (gameState == gameOverState){
-
+            // Do nothing
         }
         else if (gameState == pauseState){
             // Do nothing

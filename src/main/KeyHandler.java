@@ -45,11 +45,9 @@ public class KeyHandler implements KeyListener {
                 } else if (gp.ui.menuNum == 1) {
                     gp.playSFXCursorMove(2);
                     gp.ui.titleScreenState = gp.ui.titleScreenCredits;
-                    gp.ui.menuNum = 0;
                 } else if (gp.ui.menuNum == 2){
                     gp.playSFXCursorMove(2);
                     gp.ui.titleScreenState = gp.ui.titleScreenSettings;
-                    gp.ui.menuNum = 0;
                 } else if (gp.ui.menuNum == 3){
                     gp.playSFXCursorMove(2);
                     gp.exitGame();
