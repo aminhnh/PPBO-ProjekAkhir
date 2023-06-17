@@ -40,6 +40,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int playState = 1;
     public final int pauseState = 2;
     public final int gameOverState = 3;
+    public int score, highScore = 0;
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -96,6 +97,7 @@ public class GamePanel extends JPanel implements Runnable{
     public void update(){
         // Memanggil method update pada player dan obstacleManager 60 kali per detik
         if (gameState == playState){
+            score++;
             player.update();
             obstacleManager.update();
         }
@@ -155,6 +157,7 @@ public class GamePanel extends JPanel implements Runnable{
         System.exit(0);
     }
     public void resetGame(){
+        score = 0;
         player.setDefaultValues();
         obstacleManager.resetObstacles();
         gameState = playState;

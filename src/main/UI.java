@@ -53,7 +53,8 @@ public class UI {
             }
         }
         else if (gp.gameState == gp.playState){
-            drawFPS();
+            //drawFPS();
+            drawScore();
         }
         else if (gp.gameState == gp.pauseState){
             drawPauseScreen();
@@ -299,17 +300,27 @@ public class UI {
         g2.drawString(text, x, y);
 
         g2.setFont(fontTitle);
-        text = "{Color} Wins!";
+        text = "Green Wins!";
         x = getXforCenteredText(text);
         y += gp.tileSize;
         g2.drawString(text, x, y);
 
+        g2.setFont(fontMenu);
+        text = "SCORE : "+gp.score;
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
 
     }
     public void drawFPS(){
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 24F));
             g2.setColor(Color.white);
             g2.drawString("FPS : "+gp.actualFPS, gp.screenWidth-120, 30);
+    }
+    public void drawScore(){
+        g2.setFont(fontMenu);
+        g2.setColor(Color.white);
+        g2.drawString(String.format("%05d", gp.score), gp.screenWidth- (int) (gp.tileSize*2.5), (int)(gp.tileSize*0.7));
     }
     public int getXforCenteredText(String text){
         int textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
