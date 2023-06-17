@@ -70,6 +70,7 @@ public class ObstacleManager {
         if (px1 < ox2 && px2 > ox1 && py1 < oy2 && py2 > oy1){
             gp.stopMusic();
             gp.playSFX(3);
+            player.playDamageAnimation();
             gp.gameState = gp.gameOverState;
 
             // DEBUG

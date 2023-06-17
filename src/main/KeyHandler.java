@@ -84,9 +84,11 @@ public class KeyHandler implements KeyListener {
 
         // PAUSED STATE
         else if (gp.gameState == gp.pauseState || gp.ui.titleScreenState == gp.ui.titleScreenSettings){
-            if (gp.gameState == gp.pauseState && code == KeyEvent.VK_ESCAPE){
-                gp.music.resume();
-                gp.gameState = gp.playState;
+            if (gp.gameState == gp.pauseState){
+                if (code == KeyEvent.VK_SPACE || code == KeyEvent.VK_ESCAPE){
+                    gp.music.resume();
+                    gp.gameState = gp.playState;
+                }
             }
             if (code == KeyEvent.VK_UP || code == KeyEvent.VK_W){
                 gp.playSFXCursorMove(2);

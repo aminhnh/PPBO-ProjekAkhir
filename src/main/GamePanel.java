@@ -156,5 +156,6 @@ public class GamePanel extends JPanel implements Runnable{
         player.setDefaultValues();
         obstacleManager.resetObstacles();
         gameState = playState;
+        playMusic();
     }
 }

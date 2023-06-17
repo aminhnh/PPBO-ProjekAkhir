@@ -99,6 +99,9 @@ public class Player extends Entity{
         }
 
     }
+    public void playDamageAnimation(){
+        direction = "dead";
+    }
     public void move(double v){
         y -= v;
     }
@@ -117,6 +120,9 @@ public class Player extends Entity{
                 break;
             case "run":
                 image = skin.run.get(spriteNum);
+                break;
+            case "dead":
+                image = skin.dead.get(gp.actualFPS%5);
                 break;
         }
         // Fill ukuran sprite player

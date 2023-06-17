@@ -243,7 +243,7 @@ public class UI {
         g2.drawString(text, x, y);
 
         g2.setFont(fontTitle);
-        text = "Blue Wins!";
+        text = "{Player Color} Wins!";
         x = getXforCenteredText(text);
         y += gp.tileSize;
         g2.drawString(text, x, y);

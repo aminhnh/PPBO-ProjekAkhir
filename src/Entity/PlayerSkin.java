@@ -10,7 +10,8 @@ public class PlayerSkin {
     public BufferedImage run1, run2, run3, run4, run5, run6;
     public BufferedImage down1, down2, down3, down4, down5, down6;
     public BufferedImage up1, up2;
-    public ArrayList<BufferedImage> run, down, up;
+    public BufferedImage dead1, dead2, dead3;
+    public ArrayList<BufferedImage> run, down, up, dead;
     String color;
     public PlayerSkin(String color){
         this.color = color.toLowerCase();
@@ -38,6 +39,10 @@ public class PlayerSkin {
             down6 = ImageIO.read(getClass().getResourceAsStream("/player/dino_"+color+"_23.png"));
             down = new ArrayList<>(Arrays.asList(down1, down2, down3, down4, down5, down6));
 
+            dead1 = ImageIO.read(getClass().getResourceAsStream("/player/dino_"+color+"_14.png"));
+            dead2 = ImageIO.read(getClass().getResourceAsStream("/player/dino_"+color+"_15.png"));
+            dead3 = ImageIO.read(getClass().getResourceAsStream("/player/dino_"+color+"_16.png"));
+            dead = new ArrayList<>(Arrays.asList(dead1, dead1, dead2, dead2, dead3, dead3));
         } catch (IOException e){
             e.printStackTrace();
         }
