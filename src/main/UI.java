@@ -15,6 +15,7 @@ public class UI {
     Font arial_16B;
     Font pixellari, minecraft, upheavtt, fontMenu, fontCredits, fontTitle;
     public int menuNum = 0;
+    public int player1Skin, player2Skin = 0;
     PlayerSkin[] playerSkins;
 
     // Title Screen Sub-state
@@ -128,7 +129,11 @@ public class UI {
         }
     }
     public void drawCharacterScreen(){
-        // TODO: make character picker
+        // Logic
+        player1Skin = (player1Skin > 3) ? 0 : (player1Skin < 0) ? 3 : player1Skin;
+        player2Skin = (player2Skin > 3) ? 0 : (player2Skin < 0) ? 3 : player2Skin;
+
+
         // Background Color
         g2.setColor(new Color(80, 187, 255));
         g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
@@ -151,21 +156,21 @@ public class UI {
         int playerSize = gp.tileSize*4;
         x = (int)(gp.screenWidth/3.5) - playerSize/2;
         y += gp.tileSize*1.5;
-        g2.drawImage(playerSkins[0].up1, x, y, playerSize,playerSize, null);
+        g2.drawImage(playerSkins[player1Skin].up1, x, y, playerSize,playerSize, null);
 
         x = (int)(gp.screenWidth/3) + playerSize/2;
-        g2.drawImage(playerSkins[1].up1, x, y, playerSize,playerSize, null);
+        g2.drawImage(playerSkins[player2Skin].up1, x, y, playerSize,playerSize, null);
 
         // Options
         g2.setFont(fontMenu);
-        text = "green";
+        text = PlayerSkin.skinColor[player1Skin];
         x = getXforCenteredText(text);
         y += gp.tileSize * 5;
         g2.drawString(text, getQuarterX(text, false), y);
         text = ">             <";
         g2.drawString(text, getQuarterX(text, false), y);
 
-        text = "yellow";
+        text = PlayerSkin.skinColor[player2Skin];
         g2.drawString(text, getQuarterX(text, true), y);
         text = ">             <";
         g2.drawString(text, getQuarterX(text, true), y);
@@ -285,7 +290,6 @@ public class UI {
         drawSettings();
     }
     public void drawGameOverScreen(){
-        // TODO: draw game over
         g2.setColor(Color.white);
 
         g2.setFont(fontCredits);
@@ -295,7 +299,7 @@ public class UI {
         g2.drawString(text, x, y);
 
         g2.setFont(fontTitle);
-        text = "{Player Color} Wins!";
+        text = "{Color} Wins!";
         x = getXforCenteredText(text);
         y += gp.tileSize;
         g2.drawString(text, x, y);
@@ -327,8 +331,8 @@ public class UI {
     }
     public void setUpPlayerSkins(){
         playerSkins[0] = new PlayerSkin("blue");
-        playerSkins[1] = new PlayerSkin("red");
-        playerSkins[2] = new PlayerSkin("yellow");
-        playerSkins[3] = new PlayerSkin("green");
+        playerSkins[1] = new PlayerSkin("green");
+        playerSkins[2] = new PlayerSkin("red");
+        playerSkins[3] = new PlayerSkin("yellow");
     }
 }

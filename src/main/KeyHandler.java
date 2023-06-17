@@ -52,22 +52,23 @@ public class KeyHandler implements KeyListener {
                     gp.exitGame();
                 }
             }
-        }else if (gp.ui.titleScreenState == gp.ui.titleScreenCharacter) {
+        }else if (gp.gameState == gp.titleState && gp.ui.titleScreenState == gp.ui.titleScreenCharacter) {
             if(code == KeyEvent.VK_ENTER || code == KeyEvent.VK_SPACE){
                 gp.ui.titleScreenState = gp.ui.titleScreenMenu;
                 gp.gameState = gp.playState;
                 gp.playMusic();
             }
             else if(code == KeyEvent.VK_W || code == KeyEvent.VK_A){
+                    gp.ui.player1Skin--;
                     gp.playSFXCursorMove(2);
-
             } else if (code == KeyEvent.VK_S || code == KeyEvent.VK_D){
+                    gp.ui.player1Skin--;
                     gp.playSFXCursorMove(2);
-
             } else if (code == KeyEvent.VK_UP || code == KeyEvent.VK_LEFT) {
+                    gp.ui.player2Skin++;
                     gp.playSFXCursorMove(2);
-
             } else if (code == KeyEvent.VK_DOWN || code == KeyEvent.VK_RIGHT) {
+                    gp.ui.player2Skin--;
                     gp.playSFXCursorMove(2);
 
             }

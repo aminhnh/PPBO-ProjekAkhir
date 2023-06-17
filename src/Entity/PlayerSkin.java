@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class PlayerSkin {
     public BufferedImage run1, run2, run3, run4, run5, run6;
@@ -12,6 +13,7 @@ public class PlayerSkin {
     public BufferedImage up1, up2;
     public BufferedImage dead1, dead2, dead3;
     public ArrayList<BufferedImage> run, down, up, dead;
+    public static String[] skinColor = {"blue", "green", "red", "yellow"};
     String color;
     public PlayerSkin(String color){
         this.color = color.toLowerCase();
