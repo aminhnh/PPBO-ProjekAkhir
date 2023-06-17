@@ -31,8 +31,8 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
 
     // ENTITY & OBJECT
-    Player player = new Player(this, keyHandler, "green");
-    ObstacleManager obstacleManager = new ObstacleManager(this, player, player);
+    Player player;
+    ObstacleManager obstacleManager;
 
     // GAME STATE
     public int gameState;
@@ -47,6 +47,8 @@ public class GamePanel extends JPanel implements Runnable{
         this.setDoubleBuffered(true); // Tile diluar layar akan di load
         this.addKeyListener(keyHandler);
         this.setFocusable(true); // fokus menerima input
+        player = new Player(this, keyHandler, "green");
+        obstacleManager = new ObstacleManager(this, player, player);
     }
     public void setupGame(){
         gameState = titleState;

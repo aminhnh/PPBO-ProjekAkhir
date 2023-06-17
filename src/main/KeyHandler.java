@@ -20,40 +20,58 @@ public class KeyHandler implements KeyListener {
         int code = e.getKeyCode();
         // TITLE STATE
         // Menu
-        if (gp.gameState == gp.titleState && gp.ui.titleScreenState == gp.ui.titleScreenMenu){
+        if (gp.gameState == gp.titleState && gp.ui.titleScreenState == gp.ui.titleScreenMenu) {
             // Saat scrolling opsi menu
-            if (code == KeyEvent.VK_UP || code == KeyEvent.VK_W){
+            if (code == KeyEvent.VK_UP || code == KeyEvent.VK_W) {
                 gp.playSFXCursorMove(2);
                 gp.ui.menuNum--;
-                if (gp.ui.menuNum < 0){
+                if (gp.ui.menuNum < 0) {
                     gp.ui.menuNum = 3;
                 }
             }
-            if (code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S){
+            if (code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S) {
                 gp.ui.menuNum++;
                 gp.playSFXCursorMove(2);
-                if (gp.ui.menuNum > 3){
+                if (gp.ui.menuNum > 3) {
                     gp.ui.menuNum = 0;
                 }
             }
             // Saat memilih menu (tekan enter)
-            if (code == KeyEvent.VK_ENTER){
-                if(gp.ui.menuNum == 0){
+            if (code == KeyEvent.VK_ENTER) {
+                if (gp.ui.menuNum == 0) {
                     gp.playSFXCursorMove(2);
-                    gp.gameState = gp.playState;
-                    gp.playMusic();
+                    gp.ui.titleScreenState = gp.ui.titleScreenCharacter;
                 } else if (gp.ui.menuNum == 1) {
                     gp.playSFXCursorMove(2);
                     gp.ui.titleScreenState = gp.ui.titleScreenCredits;
-                } else if (gp.ui.menuNum == 2){
+                } else if (gp.ui.menuNum == 2) {
                     gp.playSFXCursorMove(2);
                     gp.ui.titleScreenState = gp.ui.titleScreenSettings;
-                } else if (gp.ui.menuNum == 3){
+                } else if (gp.ui.menuNum == 3) {
                     gp.playSFXCursorMove(2);
                     gp.exitGame();
                 }
             }
-        // Credits
+        }else if (gp.ui.titleScreenState == gp.ui.titleScreenCharacter) {
+            if(code == KeyEvent.VK_ENTER || code == KeyEvent.VK_SPACE){
+                gp.ui.titleScreenState = gp.ui.titleScreenMenu;
+                gp.gameState = gp.playState;
+                gp.playMusic();
+            }
+            else if(code == KeyEvent.VK_W || code == KeyEvent.VK_A){
+                    gp.playSFXCursorMove(2);
+
+            } else if (code == KeyEvent.VK_S || code == KeyEvent.VK_D){
+                    gp.playSFXCursorMove(2);
+
+            } else if (code == KeyEvent.VK_UP || code == KeyEvent.VK_LEFT) {
+                    gp.playSFXCursorMove(2);
+
+            } else if (code == KeyEvent.VK_DOWN || code == KeyEvent.VK_RIGHT) {
+                    gp.playSFXCursorMove(2);
+
+            }
+            // Credits
         } else if (gp.gameState == gp.titleState && gp.ui.titleScreenState == gp.ui.titleScreenCredits){
             if (code == KeyEvent.VK_ENTER){
                 gp.playSFXCursorMove(2);

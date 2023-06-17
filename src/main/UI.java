@@ -10,6 +10,7 @@ import java.util.List;
 
 public class UI {
     GamePanel gp;
+    UIAssets uiAssets;
     Graphics2D g2;
     Font arial_16B;
     Font pixellari, minecraft, upheavtt, fontMenu, fontCredits, fontTitle;
@@ -26,6 +27,8 @@ public class UI {
 
     public UI(GamePanel gp) {
         this.gp = gp;
+        this.uiAssets = new UIAssets();
+        uiAssets.getUIImage();
         arial_16B = new Font("Arial", Font.BOLD, 16);
         setupFonts();
         playerSkins = new PlayerSkin[4];
@@ -126,7 +129,56 @@ public class UI {
     }
     public void drawCharacterScreen(){
         // TODO: make character picker
+        // Background Color
+        g2.setColor(new Color(80, 187, 255));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+        // Title
+        g2.setFont(fontTitle);
+        String text = "Choose Your";
+        int x = getXforCenteredText(text);
+        int y = (int) (gp.tileSize*1.5);
+
+        g2.setColor(Color.black);
+        g2.drawString(text, x + 2, y + 2);
+        g2.drawString("Player", getXforCenteredText("Player")+2, y+gp.tileSize+2);
+
+        g2.setColor(Color.white);
+        g2.drawString(text, x, y);
+        g2.drawString("Player", getXforCenteredText("Player"), y+gp.tileSize);
+
+        // Player Skin
+        int playerSize = gp.tileSize*4;
+        x = (int)(gp.screenWidth/3.5) - playerSize/2;
+        y += gp.tileSize*1.5;
+        g2.drawImage(playerSkins[0].up1, x, y, playerSize,playerSize, null);
+
+        x = (int)(gp.screenWidth/3) + playerSize/2;
+        g2.drawImage(playerSkins[1].up1, x, y, playerSize,playerSize, null);
+
+        // Options
+        g2.setFont(fontMenu);
+        text = "green";
+        x = getXforCenteredText(text);
+        y += gp.tileSize * 5;
+        g2.drawString(text, getQuarterX(text, false), y);
+        text = ">             <";
+        g2.drawString(text, getQuarterX(text, false), y);
+
+        text = "yellow";
+        g2.drawString(text, getQuarterX(text, true), y);
+        text = ">             <";
+        g2.drawString(text, getQuarterX(text, true), y);
     }
+    public int getQuarterX(String text, boolean right){
+        int textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        if (right){
+            return (gp.screenWidth/4)*3 - textLength/2 - gp.tileSize/2;
+        } else {
+            return gp.screenWidth/4 - textLength/2 + gp.tileSize/2;
+        }
+    }
+
     public void drawCreditsScreen(){
         g2.setColor(new Color(80, 187, 255));
         g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
