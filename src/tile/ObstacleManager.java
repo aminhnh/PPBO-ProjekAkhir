@@ -81,7 +81,7 @@ public class ObstacleManager {
     }
     public void moveObstacles(){
         for (Obstacle obs: obstacles) {
-            obs.x -= speed;
+            obs.setX(obs.getX()-speed);
         }
     }
     public void moveLand(){
@@ -96,18 +96,18 @@ public class ObstacleManager {
         }
     }
     public void deleteOffscreenObstacles(){
-        obstacles.removeIf(obs -> obs.x < -(gp.tileSize+10));
+        obstacles.removeIf(obs -> obs.getX() < -(gp.tileSize+10));
     }
     public void checkCollision(Player player, Obstacle obs){
         int px1 = player.getSolidAreaX() ;
         int px2 = player.getSolidAreaX() + player.solidArea.width;
         int ox1 = obs.getSolidAreaX();
-        int ox2 = obs.getSolidAreaX() + obs.solidArea.width;
+        int ox2 = obs.getSolidAreaX() + obs.getSolidArea().width;
 
         int py1 = player.getSolidAreaY();
         int py2 = player.getSolidAreaY() + player.solidArea.height;
         int oy1 = obs.getSolidAreaY();
-        int oy2 = obs.getSolidAreaY() + obs.solidArea.height;
+        int oy2 = obs.getSolidAreaY() + obs.getSolidArea().height;
 
         // Intersection antara player dan obstacle
         if (px1 < ox2 && px2 > ox1 && py1 < oy2 && py2 > oy1){
@@ -130,7 +130,7 @@ public class ObstacleManager {
         for (Obstacle obs: obstacles) {
             //g2.setColor(Color.white);
             //g2.fillRect(obs.getSolidAreaX(), obs.getSolidAreaY(), obs.solidArea.width, obs.solidArea.height);
-            g2.drawImage(obs.image, obs.x, obs.y, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(obs.getImage(), obs.getX(), obs.getY(), gp.tileSize, gp.tileSize, null);
         }
         for (Land land : listLand){
             g2.drawImage(land.getImage(), land.getX(), gp.tileSize*4, gp.tileSize, gp.tileSize, null);
