@@ -1,9 +1,8 @@
 package main;
 import Entity.Player;
-import tile.ObstacleManager;
-import tile.TileManager;
 import javax.swing.*;
 import java.awt.*;
+import tile.ObstacleManager;
 
 // CLASS UNTUK MENGATUR GAME
 
@@ -22,7 +21,6 @@ public class GamePanel extends JPanel implements Runnable{
     public int actualFPS;
 
     // SYSTEM
-    TileManager tileManager = new TileManager(this);
     KeyHandler keyHandler = new KeyHandler(this);
     Sound music = new Sound();
     Sound sfx = new Sound();
