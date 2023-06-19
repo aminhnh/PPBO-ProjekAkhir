@@ -40,7 +40,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int playState = 1;
     public final int pauseState = 2;
     public final int gameOverState = 3;
-    public int score, highScore = 0;
+    public int score, highScore, counterScore = 0;
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -71,6 +71,7 @@ public class GamePanel extends JPanel implements Runnable{
         //Untuk menampilkan FPS
         int timer = 0;
         int drawCount = 0;
+        counterScore = 0;
 
         while(gameThread != null){ // selama gameThread ada, jalankan kode di {}
             currentTime = System.nanoTime();
@@ -97,7 +98,11 @@ public class GamePanel extends JPanel implements Runnable{
     public void update(){
         // Memanggil method update pada player dan obstacleManager 60 kali per detik
         if (gameState == playState){
-            score++;
+            counterScore++;
+            if (counterScore == 6){
+                score++;
+                counterScore = 0;
+            }
             player.update();
             obstacleManager.update();
         }

@@ -25,7 +25,7 @@ public class ObstacleManager {
         this.player2 = player2;
         spawnCounter = 0;
         updateCounter = 0;
-        speed = 5;
+        speed = 10;
 
         listLand = new ArrayList<>();
         setLand();
@@ -122,7 +122,7 @@ public class ObstacleManager {
         obstacles.clear();
         x = gp.tileSize*4;
         y = gp.tileSize*3;
-        speed = 5;
+        speed = 10;
     }
 
 }
