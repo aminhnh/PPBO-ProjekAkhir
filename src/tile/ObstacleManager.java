@@ -15,6 +15,7 @@ public class ObstacleManager {
     ArrayList<Land> listLand;
     Player player1, player2;
     int x, y, updateCounter, spawnCounter, speed;
+    private final int defaultSpeed = 5;
 
     public ObstacleManager(GamePanel gp, Player player1, Player player2){
         this.gp = gp;
@@ -25,7 +26,7 @@ public class ObstacleManager {
         this.player2 = player2;
         spawnCounter = 0;
         updateCounter = 0;
-        speed = 10;
+        speed = defaultSpeed;
 
         listLand = new ArrayList<>();
         setLand();
@@ -48,16 +49,35 @@ public class ObstacleManager {
             spawnCounter++;
             spawnObstacle();
         }
+        if (updateCounter % (gp.FPS*5)  == 0){
+            speed++;
+        }
         moveLand();
         moveObstacles();
         deleteOffscreenObstacles();
     }
-    // TODO: move other tiles
-    // TODO: change speed to be faster as time passes
-    // TODO: randomize obstacles distance
 
     public void spawnObstacle(){
-        obstacles.add(new Obstacle(gp, gp.screenWidth, gp.tileSize*3));
+        // Random placement
+        double rand = Math.random();
+        int xTile = listLand.get(listLand.size()-1).x + gp.tileSize*3 + gp.tileSize * (int) (rand * 3);
+
+        // Random amount
+        int obsCount;
+        if(speed <= 5){
+            obsCount = (int) (Math.random()*2);
+        } else if (speed <= 15) {
+            obsCount = (int) (Math.random()*3);
+        } else if (speed <= 30) {
+            obsCount = (int) (Math.random() * 4);
+        } else if (speed <= 45) {
+            obsCount = (int) (Math.random() * 5);
+        } else {
+            obsCount = (int) (Math.random()*6);
+        }
+        for (int j= 0; j < obsCount; j++){
+            obstacles.add(new Obstacle(gp, xTile + gp.tileSize * j, gp.tileSize*3));
+        }
     }
     public void moveObstacles(){
         for (Obstacle obs: obstacles) {
@@ -65,7 +85,6 @@ public class ObstacleManager {
         }
     }
     public void moveLand(){
-        System.out.println(listLand.size());
         for(Land land : listLand){
             land.x -= speed;
         }
@@ -122,7 +141,7 @@ public class ObstacleManager {
         obstacles.clear();
         x = gp.tileSize*4;
         y = gp.tileSize*3;
-        speed = 10;
+        speed = defaultSpeed;
     }
 
 }
