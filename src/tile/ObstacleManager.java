@@ -34,7 +34,7 @@ public class ObstacleManager {
     public void setLand(){
         for(int i = 0; i < 15; i++){
             Land land = new Land();
-            land.x = (int) i * gp.tileSize;
+            land.setX((int) i * gp.tileSize);
             listLand.add(land);
         }
     }
@@ -60,7 +60,7 @@ public class ObstacleManager {
     public void spawnObstacle(){
         // Random placement
         double rand = Math.random();
-        int xTile = listLand.get(listLand.size()-1).x + gp.tileSize*3 + gp.tileSize * (int) (rand * 3);
+        int xTile = listLand.get(listLand.size()-1).getX() + gp.tileSize*3 + gp.tileSize * (int) (rand * 3);
 
         // Random amount
         int obsCount;
@@ -86,11 +86,11 @@ public class ObstacleManager {
     }
     public void moveLand(){
         for(Land land : listLand){
-            land.x -= speed;
+            land.setX(land.getX()-speed);
         }
         Land firstLand = listLand.get(0);
-        if(firstLand.x + gp.tileSize <  - (gp.tileSize*2)){
-            firstLand.x = listLand.get(listLand.size()-1).x + gp.tileSize;
+        if(firstLand.getX() + gp.tileSize <  - (gp.tileSize*2)){
+            firstLand.setX(listLand.get(listLand.size()-1).getX() + gp.tileSize);
             listLand.add(firstLand);
             listLand.remove(0);
         }
@@ -133,8 +133,8 @@ public class ObstacleManager {
             g2.drawImage(obs.image, obs.x, obs.y, gp.tileSize, gp.tileSize, null);
         }
         for (Land land : listLand){
-            g2.drawImage(land.image, land.x, gp.tileSize*4, gp.tileSize, gp.tileSize, null);
-            g2.drawImage(land.image, land.x, gp.tileSize*9, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(land.getImage(), land.getX(), gp.tileSize*4, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(land.getImage(), land.getX(), gp.tileSize*9, gp.tileSize, gp.tileSize, null);
         }
     }
     public void resetObstacles(){
