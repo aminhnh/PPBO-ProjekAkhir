@@ -120,7 +120,7 @@ public class GamePanel extends JPanel implements Runnable{
         }
         else {
             // Tile
-            tileManager.draw(g2);
+            //tileManager.draw(g2);
 
             // Obstacle
             obstacleManager.draw(g2);

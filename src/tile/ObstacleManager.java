@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class ObstacleManager {
     GamePanel gp;
     ArrayList<Obstacle> obstacles;
+    ArrayList<Land> listLand;
     Player player1, player2;
     int x, y, updateCounter, spawnCounter, speed;
 
@@ -25,6 +26,16 @@ public class ObstacleManager {
         spawnCounter = 0;
         updateCounter = 0;
         speed = 5;
+
+        listLand = new ArrayList<>();
+        setLand();
+    }
+    public void setLand(){
+        for(int i = 0; i < 15; i++){
+            Land land = new Land();
+            land.x = (int) i * gp.tileSize;
+            listLand.add(land);
+        }
     }
     public void update(){
         updateCounter++;
@@ -37,6 +48,7 @@ public class ObstacleManager {
             spawnCounter++;
             spawnObstacle();
         }
+        moveLand();
         moveObstacles();
         deleteOffscreenObstacles();
     }
@@ -50,6 +62,18 @@ public class ObstacleManager {
     public void moveObstacles(){
         for (Obstacle obs: obstacles) {
             obs.x -= speed;
+        }
+    }
+    public void moveLand(){
+        System.out.println(listLand.size());
+        for(Land land : listLand){
+            land.x -= speed;
+        }
+        Land firstLand = listLand.get(0);
+        if(firstLand.x + gp.tileSize <  - (gp.tileSize*2)){
+            firstLand.x = listLand.get(listLand.size()-1).x + gp.tileSize;
+            listLand.add(firstLand);
+            listLand.remove(0);
         }
     }
     public void deleteOffscreenObstacles(){
@@ -79,12 +103,19 @@ public class ObstacleManager {
         }
     }
     public void draw(Graphics2D g2){
+        // Set background
+        g2.setColor(new Color(80, 187, 255));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
         // Loop untuk menampilkan setiap obstacle di ArrayList obstacles
         for (Obstacle obs: obstacles) {
-            g2.setColor(Color.white);
+            //g2.setColor(Color.white);
             //g2.fillRect(obs.getSolidAreaX(), obs.getSolidAreaY(), obs.solidArea.width, obs.solidArea.height);
             g2.drawImage(obs.image, obs.x, obs.y, gp.tileSize, gp.tileSize, null);
+        }
+        for (Land land : listLand){
+            g2.drawImage(land.image, land.x, gp.tileSize*4, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(land.image, land.x, gp.tileSize*9, gp.tileSize, gp.tileSize, null);
         }
     }
     public void resetObstacles(){
@@ -93,4 +124,5 @@ public class ObstacleManager {
         y = gp.tileSize*3;
         speed = 5;
     }
+
 }
