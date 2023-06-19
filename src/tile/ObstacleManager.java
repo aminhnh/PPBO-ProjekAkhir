@@ -10,13 +10,15 @@ import java.util.ArrayList;
 // CLASS YANG MENGATUR OBSTACLE
 
 public class ObstacleManager {
-    GamePanel gp;
-    ArrayList<Obstacle> obstacles;
-    ArrayList<Land> listLand;
-    Player player1, player2;
-    int x, y, updateCounter, spawnCounter, speed;
+//    Attribute
+    private GamePanel gp;
+    private ArrayList<Obstacle> obstacles;
+    private ArrayList<Land> listLand;
+    private Player player1, player2;
+    private int x, y, updateCounter, spawnCounter, speed;
     private final int defaultSpeed = 5;
 
+//    Constructor
     public ObstacleManager(GamePanel gp, Player player1, Player player2){
         this.gp = gp;
         x = gp.tileSize*4;
@@ -31,6 +33,72 @@ public class ObstacleManager {
         listLand = new ArrayList<>();
         setLand();
     }
+
+//    Getter Setter
+
+    public GamePanel getGp() {
+        return gp;
+    }
+    public void setGp(GamePanel gp) {
+        this.gp = gp;
+    }
+    public ArrayList<Obstacle> getObstacles() {
+        return obstacles;
+    }
+    public void setObstacles(ArrayList<Obstacle> obstacles) {
+        this.obstacles = obstacles;
+    }
+    public ArrayList<Land> getListLand() {
+        return listLand;
+    }
+    public void setListLand(ArrayList<Land> listLand) {
+        this.listLand = listLand;
+    }
+    public Player getPlayer1() {
+        return player1;
+    }
+    public void setPlayer1(Player player1) {
+        this.player1 = player1;
+    }
+    public Player getPlayer2() {
+        return player2;
+    }
+    public void setPlayer2(Player player2) {
+        this.player2 = player2;
+    }
+    public int getX() {
+        return x;
+    }
+    public void setX(int x) {
+        this.x = x;
+    }
+    public int getY() {
+        return y;
+    }
+    public void setY(int y) {
+        this.y = y;
+    }
+    public int getUpdateCounter() {
+        return updateCounter;
+    }
+    public void setUpdateCounter(int updateCounter) {
+        this.updateCounter = updateCounter;
+    }
+    public int getSpawnCounter() {
+        return spawnCounter;
+    }
+    public void setSpawnCounter(int spawnCounter) {
+        this.spawnCounter = spawnCounter;
+    }
+    public int getSpeed() {
+        return speed;
+    }
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+    public int getDefaultSpeed() {
+        return defaultSpeed;
+    }
     public void setLand(){
         for(int i = 0; i < 15; i++){
             Land land = new Land();
@@ -38,6 +106,8 @@ public class ObstacleManager {
             listLand.add(land);
         }
     }
+
+//    Method
     public void update(){
         updateCounter++;
         // Check collision pada semua obstacles
@@ -56,7 +126,6 @@ public class ObstacleManager {
         moveObstacles();
         deleteOffscreenObstacles();
     }
-
     public void spawnObstacle(){
         // Random placement
         double rand = Math.random();
