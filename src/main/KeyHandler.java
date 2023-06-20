@@ -96,9 +96,12 @@ public class KeyHandler implements KeyListener {
                     gp.exitGame();
                 }
             }
+            // Set Player skin
         }else if (gp.getGameState() == gp.getTitleState() && gp.getUi().titleScreenState == gp.getUi().titleScreenCharacter) {
             if(code == KeyEvent.VK_ENTER || code == KeyEvent.VK_SPACE){
                 gp.getUi().titleScreenState = gp.getUi().titleScreenMenu;
+                gp.getPlayer1().setSkin(gp.getUi().playerSkins[gp.getUi().player1Skin]);
+                gp.getPlayer2().setSkin(gp.getUi().playerSkins[gp.getUi().player2Skin]);
                 gp.setGameState(gp.getPlayState());
                 gp.playMusic();
             }

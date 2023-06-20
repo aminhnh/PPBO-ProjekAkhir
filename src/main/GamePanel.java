@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable{
     private Thread gameThread;
 
     // ENTITY & OBJECT
-    private Player player;
+    private Player player1, player2;
     private ObstacleManager obstacleManager;
     private String winner;
 
@@ -49,8 +49,9 @@ public class GamePanel extends JPanel implements Runnable{
         this.setDoubleBuffered(true); // Tile diluar layar akan di load
         this.addKeyListener(keyHandler);
         this.setFocusable(true); // fokus menerima input
-        player = new Player(this, keyHandler, "green");
-        obstacleManager = new ObstacleManager(this, player, player);
+        player1 = new Player(this, keyHandler, "green");
+        player2 = new Player(this, keyHandler, "green");
+        obstacleManager = new ObstacleManager(this, player1, player2);
     }
 
 //    Getter Setter
@@ -149,14 +150,18 @@ public class GamePanel extends JPanel implements Runnable{
         this.gameThread = gameThread;
     }
 
-    public Player getPlayer() {
-        return player;
+    public Player getPlayer1() {
+        return player1;
     }
-
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setPlayer1(Player player1) {
+        this.player1 = player1;
     }
-
+    public Player getPlayer2() {
+        return player2;
+    }
+    public void setPlayer2(Player player2) {
+        this.player2 = player2;
+    }
     public ObstacleManager getObstacleManager() {
         return obstacleManager;
     }
@@ -266,7 +271,8 @@ public class GamePanel extends JPanel implements Runnable{
                 score++;
                 counterScore = 0;
             }
-            player.update();
+            player1.update();
+            player2.update();
             obstacleManager.update();
         }
         else if (gameState == gameOverState){
@@ -294,7 +300,8 @@ public class GamePanel extends JPanel implements Runnable{
             obstacleManager.draw(g2);
 
             // Player
-            player.draw(g2);
+            player1.draw(g2);
+            player2.draw(g2);
 
             // UI
             ui.draw(g2);
@@ -326,7 +333,8 @@ public class GamePanel extends JPanel implements Runnable{
     }
     public void resetGame(){
         score = 0;
-        player.setDefaultValues();
+        player1.setDefaultValues();
+        player2.setDefaultValues();
         obstacleManager.resetObstacles();
         gameState = playState;
         playMusic();

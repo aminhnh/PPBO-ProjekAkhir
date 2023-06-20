@@ -16,7 +16,7 @@ public class UI {
     Font pixellari, minecraft, upheavtt, fontMenu, fontCredits, fontTitle;
     public int menuNum = 0;
     public int player1Skin, player2Skin = 0;
-    PlayerSkin[] playerSkins;
+    public PlayerSkin[] playerSkins;
 
     // Title Screen Sub-state
     public int titleScreenState = 0;
