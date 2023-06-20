@@ -112,7 +112,7 @@ public class ObstacleManager {
         updateCounter++;
         // Check collision pada semua obstacles
         for (Obstacle obs : obstacles) {
-            checkCollision(player1, obs);
+            checkCollision(player1, player2, obs);
         }
         // Tambah obstacle setiap satu detik
         if(updateCounter%gp.getFPS() == 1){
@@ -167,27 +167,39 @@ public class ObstacleManager {
     public void deleteOffscreenObstacles(){
         obstacles.removeIf(obs -> obs.getX() < -(gp.getTileSize()+10));
     }
-    public void checkCollision(Player player, Obstacle obs){
-        int px1 = player.getSolidAreaX() ;
-        int px2 = player.getSolidAreaX() + player.getSolidArea().width;
+    public void checkCollision(Player player1, Player player2, Obstacle obs){
+        int p1x1 = player1.getSolidAreaX() ;
+        int p1x2 = player1.getSolidAreaX() + player1.getSolidArea().width;
+        int p1y1 = player1.getSolidAreaY();
+        int p1y2 = player1.getSolidAreaY() + player1.getSolidArea().height;
+
+        int p2x1 = player2.getSolidAreaX() ;
+        int p2x2 = player2.getSolidAreaX() + player2.getSolidArea().width;
+        int p2y1 = player2.getSolidAreaY();
+        int p2y2 = player2.getSolidAreaY() + player2.getSolidArea().height;
+
         int ox1 = obs.getSolidAreaX();
         int ox2 = obs.getSolidAreaX() + obs.getSolidArea().width;
-
-        int py1 = player.getSolidAreaY();
-        int py2 = player.getSolidAreaY() + player.getSolidArea().height;
         int oy1 = obs.getSolidAreaY();
         int oy2 = obs.getSolidAreaY() + obs.getSolidArea().height;
 
         // Intersection antara player dan obstacle
-        if (px1 < ox2 && px2 > ox1 && py1 < oy2 && py2 > oy1){
+        if (p1x1 < ox2 && p1x2 > ox1 && p1y1 < oy2 && p1y2 > oy1){
             gp.stopMusic();
             gp.playSFX(3);
-            player.playDamageAnimation();
+            player1.playDamageAnimation();
+            gp.setWinner(player2.getSkin().getColor());
             gp.setGameState(gp.getGameOverState());
 
             // DEBUG
             //System.out.println("GAME OVER");
             //System.out.println("PX1: "+px1+ " PX2: "+px2+" OX1: "+ox1+" OX2 "+ox2);
+        } else if (p2x1 < ox2 && p2x2 > ox1 && p2y1 < oy2 + gp.getTileSize()*5 && p2y2 > oy1 + + gp.getTileSize()*5){
+            gp.stopMusic();
+            gp.playSFX(3);
+            player1.playDamageAnimation();
+            gp.setWinner(player1.getSkin().getColor());
+            gp.setGameState(gp.getGameOverState());
         }
     }
     public void draw(Graphics2D g2){
@@ -200,6 +212,7 @@ public class ObstacleManager {
             //g2.setColor(Color.white);
             //g2.fillRect(obs.getSolidAreaX(), obs.getSolidAreaY(), obs.solidArea.width, obs.solidArea.height);
             g2.drawImage(obs.getImage(), obs.getX(), obs.getY(), gp.getTileSize(), gp.getTileSize(), null);
+            g2.drawImage(obs.getImage(), obs.getX(), obs.getY()+gp.getTileSize()*5, gp.getTileSize(), gp.getTileSize(), null);
         }
         for (Land land : listLand){
             g2.drawImage(land.getImage(), land.getX(), gp.getTileSize()*4, gp.getTileSize(), gp.getTileSize(), null);

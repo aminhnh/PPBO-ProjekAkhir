@@ -32,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable{
     // ENTITY & OBJECT
     private Player player;
     private ObstacleManager obstacleManager;
+    private String winner;
 
     // GAME STATE
     private int gameState;
@@ -53,6 +54,13 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
 //    Getter Setter
+
+    public String getWinner() {
+        return winner;
+    }
+    public void setWinner(String winner) {
+        this.winner = winner;
+    }
     public int getOriginalTileSize() {
         return originalTileSize;
     }

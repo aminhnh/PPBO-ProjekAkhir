@@ -300,7 +300,7 @@ public class UI {
         g2.drawString(text, x, y);
 
         g2.setFont(fontTitle);
-        text = "Green Wins!";
+        text = gp.getWinner() + " Wins!";
         x = getXforCenteredText(text);
         y += gp.getTileSize();
         g2.drawString(text, x, y);
