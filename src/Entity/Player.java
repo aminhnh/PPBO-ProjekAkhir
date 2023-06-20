@@ -17,12 +17,12 @@ public class Player extends Entity{
     private KeyHandler keyHandler;
     private PlayerSkin skin;
     private final static int scale = 2;
-    private boolean onAir = false;
-    private boolean isJumping = false;
-    private double velocity, floor;
+    protected boolean onAir = false;
+    protected boolean isJumping = false;
+    protected double velocity, floor;
 
 //    Constructor
-    public Player(GamePanel gp, KeyHandler keyHandler, String color) {
+    public Player(GamePanel gp, KeyHandler keyHandler, String defaultColor) {
         this.gp = gp;
         this.keyHandler = keyHandler;
         this.velocity = 0;
@@ -30,7 +30,7 @@ public class Player extends Entity{
         setDefaultValues();
 
         // Set skin player
-        skin = new PlayerSkin("green");
+        skin = new PlayerSkin(defaultColor);
 
         // SolidArea itu collision box untuk player (area yg dideteksi jika menabrak collision box obstacle)
         setSolidArea(new Rectangle());
