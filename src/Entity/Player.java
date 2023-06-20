@@ -132,7 +132,6 @@ public class Player extends Entity{
             setJumpCounter(getJumpCounter()+1);
         }
 
-        // TODO: Make Jump better
         // Kode dibawah ini mengatur dino lompat
         if (keyHandler.isUpPressed1() && onFloor() && !isJumping){
             // saat tekan naik & player di lantai:
