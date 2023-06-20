@@ -5,13 +5,57 @@ import java.awt.event.KeyListener;
 // CLASS UNTUK MENGATUR INPUT (jika keyboard ditekan)
 
 public class KeyHandler implements KeyListener {
-    public boolean upPressed, downPressed, leftPressed, rightPressed;
-    public GamePanel gp;
+//    Attribute
+    private boolean upPressed, downPressed, leftPressed, rightPressed;
+    private GamePanel gp;
 
+//    Constructor
     public KeyHandler(GamePanel gp) {
         this.gp = gp;
     }
 
+//    Getter Setter
+    public boolean isUpPressed() {
+        return upPressed;
+    }
+
+    public void setUpPressed(boolean upPressed) {
+        this.upPressed = upPressed;
+    }
+
+    public boolean isDownPressed() {
+        return downPressed;
+    }
+
+    public void setDownPressed(boolean downPressed) {
+        this.downPressed = downPressed;
+    }
+
+    public boolean isLeftPressed() {
+        return leftPressed;
+    }
+
+    public void setLeftPressed(boolean leftPressed) {
+        this.leftPressed = leftPressed;
+    }
+
+    public boolean isRightPressed() {
+        return rightPressed;
+    }
+
+    public void setRightPressed(boolean rightPressed) {
+        this.rightPressed = rightPressed;
+    }
+
+    public GamePanel getGp() {
+        return gp;
+    }
+
+    public void setGp(GamePanel gp) {
+        this.gp = gp;
+    }
+
+    //    Method
     @Override
     public void keyTyped(KeyEvent e){}
 
@@ -20,69 +64,69 @@ public class KeyHandler implements KeyListener {
         int code = e.getKeyCode();
         // TITLE STATE
         // Menu
-        if (gp.gameState == gp.titleState && gp.ui.titleScreenState == gp.ui.titleScreenMenu) {
+        if (gp.getGameState() == gp.getTitleState() && gp.getUi().titleScreenState == gp.getUi().titleScreenMenu) {
             // Saat scrolling opsi menu
             if (code == KeyEvent.VK_UP || code == KeyEvent.VK_W) {
                 gp.playSFXCursorMove(2);
-                gp.ui.menuNum--;
-                if (gp.ui.menuNum < 0) {
-                    gp.ui.menuNum = 3;
+                gp.getUi().menuNum--;
+                if (gp.getUi().menuNum < 0) {
+                    gp.getUi().menuNum = 3;
                 }
             }
             if (code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S) {
-                gp.ui.menuNum++;
+                gp.getUi().menuNum++;
                 gp.playSFXCursorMove(2);
-                if (gp.ui.menuNum > 3) {
-                    gp.ui.menuNum = 0;
+                if (gp.getUi().menuNum > 3) {
+                    gp.getUi().menuNum = 0;
                 }
             }
             // Saat memilih menu (tekan enter)
             if (code == KeyEvent.VK_ENTER) {
-                if (gp.ui.menuNum == 0) {
+                if (gp.getUi().menuNum == 0) {
                     gp.playSFXCursorMove(2);
-                    gp.ui.titleScreenState = gp.ui.titleScreenCharacter;
-                } else if (gp.ui.menuNum == 1) {
+                    gp.getUi().titleScreenState = gp.getUi().titleScreenCharacter;
+                } else if (gp.getUi().menuNum == 1) {
                     gp.playSFXCursorMove(2);
-                    gp.ui.titleScreenState = gp.ui.titleScreenCredits;
-                } else if (gp.ui.menuNum == 2) {
+                    gp.getUi().titleScreenState = gp.getUi().titleScreenCredits;
+                } else if (gp.getUi().menuNum == 2) {
                     gp.playSFXCursorMove(2);
-                    gp.ui.titleScreenState = gp.ui.titleScreenSettings;
-                } else if (gp.ui.menuNum == 3) {
+                    gp.getUi().titleScreenState = gp.getUi().titleScreenSettings;
+                } else if (gp.getUi().menuNum == 3) {
                     gp.playSFXCursorMove(2);
                     gp.exitGame();
                 }
             }
-        }else if (gp.gameState == gp.titleState && gp.ui.titleScreenState == gp.ui.titleScreenCharacter) {
+        }else if (gp.getGameState() == gp.getTitleState() && gp.getUi().titleScreenState == gp.getUi().titleScreenCharacter) {
             if(code == KeyEvent.VK_ENTER || code == KeyEvent.VK_SPACE){
-                gp.ui.titleScreenState = gp.ui.titleScreenMenu;
-                gp.gameState = gp.playState;
+                gp.getUi().titleScreenState = gp.getUi().titleScreenMenu;
+                gp.setGameState(gp.getPlayState());
                 gp.playMusic();
             }
             else if(code == KeyEvent.VK_W || code == KeyEvent.VK_A){
-                    gp.ui.player1Skin--;
+                    gp.getUi().player1Skin--;
                     gp.playSFXCursorMove(2);
             } else if (code == KeyEvent.VK_S || code == KeyEvent.VK_D){
-                    gp.ui.player1Skin--;
+                    gp.getUi().player1Skin--;
                     gp.playSFXCursorMove(2);
             } else if (code == KeyEvent.VK_UP || code == KeyEvent.VK_LEFT) {
-                    gp.ui.player2Skin++;
+                    gp.getUi().player2Skin++;
                     gp.playSFXCursorMove(2);
             } else if (code == KeyEvent.VK_DOWN || code == KeyEvent.VK_RIGHT) {
-                    gp.ui.player2Skin--;
+                    gp.getUi().player2Skin--;
                     gp.playSFXCursorMove(2);
 
             }
             // Credits
-        } else if (gp.gameState == gp.titleState && gp.ui.titleScreenState == gp.ui.titleScreenCredits){
+        } else if (gp.getGameState() == gp.getTitleState() && gp.getUi().titleScreenState == gp.getUi().titleScreenCredits){
             if (code == KeyEvent.VK_ENTER){
                 gp.playSFXCursorMove(2);
-                gp.ui.titleScreenState = gp.ui.titleScreenMenu;
+                gp.getUi().titleScreenState = gp.getUi().titleScreenMenu;
             }
 
         }
 
         // PLAY STATE
-        else if (gp.gameState == gp.playState){
+        else if (gp.getGameState() == gp.getPlayState()){
             if (code == KeyEvent.VK_UP){
                 upPressed = true;
             }
@@ -96,68 +140,68 @@ public class KeyHandler implements KeyListener {
                 rightPressed = true;
             }
             if (code == KeyEvent.VK_ESCAPE || code == KeyEvent.VK_SPACE){
-                gp.gameState = gp.pauseState;
-                gp.music.pause();
+                gp.setGameState(gp.getPauseState());
+                gp.getMusic().pause();
             }
         }
 
         // PAUSED STATE
-        else if (gp.gameState == gp.pauseState || gp.ui.titleScreenState == gp.ui.titleScreenSettings){
-            if (gp.gameState == gp.pauseState){
+        else if (gp.getGameState() == gp.getPauseState() || gp.getUi().titleScreenState == gp.getUi().titleScreenSettings){
+            if (gp.getGameState() == gp.getPauseState()){
                 if (code == KeyEvent.VK_SPACE || code == KeyEvent.VK_ESCAPE){
-                    gp.music.resume();
-                    gp.gameState = gp.playState;
+                    gp.getMusic().resume();
+                    gp.setGameState(gp.getPlayState());
                 }
             }
             if (code == KeyEvent.VK_UP || code == KeyEvent.VK_W){
                 gp.playSFXCursorMove(2);
-                gp.ui.menuNum--;
-                if (gp.ui.menuNum < 0){
-                    gp.ui.menuNum = 1;
+                gp.getUi().menuNum--;
+                if (gp.getUi().menuNum < 0){
+                    gp.getUi().menuNum = 1;
                 }
             }
             if (code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S){
                 gp.playSFXCursorMove(2);
-                gp.ui.menuNum++;
-                if (gp.ui.menuNum > 1){
-                    gp.ui.menuNum = 0;
+                gp.getUi().menuNum++;
+                if (gp.getUi().menuNum > 1){
+                    gp.getUi().menuNum = 0;
                 }
             }
             if (code == KeyEvent.VK_ENTER){
-                if(gp.ui.menuNum == 0){
-                    gp.ui.titleScreenState = gp.ui.titleScreenMenu;
-                } else if (gp.ui.menuNum == 1){
-                    gp.ui.titleScreenState = gp.ui.titleScreenMenu;
-                } else if (gp.ui.menuNum == 2) {
-                    gp.ui.titleScreenState = gp.ui.titleScreenMenu;
+                if(gp.getUi().menuNum == 0){
+                    gp.getUi().titleScreenState = gp.getUi().titleScreenMenu;
+                } else if (gp.getUi().menuNum == 1){
+                    gp.getUi().titleScreenState = gp.getUi().titleScreenMenu;
+                } else if (gp.getUi().menuNum == 2) {
+                    gp.getUi().titleScreenState = gp.getUi().titleScreenMenu;
                 }
             }
 
             if (code == KeyEvent.VK_LEFT){
-                if (gp.ui.menuNum == 0 && gp.music.volumeScale > 0) {
-                    gp.music.volumeScale--;
-                    gp.music.checkVolume();
+                if (gp.getUi().menuNum == 0 && gp.getMusic().getVolumeScale() > 0) {
+                    gp.getMusic().setVolumeScale(gp.getMusic().getVolumeScale()-1);
+                    gp.getMusic().checkVolume();
                 }
-                if (gp.ui.menuNum == 1 && gp.sfx.volumeScale > 0) {
-                    gp.sfx.volumeScale--;
-                    gp.sfxMoveCursor.volumeScale--;
-                    gp.sfx.checkVolume();
+                if (gp.getUi().menuNum == 1 && gp.getSfx().getVolumeScale() > 0) {
+                    gp.getSfx().setVolumeScale(gp.getSfx().getVolumeScale()-1);
+                    gp.getSfxMoveCursor().setVolumeScale(gp.getSfxMoveCursor().getVolumeScale()-1);
+                    gp.getSfx().checkVolume();
                 }
             }
             if (code == KeyEvent.VK_RIGHT){
-                if (gp.ui.menuNum == 0 && gp.music.volumeScale < 5) {
-                    gp.music.volumeScale++;
-                    gp.music.checkVolume();
+                if (gp.getUi().menuNum == 0 && gp.getMusic().getVolumeScale() < 5) {
+                    gp.getMusic().setVolumeScale(gp.getMusic().getVolumeScale()+1);
+                    gp.getMusic().checkVolume();
                 }
-                if (gp.ui.menuNum == 1 && gp.sfx.volumeScale < 5) {
-                    gp.sfx.volumeScale++;
-                    gp.sfxMoveCursor.volumeScale++;
-                    gp.sfx.checkVolume();
+                if (gp.getUi().menuNum == 1 && gp.getSfx().getVolumeScale() < 5) {
+                    gp.getSfx().setVolumeScale(gp.getSfx().getVolumeScale()+1);
+                    gp.getSfxMoveCursor().setVolumeScale(gp.getSfxMoveCursor().getVolumeScale()+1);
+                    gp.getSfx().checkVolume();
                 }
             }
         }
         // GAMEOVER
-        else if (gp.gameState == gp.gameOverState){
+        else if (gp.getGameState() == gp.getGameOverState()){
             if(code == KeyEvent.VK_ENTER || code == KeyEvent.VK_SPACE){
                 gp.resetGame();
             }

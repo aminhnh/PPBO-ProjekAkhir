@@ -7,13 +7,16 @@ import javax.sound.sampled.FloatControl;
 import java.net.URL;
 
 public class Sound {
-    Clip clip;
+//    Attribute
+    private Clip clip;
+    private
     URL soundURL[] = new URL[30];
     private long clipTimePosition;
-    FloatControl fc;
-    int volumeScale = 3;
-    float volume;
+    private FloatControl fc;
+    private int volumeScale = 3;
+    private float volume;
 
+//    Constructor
     public Sound(){
         soundURL[0] = getClass().getResource("/sounds/chiptune-grooving.wav");
         soundURL[1] = getClass().getResource("/sounds/sfx_jump.wav");
@@ -21,6 +24,56 @@ public class Sound {
         soundURL[3] = getClass().getResource("/sounds/sfx_dead.wav");
     }
 
+//    Getter Setter
+    public Clip getClip() {
+        return clip;
+    }
+
+    public void setClip(Clip clip) {
+        this.clip = clip;
+    }
+
+    public URL[] getSoundURL() {
+        return soundURL;
+    }
+
+    public void setSoundURL(URL[] soundURL) {
+        this.soundURL = soundURL;
+    }
+
+    public long getClipTimePosition() {
+        return clipTimePosition;
+    }
+
+    public void setClipTimePosition(long clipTimePosition) {
+        this.clipTimePosition = clipTimePosition;
+    }
+
+    public FloatControl getFc() {
+        return fc;
+    }
+
+    public void setFc(FloatControl fc) {
+        this.fc = fc;
+    }
+
+    public int getVolumeScale() {
+        return volumeScale;
+    }
+
+    public void setVolumeScale(int volumeScale) {
+        this.volumeScale = volumeScale;
+    }
+
+    public float getVolume() {
+        return volume;
+    }
+
+    public void setVolume(float volume) {
+        this.volume = volume;
+    }
+
+    //    Method
     public void setFile(int i){
         // Membuka audio file
         try{

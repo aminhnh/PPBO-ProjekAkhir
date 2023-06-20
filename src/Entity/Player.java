@@ -26,7 +26,7 @@ public class Player extends Entity{
         this.gp = gp;
         this.keyHandler = keyHandler;
         this.velocity = 0;
-        floor = (gp.tileSize+6)*2;
+        floor = (gp.getTileSize()+6)*2;
         setDefaultValues();
 
         // Set skin player
@@ -34,10 +34,10 @@ public class Player extends Entity{
 
         // SolidArea itu collision box untuk player (area yg dideteksi jika menabrak collision box obstacle)
         setSolidArea(new Rectangle());
-        getSolidArea().width = 7*gp.scale;
-        getSolidArea().height = 19*gp.scale;
-        getSolidArea().x = getX() - (gp.tileSize*Player.scale/2) - (getSolidArea().width/2);
-        getSolidArea().y = 8*gp.scale;
+        getSolidArea().width = 7*gp.getScale();
+        getSolidArea().height = 19*gp.getScale();
+        getSolidArea().x = getX() - (gp.getTileSize()*Player.scale/2) - (getSolidArea().width/2);
+        getSolidArea().y = 8*gp.getScale();
     }
 
 //    Getter Setter
@@ -99,8 +99,8 @@ public class Player extends Entity{
 
     //    Method
     public void setDefaultValues(){
-        setX(gp.tileSize*2);
-        setY((gp.tileSize+6)*2);
+        setX(gp.getTileSize()*2);
+        setY((gp.getTileSize()+6)*2);
         setSpeed(5);
         setDirection("run");
     }
@@ -111,13 +111,13 @@ public class Player extends Entity{
 
     public void update(){
         //System.out.println("Y = "+y+"  v = "+velocity);
-        if(keyHandler.upPressed || isJumping){
+        if(keyHandler.isUpPressed() || isJumping){
             setDirection("up");
-        } else if (keyHandler.downPressed){
+        } else if (keyHandler.isDownPressed()){
             setDirection("down");
-        } else if (keyHandler.leftPressed){
+        } else if (keyHandler.isLeftPressed()){
             setX(super.getX()-super.getSpeed());
-        } else if (keyHandler.rightPressed) {
+        } else if (keyHandler.isRightPressed()) {
             setX(getX()+getSpeed());
         } else{
             setDirection("run");
@@ -134,7 +134,7 @@ public class Player extends Entity{
 
         // TODO: Make Jump better
         // Kode dibawah ini mengatur dino lompat
-        if (keyHandler.upPressed && onFloor() && !isJumping){
+        if (keyHandler.isUpPressed() && onFloor() && !isJumping){
             // saat tekan naik & player di lantai:
             gp.playSFX(1);
             velocity = 20;
@@ -184,14 +184,14 @@ public class Player extends Entity{
                 image = skin.getRun().get(getSpriteNum());
                 break;
             case "dead":
-                image = skin.getDead().get(gp.actualFPS%5);
+                image = skin.getDead().get(gp.getActualFPS()%5);
                 break;
         }
         // Fill ukuran sprite player
         //g2.fillRect((int)x, (int)y, gp.tileSize*Player.scale, gp.tileSize*Player.scale);
 
         // Draw Dino on screen
-        g2.drawImage(image, (int) getX(), (int) getY(), gp.tileSize*Player.scale, gp.tileSize*Player.scale, null);
+        g2.drawImage(image, (int) getX(), (int) getY(), gp.getTileSize()*Player.scale, gp.getTileSize()*Player.scale, null);
         // Draw solidArea
         //g2.fillRect(getSolidAreaX(), getSolidAreaY(), solidArea.width, solidArea.height);
     }

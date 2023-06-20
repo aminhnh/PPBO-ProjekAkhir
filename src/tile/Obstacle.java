@@ -19,15 +19,15 @@ public class Obstacle {
         this.gp = gp;
         this.x = x;
         this.y = y;
-        this.width = gp.tileSize;
-        this.height = gp.tileSize;
+        this.width = gp.getTileSize();
+        this.height = gp.getTileSize();
 
         // SolidArea merupakan collider box obstacle
         this.solidArea = new Rectangle();
-        solidArea.x = (int) (gp.tileSize*0.2*0.5);
+        solidArea.x = (int) (gp.getTileSize()*0.2*0.5);
         solidArea.y = getSolidAreaY();
-        solidArea.width = (int) (gp.tileSize*0.9);
-        solidArea.height = (int) (gp.tileSize*0.2);
+        solidArea.width = (int) (gp.getTileSize()*0.9);
+        solidArea.height = (int) (gp.getTileSize()*0.2);
 
         getObstacleImage();
     }
@@ -88,6 +88,6 @@ public class Obstacle {
         return x;
     }
     public int getSolidAreaY(){
-        return (int) ( y + (0.8*gp.tileSize));
+        return (int) ( y + (0.8*gp.getTileSize()));
     }
 }

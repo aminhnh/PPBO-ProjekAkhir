@@ -40,7 +40,7 @@ public class UI {
     }
     public void draw(Graphics2D g2){
         this.g2 = g2;
-        if (gp.gameState == gp.titleState){
+        if (gp.getGameState() == gp.getTitleState()){
             if (titleScreenState == titleScreenMenu){
                 drawMenuScreen();
             }
@@ -52,27 +52,27 @@ public class UI {
                 drawCharacterScreen();
             }
         }
-        else if (gp.gameState == gp.playState){
+        else if (gp.getGameState() == gp.getPlayState()){
             //drawFPS();
             drawScore();
         }
-        else if (gp.gameState == gp.pauseState){
+        else if (gp.getGameState() == gp.getPauseState()){
             drawPauseScreen();
         }
-        else if (gp.gameState == gp.gameOverState){
+        else if (gp.getGameState() == gp.getGameOverState()){
             drawGameOverScreen();
         }
     }
     public void drawMenuScreen() {
         // Background Color
         g2.setColor(new Color(80, 187, 255));
-        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+        g2.fillRect(0, 0, gp.getScreenWidth(), gp.getScreenHeight());
 
         // Title text settings
         g2.setFont(fontTitle);
         String text = "DINO PARTY";
         int x = getXforCenteredText(text);
-        int y = (int)(gp.tileSize * 2.5);
+        int y = (int)(gp.getTileSize() * 2.5);
 
         // Shadow
         g2.setColor(Color.black);
@@ -83,15 +83,15 @@ public class UI {
         g2.drawString(text, x, y);
 
         // Player images
-        int playerSize = gp.tileSize*2;
-        y += gp.tileSize;
-        x = (gp.screenWidth - (playerSize*4))/2;
+        int playerSize = gp.getTileSize()*2;
+        y += gp.getTileSize();
+        x = (gp.getScreenWidth() - (playerSize*4))/2;
         g2.drawImage(playerSkins[0].getUp1(), x, y, playerSize,playerSize, null);
-        x += gp.tileSize*2;
+        x += gp.getTileSize()*2;
         g2.drawImage(playerSkins[1].getUp1(), x, y, playerSize,playerSize, null);
-        x += gp.tileSize*4;
+        x += gp.getTileSize()*4;
         g2.drawImage(playerSkins[2].getUp1(), x, y, -playerSize,playerSize, null);
-        x += gp.tileSize*2;
+        x += gp.getTileSize()*2;
         g2.drawImage(playerSkins[3].getUp1(), x, y, -playerSize,playerSize, null);
 
         // Menu
@@ -99,7 +99,7 @@ public class UI {
 
         text = "PLAY";
         x = getXforCenteredText(text);
-        y += gp.tileSize * 3;
+        y += gp.getTileSize() * 3;
         g2.drawString(text, x, y);
         if (menuNum == 0) {
             g2.drawString(">", x - 30, y);
@@ -107,7 +107,7 @@ public class UI {
 
         text = "CREDITS";
         x = getXforCenteredText(text);
-        y += gp.tileSize / 2;
+        y += gp.getTileSize() / 2;
         g2.drawString(text, x, y);
         if (menuNum == 1) {
             g2.drawString(">", x - 30, y);
@@ -115,7 +115,7 @@ public class UI {
 
         text = "SETTINGS";
         x = getXforCenteredText(text);
-        y += gp.tileSize / 2;
+        y += gp.getTileSize() / 2;
         g2.drawString(text, x, y);
         if (menuNum == 2) {
             g2.drawString(">", x - 30, y);
@@ -123,7 +123,7 @@ public class UI {
 
         text = "QUIT";
         x = getXforCenteredText(text);
-        y += gp.tileSize / 2;
+        y += gp.getTileSize() / 2;
         g2.drawString(text,x, y);
         if (menuNum == 3) {
             g2.drawString(">", x - 30, y);
@@ -137,36 +137,36 @@ public class UI {
 
         // Background Color
         g2.setColor(new Color(80, 187, 255));
-        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+        g2.fillRect(0, 0, gp.getScreenWidth(), gp.getScreenHeight());
 
         // Title
         g2.setFont(fontTitle);
         String text = "Choose Your";
         int x = getXforCenteredText(text);
-        int y = (int) (gp.tileSize*1.5);
+        int y = (int) (gp.getTileSize()*1.5);
 
         g2.setColor(Color.black);
         g2.drawString(text, x + 2, y + 2);
-        g2.drawString("Player", getXforCenteredText("Player")+2, y+gp.tileSize+2);
+        g2.drawString("Player", getXforCenteredText("Player")+2, y+gp.getTileSize()+2);
 
         g2.setColor(Color.white);
         g2.drawString(text, x, y);
-        g2.drawString("Player", getXforCenteredText("Player"), y+gp.tileSize);
+        g2.drawString("Player", getXforCenteredText("Player"), y+gp.getTileSize());
 
         // Player Skin
-        int playerSize = gp.tileSize*4;
-        x = (int)(gp.screenWidth/3.5) - playerSize/2;
-        y += gp.tileSize*1.5;
+        int playerSize = gp.getTileSize()*4;
+        x = (int)(gp.getScreenWidth()/3.5) - playerSize/2;
+        y += gp.getTileSize()*1.5;
         g2.drawImage(playerSkins[player1Skin].getUp1(), x, y, playerSize,playerSize, null);
 
-        x = (int)(gp.screenWidth/3) + playerSize/2;
+        x = (int)(gp.getScreenWidth()/3) + playerSize/2;
         g2.drawImage(playerSkins[player2Skin].getUp1(), x, y, playerSize,playerSize, null);
 
         // Options
         g2.setFont(fontMenu);
         text = PlayerSkin.getSkinColor()[player1Skin];
         x = getXforCenteredText(text);
-        y += gp.tileSize * 5;
+        y += gp.getTileSize() * 5;
         g2.drawString(text, getQuarterX(text, false), y);
         text = ">             <";
         g2.drawString(text, getQuarterX(text, false), y);
@@ -179,54 +179,54 @@ public class UI {
     public int getQuarterX(String text, boolean right){
         int textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         if (right){
-            return (gp.screenWidth/4)*3 - textLength/2 - gp.tileSize/2;
+            return (gp.getScreenWidth()/4)*3 - textLength/2 - gp.getTileSize()/2;
         } else {
-            return gp.screenWidth/4 - textLength/2 + gp.tileSize/2;
+            return gp.getScreenWidth()/4 - textLength/2 + gp.getTileSize()/2;
         }
     }
 
     public void drawCreditsScreen(){
         g2.setColor(new Color(80, 187, 255));
-        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+        g2.fillRect(0, 0, gp.getScreenWidth(), gp.getScreenHeight());
 
         g2.setColor(Color.white);
         g2.setFont(fontMenu);
 
         String credit = "Made By : ";
         int creditX = getXforCenteredText(credit);
-        int creditY = (int) (gp.tileSize*1.5);
+        int creditY = (int) (gp.getTileSize()*1.5);
         g2.drawString(credit, creditX, creditY);
 
         g2.setFont(fontCredits);
         String line1 = "Aminah Nurul Huda";
         int line1X = getXforCenteredText(line1);
-        int line1Y = creditY + gp.tileSize;
+        int line1Y = creditY + gp.getTileSize();
         g2.drawString(line1, line1X, line1Y);
 
         String line2 = "Amanda Farliana Setyasari";
         int line2X = getXforCenteredText(line2);
-        int line2Y = line1Y + gp.tileSize/2;
+        int line2Y = line1Y + gp.getTileSize()/2;
         g2.drawString(line2, line2X, line2Y);
 
         String line3 = "Salwa Jasmine A'aliyah";
         int line3X = getXforCenteredText(line3);
-        int line3Y = line2Y + gp.tileSize/2;
+        int line3Y = line2Y + gp.getTileSize()/2;
         g2.drawString(line3, line3X, line3Y);
 
         String line4 = "Risma Saputri";
         int line4X = getXforCenteredText(line4);
-        int line4Y = line3Y + gp.tileSize/2;
+        int line4Y = line3Y + gp.getTileSize()/2;
         g2.drawString(line4, line4X, line4Y);
 
         g2.setFont(fontMenu);
         String text = "Dosen Pengampu:";
         int x = getXforCenteredText(text);
-        int y = line4Y + gp.tileSize*2;
+        int y = line4Y + gp.getTileSize()*2;
         g2.drawString(text, x, y);
 
         g2.setFont(fontCredits);
         text = "Margareta Hardiyanti, S.Kom., M.Eng.";
-        y += gp.tileSize;
+        y += gp.getTileSize();
         x = getXforCenteredText(text);
         g2.drawString(text, x, y);
 
@@ -234,58 +234,58 @@ public class UI {
         g2.setFont(fontMenu);
         text = "BACK";
         x = getXforCenteredText(text);
-        y += gp.tileSize*1.5 ;
+        y += gp.getTileSize()*1.5 ;
 
         g2.drawString(text, x, y);
         g2.drawString(">", x - 30, y);
     }
     public void drawSettingsScreen(){
         g2.setColor(new Color(80, 187, 255));
-        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+        g2.fillRect(0, 0, gp.getScreenWidth(), gp.getScreenHeight());
         drawSettings();
     }
     public void drawSettings(){
         g2.setColor(Color.white);
         int x = 170;
-        int y = (int)(gp.tileSize);
+        int y = (int)(gp.getTileSize());
         int rectX;
-        int rectY = (int)(gp.tileSize);
+        int rectY = (int)(gp.getTileSize());
 
         //MUSIC + BAR
         g2.setFont(fontMenu);
         String text = "MUSIC";
-        y += gp.tileSize * 3;
+        y += gp.getTileSize() * 3;
         g2.drawString(text, x, y);
         if (menuNum == 0) {
             g2.drawString(">", x - 30, y);
         }
-        rectX = gp.tileSize + gp.tileSize * 5;
-        rectY += gp.tileSize * 2.5;
+        rectX = gp.getTileSize() + gp.getTileSize() * 5;
+        rectY += gp.getTileSize() * 2.5;
         g2.drawRect(rectX, rectY, 120, 24);
-        int volumeWidth = 24 * gp.music.volumeScale;
+        int volumeWidth = 24 * gp.getMusic().getVolumeScale();
         g2.fillRect(rectX, rectY, volumeWidth, 24);
 
         //SOUND + BAR
         text = "SOUND";
-        y += gp.tileSize;
+        y += gp.getTileSize();
         g2.drawString(text, x, y);
         if (menuNum == 1) {
             g2.drawString(">", x - 30, y);
         }
-        rectY += gp.tileSize;
+        rectY += gp.getTileSize();
         g2.drawRect(rectX, rectY, 120, 24);
-        volumeWidth = 24 * gp.sfx.volumeScale;
+        volumeWidth = 24 * gp.getSfx().getVolumeScale();
         g2.fillRect(rectX, rectY, volumeWidth, 24);
     }
     public void drawPauseScreen(){
         g2.setColor(new Color(0, 0, 0, 150));
-        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+        g2.fillRect(0, 0, gp.getScreenWidth(), gp.getScreenHeight());
 
         g2.setFont(fontTitle);
         String text = "PAUSED";
         g2.setColor(Color.white);
         int x = getXforCenteredText(text);
-        int y = gp.screenHeight/4;
+        int y = gp.getScreenHeight()/4;
         g2.drawString(text, x, y);
 
         drawSettings();
@@ -296,35 +296,35 @@ public class UI {
         g2.setFont(fontCredits);
         String text = "GAME OVER";
         int x = getXforCenteredText(text);
-        int y = gp.tileSize;
+        int y = gp.getTileSize();
         g2.drawString(text, x, y);
 
         g2.setFont(fontTitle);
         text = "Green Wins!";
         x = getXforCenteredText(text);
-        y += gp.tileSize;
+        y += gp.getTileSize();
         g2.drawString(text, x, y);
 
         g2.setFont(fontMenu);
-        text = "SCORE : "+gp.score;
+        text = "SCORE : "+gp.getScore();
         x = getXforCenteredText(text);
-        y += gp.tileSize;
+        y += gp.getTileSize();
         g2.drawString(text, x, y);
 
     }
     public void drawFPS(){
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 24F));
             g2.setColor(Color.white);
-            g2.drawString("FPS : "+gp.actualFPS, gp.screenWidth-120, 30);
+            g2.drawString("FPS : "+gp.getActualFPS(), gp.getScreenWidth()-120, 30);
     }
     public void drawScore(){
         g2.setFont(fontMenu);
         g2.setColor(Color.white);
-        g2.drawString(String.format("%05d", gp.score), gp.screenWidth- (int) (gp.tileSize*2.5), (int)(gp.tileSize*0.7));
+        g2.drawString(String.format("%05d", gp.getScore()), gp.getScreenWidth()- (int) (gp.getTileSize()*2.5), (int)(gp.getTileSize()*0.7));
     }
     public int getXforCenteredText(String text){
         int textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-        return gp.screenWidth/2 - textLength/2;
+        return gp.getScreenWidth()/2 - textLength/2;
     }
     public void setupFonts(){
         try {

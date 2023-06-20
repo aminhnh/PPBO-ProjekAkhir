@@ -21,8 +21,8 @@ public class ObstacleManager {
 //    Constructor
     public ObstacleManager(GamePanel gp, Player player1, Player player2){
         this.gp = gp;
-        x = gp.tileSize*4;
-        y = gp.tileSize*3;
+        x = gp.getTileSize()*4;
+        y = gp.getTileSize()*3;
         obstacles = new ArrayList<>();
         this.player1 = player1;
         this.player2 = player2;
@@ -102,7 +102,7 @@ public class ObstacleManager {
     public void setLand(){
         for(int i = 0; i < 15; i++){
             Land land = new Land();
-            land.setX((int) i * gp.tileSize);
+            land.setX((int) i * gp.getTileSize());
             listLand.add(land);
         }
     }
@@ -115,11 +115,11 @@ public class ObstacleManager {
             checkCollision(player1, obs);
         }
         // Tambah obstacle setiap satu detik
-        if(updateCounter%gp.FPS == 1){
+        if(updateCounter%gp.getFPS() == 1){
             spawnCounter++;
             spawnObstacle();
         }
-        if (updateCounter % (gp.FPS*5)  == 0){
+        if (updateCounter % (gp.getFPS()*5)  == 0){
             speed++;
         }
         moveLand();
@@ -129,7 +129,7 @@ public class ObstacleManager {
     public void spawnObstacle(){
         // Random placement
         double rand = Math.random();
-        int xTile = listLand.get(listLand.size()-1).getX() + gp.tileSize*3 + gp.tileSize * (int) (rand * 3);
+        int xTile = listLand.get(listLand.size()-1).getX() + gp.getTileSize()*3 + gp.getTileSize() * (int) (rand * 3);
 
         // Random amount
         int obsCount;
@@ -145,7 +145,7 @@ public class ObstacleManager {
             obsCount = (int) (Math.random()*6);
         }
         for (int j= 0; j < obsCount; j++){
-            obstacles.add(new Obstacle(gp, xTile + gp.tileSize * j, gp.tileSize*3));
+            obstacles.add(new Obstacle(gp, xTile + gp.getTileSize() * j, gp.getTileSize()*3));
         }
     }
     public void moveObstacles(){
@@ -158,14 +158,14 @@ public class ObstacleManager {
             land.setX(land.getX()-speed);
         }
         Land firstLand = listLand.get(0);
-        if(firstLand.getX() + gp.tileSize <  - (gp.tileSize*2)){
-            firstLand.setX(listLand.get(listLand.size()-1).getX() + gp.tileSize);
+        if(firstLand.getX() + gp.getTileSize() <  - (gp.getTileSize()*2)){
+            firstLand.setX(listLand.get(listLand.size()-1).getX() + gp.getTileSize());
             listLand.add(firstLand);
             listLand.remove(0);
         }
     }
     public void deleteOffscreenObstacles(){
-        obstacles.removeIf(obs -> obs.getX() < -(gp.tileSize+10));
+        obstacles.removeIf(obs -> obs.getX() < -(gp.getTileSize()+10));
     }
     public void checkCollision(Player player, Obstacle obs){
         int px1 = player.getSolidAreaX() ;
@@ -183,7 +183,7 @@ public class ObstacleManager {
             gp.stopMusic();
             gp.playSFX(3);
             player.playDamageAnimation();
-            gp.gameState = gp.gameOverState;
+            gp.setGameState(gp.getGameOverState());
 
             // DEBUG
             //System.out.println("GAME OVER");
@@ -193,23 +193,23 @@ public class ObstacleManager {
     public void draw(Graphics2D g2){
         // Set background
         g2.setColor(new Color(80, 187, 255));
-        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+        g2.fillRect(0, 0, gp.getScreenWidth(), gp.getScreenHeight());
 
         // Loop untuk menampilkan setiap obstacle di ArrayList obstacles
         for (Obstacle obs: obstacles) {
             //g2.setColor(Color.white);
             //g2.fillRect(obs.getSolidAreaX(), obs.getSolidAreaY(), obs.solidArea.width, obs.solidArea.height);
-            g2.drawImage(obs.getImage(), obs.getX(), obs.getY(), gp.tileSize, gp.tileSize, null);
+            g2.drawImage(obs.getImage(), obs.getX(), obs.getY(), gp.getTileSize(), gp.getTileSize(), null);
         }
         for (Land land : listLand){
-            g2.drawImage(land.getImage(), land.getX(), gp.tileSize*4, gp.tileSize, gp.tileSize, null);
-            g2.drawImage(land.getImage(), land.getX(), gp.tileSize*9, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(land.getImage(), land.getX(), gp.getTileSize()*4, gp.getTileSize(), gp.getTileSize(), null);
+            g2.drawImage(land.getImage(), land.getX(), gp.getTileSize()*9, gp.getTileSize(), gp.getTileSize(), null);
         }
     }
     public void resetObstacles(){
         obstacles.clear();
-        x = gp.tileSize*4;
-        y = gp.tileSize*3;
+        x = gp.getTileSize()*4;
+        y = gp.getTileSize()*3;
         speed = defaultSpeed;
     }
 

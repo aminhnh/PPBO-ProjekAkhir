@@ -7,39 +7,41 @@ import tile.ObstacleManager;
 // CLASS UNTUK MENGATUR GAME
 
 public class GamePanel extends JPanel implements Runnable{
+//    Attribute
     // Screen Settings
-    final int originalTileSize = 16;  // 16x16px
-    public final int scale = 3;
-    public final int tileSize = originalTileSize * scale; // 16x3 = 48
-    public final int maxScreenCol = 12; // Banyak kolom tile
-    public final int maxScreenRow = 10; // Banyak baris tile
-    public final int screenWidth = tileSize * maxScreenCol;
-    public final int screenHeight = tileSize * maxScreenRow;
+    private final int originalTileSize = 16;  // 16x16px
+    private final int scale = 3;
+    private final int tileSize = originalTileSize * scale; // 16x3 = 48
+    private final int maxScreenCol = 12; // Banyak kolom tile
+    private final int maxScreenRow = 10; // Banyak baris tile
+    private final int screenWidth = tileSize * maxScreenCol;
+    private final int screenHeight = tileSize * maxScreenRow;
 
     // FPS
-    public final int FPS =  60; // Berapa kali game di-update per detik
-    public int actualFPS;
+    private final int FPS =  60; // Berapa kali game di-update per detik
+    private int actualFPS;
 
     // SYSTEM
-    KeyHandler keyHandler = new KeyHandler(this);
-    Sound music = new Sound();
-    Sound sfx = new Sound();
-    Sound sfxMoveCursor = new Sound();
-    public UI ui = new UI(this);
-    Thread gameThread;
+    private KeyHandler keyHandler = new KeyHandler(this);
+    private Sound music = new Sound();
+    private Sound sfx = new Sound();
+    private Sound sfxMoveCursor = new Sound();
+    private UI ui = new UI(this);
+    private Thread gameThread;
 
     // ENTITY & OBJECT
-    Player player;
-    ObstacleManager obstacleManager;
+    private Player player;
+    private ObstacleManager obstacleManager;
 
     // GAME STATE
-    public int gameState;
-    public final int titleState = 0;
-    public final int playState = 1;
-    public final int pauseState = 2;
-    public final int gameOverState = 3;
-    public int score, highScore, counterScore = 0;
+    private int gameState;
+    private final int titleState = 0;
+    private final int playState = 1;
+    private final int pauseState = 2;
+    private final int gameOverState = 3;
+    private int score, highScore, counterScore = 0;
 
+//    Constructor
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
@@ -49,6 +51,161 @@ public class GamePanel extends JPanel implements Runnable{
         player = new Player(this, keyHandler, "green");
         obstacleManager = new ObstacleManager(this, player, player);
     }
+
+//    Getter Setter
+    public int getOriginalTileSize() {
+        return originalTileSize;
+    }
+
+    public int getScale() {
+        return scale;
+    }
+
+    public int getTileSize() {
+        return tileSize;
+    }
+
+    public int getMaxScreenCol() {
+        return maxScreenCol;
+    }
+
+    public int getMaxScreenRow() {
+        return maxScreenRow;
+    }
+
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public int getScreenHeight() {
+        return screenHeight;
+    }
+
+    public int getFPS() {
+        return FPS;
+    }
+
+    public int getActualFPS() {
+        return actualFPS;
+    }
+
+    public void setActualFPS(int actualFPS) {
+        this.actualFPS = actualFPS;
+    }
+
+    public KeyHandler getKeyHandler() {
+        return keyHandler;
+    }
+
+    public void setKeyHandler(KeyHandler keyHandler) {
+        this.keyHandler = keyHandler;
+    }
+
+    public Sound getMusic() {
+        return music;
+    }
+
+    public void setMusic(Sound music) {
+        this.music = music;
+    }
+
+    public Sound getSfx() {
+        return sfx;
+    }
+
+    public void setSfx(Sound sfx) {
+        this.sfx = sfx;
+    }
+
+    public Sound getSfxMoveCursor() {
+        return sfxMoveCursor;
+    }
+
+    public void setSfxMoveCursor(Sound sfxMoveCursor) {
+        this.sfxMoveCursor = sfxMoveCursor;
+    }
+
+    public UI getUi() {
+        return ui;
+    }
+
+    public void setUi(UI ui) {
+        this.ui = ui;
+    }
+
+    public Thread getGameThread() {
+        return gameThread;
+    }
+
+    public void setGameThread(Thread gameThread) {
+        this.gameThread = gameThread;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public ObstacleManager getObstacleManager() {
+        return obstacleManager;
+    }
+
+    public void setObstacleManager(ObstacleManager obstacleManager) {
+        this.obstacleManager = obstacleManager;
+    }
+
+    public int getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(int gameState) {
+        this.gameState = gameState;
+    }
+
+    public int getTitleState() {
+        return titleState;
+    }
+
+    public int getPlayState() {
+        return playState;
+    }
+
+    public int getPauseState() {
+        return pauseState;
+    }
+
+    public int getGameOverState() {
+        return gameOverState;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getHighScore() {
+        return highScore;
+    }
+
+    public void setHighScore(int highScore) {
+        this.highScore = highScore;
+    }
+
+    public int getCounterScore() {
+        return counterScore;
+    }
+
+    public void setCounterScore(int counterScore) {
+        this.counterScore = counterScore;
+    }
+
+    //    Method
     public void setupGame(){
         gameState = titleState;
     }
