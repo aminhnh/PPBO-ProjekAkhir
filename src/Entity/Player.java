@@ -111,13 +111,13 @@ public class Player extends Entity{
 
     public void update(){
         //System.out.println("Y = "+y+"  v = "+velocity);
-        if(keyHandler.isUpPressed() || isJumping){
+        if(keyHandler.isUpPressed1() || isJumping){
             setDirection("up");
-        } else if (keyHandler.isDownPressed()){
+        } else if (keyHandler.isDownPressed1()){
             setDirection("down");
-        } else if (keyHandler.isLeftPressed()){
+        } else if (keyHandler.isLeftPressed1()){
             setX(super.getX()-super.getSpeed());
-        } else if (keyHandler.isRightPressed()) {
+        } else if (keyHandler.isRightPressed1()) {
             setX(getX()+getSpeed());
         } else{
             setDirection("run");
@@ -134,7 +134,7 @@ public class Player extends Entity{
 
         // TODO: Make Jump better
         // Kode dibawah ini mengatur dino lompat
-        if (keyHandler.isUpPressed() && onFloor() && !isJumping){
+        if (keyHandler.isUpPressed1() && onFloor() && !isJumping){
             // saat tekan naik & player di lantai:
             gp.playSFX(1);
             velocity = 20;

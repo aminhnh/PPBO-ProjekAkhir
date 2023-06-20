@@ -2,6 +2,8 @@ package main;
 import Entity.Player;
 import javax.swing.*;
 import java.awt.*;
+
+import Entity.Player2;
 import tile.ObstacleManager;
 
 // CLASS UNTUK MENGATUR GAME
@@ -49,8 +51,8 @@ public class GamePanel extends JPanel implements Runnable{
         this.setDoubleBuffered(true); // Tile diluar layar akan di load
         this.addKeyListener(keyHandler);
         this.setFocusable(true); // fokus menerima input
-        player1 = new Player(this, keyHandler, "green");
-        player2 = new Player(this, keyHandler, "green");
+        player1 = new Player(this, keyHandler, "blue");
+        player2 = new Player2(this, keyHandler, "blue");
         obstacleManager = new ObstacleManager(this, player1, player2);
     }
 

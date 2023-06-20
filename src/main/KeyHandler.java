@@ -6,7 +6,9 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 //    Attribute
-    private boolean upPressed, downPressed, leftPressed, rightPressed;
+//    private boolean upPressed11, downPressed11, leftPressed11, rightPressed11;
+    private boolean upPressed1, downPressed1, leftPressed1, rightPressed1;
+    private boolean upPressed2, downPressed2, leftPressed2, rightPressed2;
     private GamePanel gp;
 
 //    Constructor
@@ -15,36 +17,69 @@ public class KeyHandler implements KeyListener {
     }
 
 //    Getter Setter
-    public boolean isUpPressed() {
-        return upPressed;
+
+    public boolean isUpPressed1() {
+        return upPressed1;
     }
 
-    public void setUpPressed(boolean upPressed) {
-        this.upPressed = upPressed;
+    public void setUpPressed1(boolean upPressed1) {
+        this.upPressed1 = upPressed1;
     }
 
-    public boolean isDownPressed() {
-        return downPressed;
+    public boolean isDownPressed1() {
+        return downPressed1;
     }
 
-    public void setDownPressed(boolean downPressed) {
-        this.downPressed = downPressed;
+    public void setDownPressed1(boolean downPressed1) {
+        this.downPressed1 = downPressed1;
     }
 
-    public boolean isLeftPressed() {
-        return leftPressed;
+    public boolean isLeftPressed1() {
+        return leftPressed1;
     }
 
-    public void setLeftPressed(boolean leftPressed) {
-        this.leftPressed = leftPressed;
+    public void setLeftPressed1(boolean leftPressed1) {
+        this.leftPressed1 = leftPressed1;
     }
 
-    public boolean isRightPressed() {
-        return rightPressed;
+    public boolean isRightPressed1() {
+        return rightPressed1;
     }
 
-    public void setRightPressed(boolean rightPressed) {
-        this.rightPressed = rightPressed;
+    public void setRightPressed1(boolean rightPressed1) {
+        this.rightPressed1 = rightPressed1;
+    }
+
+    public boolean isUpPressed2() {
+        return upPressed2;
+    }
+
+    public void setUpPressed2(boolean upPressed2) {
+        this.upPressed2 = upPressed2;
+    }
+
+    public boolean isDownPressed2() {
+        return downPressed2;
+    }
+
+    public void setDownPressed2(boolean downPressed2) {
+        this.downPressed2 = downPressed2;
+    }
+
+    public boolean isLeftPressed2() {
+        return leftPressed2;
+    }
+
+    public void setLeftPressed2(boolean leftPressed2) {
+        this.leftPressed2 = leftPressed2;
+    }
+
+    public boolean isRightPressed2() {
+        return rightPressed2;
+    }
+
+    public void setRightPressed2(boolean rightPressed2) {
+        this.rightPressed2 = rightPressed2;
     }
 
     public GamePanel getGp() {
@@ -131,18 +166,22 @@ public class KeyHandler implements KeyListener {
         // PLAY STATE
         else if (gp.getGameState() == gp.getPlayState()){
             if (code == KeyEvent.VK_UP){
-                upPressed = true;
-            }
-            if (code == KeyEvent.VK_DOWN){
-                downPressed = true;
-            }
-            if (code == KeyEvent.VK_LEFT){
-                leftPressed = true;
-            }
-            if (code == KeyEvent.VK_RIGHT){
-                rightPressed = true;
-            }
-            if (code == KeyEvent.VK_ESCAPE || code == KeyEvent.VK_SPACE){
+                upPressed1 = true;
+            } else if (code == KeyEvent.VK_W) {
+                upPressed2 = true;
+            } else if (code == KeyEvent.VK_DOWN){
+                downPressed1 = true;
+            } else if (code == KeyEvent.VK_S) {
+                downPressed2 = true;
+            } else if (code == KeyEvent.VK_LEFT){
+                leftPressed1 = true;
+            } else if (code == KeyEvent.VK_A) {
+                leftPressed2 = true;
+            } else if (code == KeyEvent.VK_RIGHT){
+                rightPressed1 = true;
+            } else if (code == KeyEvent.VK_D) {
+                rightPressed2 = true;
+            } else if (code == KeyEvent.VK_ESCAPE || code == KeyEvent.VK_SPACE){
                 gp.setGameState(gp.getPauseState());
                 gp.getMusic().pause();
             }
@@ -215,16 +254,28 @@ public class KeyHandler implements KeyListener {
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
         if (code == KeyEvent.VK_UP){
-            upPressed = false;
+            upPressed1 = false;
         }
         if (code == KeyEvent.VK_DOWN){
-            downPressed = false;
+            downPressed1 = false;
         }
         if (code == KeyEvent.VK_LEFT){
-            leftPressed = false;
+            leftPressed1 = false;
         }
         if (code == KeyEvent.VK_RIGHT){
-            rightPressed = false;
+            rightPressed1 = false;
+        }
+        if (code == KeyEvent.VK_W){
+            upPressed2 = false;
+        }
+        if (code == KeyEvent.VK_S){
+            downPressed2 = false;
+        }
+        if (code == KeyEvent.VK_A){
+            leftPressed2 = false;
+        }
+        if (code == KeyEvent.VK_D){
+            rightPressed2 = false;
         }
     }
 }
