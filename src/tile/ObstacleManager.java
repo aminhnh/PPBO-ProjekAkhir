@@ -169,12 +169,12 @@ public class ObstacleManager {
     }
     public void checkCollision(Player player, Obstacle obs){
         int px1 = player.getSolidAreaX() ;
-        int px2 = player.getSolidAreaX() + player.solidArea.width;
+        int px2 = player.getSolidAreaX() + player.getSolidArea().width;
         int ox1 = obs.getSolidAreaX();
         int ox2 = obs.getSolidAreaX() + obs.getSolidArea().width;
 
         int py1 = player.getSolidAreaY();
-        int py2 = player.getSolidAreaY() + player.solidArea.height;
+        int py2 = player.getSolidAreaY() + player.getSolidArea().height;
         int oy1 = obs.getSolidAreaY();
         int oy2 = obs.getSolidAreaY() + obs.getSolidArea().height;
 

@@ -86,13 +86,13 @@ public class UI {
         int playerSize = gp.tileSize*2;
         y += gp.tileSize;
         x = (gp.screenWidth - (playerSize*4))/2;
-        g2.drawImage(playerSkins[0].up1, x, y, playerSize,playerSize, null);
+        g2.drawImage(playerSkins[0].getUp1(), x, y, playerSize,playerSize, null);
         x += gp.tileSize*2;
-        g2.drawImage(playerSkins[1].up1, x, y, playerSize,playerSize, null);
+        g2.drawImage(playerSkins[1].getUp1(), x, y, playerSize,playerSize, null);
         x += gp.tileSize*4;
-        g2.drawImage(playerSkins[2].up1, x, y, -playerSize,playerSize, null);
+        g2.drawImage(playerSkins[2].getUp1(), x, y, -playerSize,playerSize, null);
         x += gp.tileSize*2;
-        g2.drawImage(playerSkins[3].up1, x, y, -playerSize,playerSize, null);
+        g2.drawImage(playerSkins[3].getUp1(), x, y, -playerSize,playerSize, null);
 
         // Menu
         g2.setFont(fontMenu);
@@ -157,21 +157,21 @@ public class UI {
         int playerSize = gp.tileSize*4;
         x = (int)(gp.screenWidth/3.5) - playerSize/2;
         y += gp.tileSize*1.5;
-        g2.drawImage(playerSkins[player1Skin].up1, x, y, playerSize,playerSize, null);
+        g2.drawImage(playerSkins[player1Skin].getUp1(), x, y, playerSize,playerSize, null);
 
         x = (int)(gp.screenWidth/3) + playerSize/2;
-        g2.drawImage(playerSkins[player2Skin].up1, x, y, playerSize,playerSize, null);
+        g2.drawImage(playerSkins[player2Skin].getUp1(), x, y, playerSize,playerSize, null);
 
         // Options
         g2.setFont(fontMenu);
-        text = PlayerSkin.skinColor[player1Skin];
+        text = PlayerSkin.getSkinColor()[player1Skin];
         x = getXforCenteredText(text);
         y += gp.tileSize * 5;
         g2.drawString(text, getQuarterX(text, false), y);
         text = ">             <";
         g2.drawString(text, getQuarterX(text, false), y);
 
-        text = PlayerSkin.skinColor[player2Skin];
+        text = PlayerSkin.getSkinColor()[player2Skin];
         g2.drawString(text, getQuarterX(text, true), y);
         text = ">             <";
         g2.drawString(text, getQuarterX(text, true), y);
