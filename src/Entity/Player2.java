@@ -10,13 +10,13 @@ public class Player2 extends Player{
 
     public void update(){
         //System.out.println("Y = "+y+"  v = "+velocity);
-        if(getKeyHandler().isUpPressed1() || isJumping){
+        if(getKeyHandler().isUpPressed2() || isJumping){
             setDirection("up");
-        } else if (getKeyHandler().isDownPressed1()){
+        } else if (getKeyHandler().isDownPressed2()){
             setDirection("down");
-        } else if (getKeyHandler().isLeftPressed1()){
+        } else if (getKeyHandler().isLeftPressed2()){
             setX(super.getX()-super.getSpeed());
-        } else if (getKeyHandler().isRightPressed1()) {
+        } else if (getKeyHandler().isRightPressed2()) {
             setX(getX()+getSpeed());
         } else{
             setDirection("run");
@@ -33,7 +33,7 @@ public class Player2 extends Player{
 
         // TODO: Make Jump better
         // Kode dibawah ini mengatur dino lompat
-        if (getKeyHandler().isUpPressed1() && onFloor() && !isJumping){
+        if (getKeyHandler().isUpPressed2() && onFloor() && !isJumping){
             // saat tekan naik & player di lantai:
             getGp().playSFX(1);
             velocity = 20;
