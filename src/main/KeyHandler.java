@@ -134,6 +134,7 @@ public class KeyHandler implements KeyListener {
             // Set Player skin
         }else if (gp.getGameState() == gp.getTitleState() && gp.getUi().titleScreenState == gp.getUi().titleScreenCharacter) {
             if(code == KeyEvent.VK_ENTER || code == KeyEvent.VK_SPACE){
+                gp.playSFXCursorMove(2);
                 if (gp.getUi().player1Skin != gp.getUi().player2Skin){
                     gp.getUi().titleScreenState = gp.getUi().titleScreenMenu;
                     gp.getPlayer1().setSkin(gp.getUi().playerSkins[gp.getUi().player1Skin]);

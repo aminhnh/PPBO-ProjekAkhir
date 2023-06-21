@@ -25,10 +25,6 @@ public class Player2 extends Player{
             setDirection("up");
         } else if (getKeyHandler().isDownPressed2()){
             setDirection("down");
-        } else if (getKeyHandler().isLeftPressed2()){
-            setX(super.getX()-super.getSpeed());
-        } else if (getKeyHandler().isRightPressed2()) {
-            setX(getX()+getSpeed());
         } else{
             setDirection("run");
         }

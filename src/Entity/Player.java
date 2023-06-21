@@ -117,10 +117,6 @@ public class Player extends Entity{
             setDirection("up");
         } else if (keyHandler.isDownPressed1()){
             setDirection("down");
-        } else if (keyHandler.isLeftPressed1()){
-            setX(super.getX()-super.getSpeed());
-        } else if (keyHandler.isRightPressed1()) {
-            setX(getX()+getSpeed());
         } else{
             setDirection("run");
         }
