@@ -208,10 +208,6 @@ public class GamePanel extends JPanel implements Runnable{
         return highScore;
     }
 
-    public void setHighScore(int highScore) {
-        this.highScore = highScore;
-    }
-
     public int getCounterScore() {
         return counterScore;
     }
@@ -340,5 +336,14 @@ public class GamePanel extends JPanel implements Runnable{
         obstacleManager.resetObstacles();
         gameState = playState;
         playMusic();
+    }
+    public boolean setHighScore(int newScore){
+        if (newScore > highScore){
+            highScore = newScore;
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

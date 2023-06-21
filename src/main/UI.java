@@ -311,6 +311,18 @@ public class UI {
         y += gp.getTileSize();
         g2.drawString(text, x, y);
 
+        // TODO: INI KOK NGGA NAMPIL SIH
+        if (gp.setHighScore(gp.getScore())){
+            text = "NEW HIGHSCORE!!";
+            x = getXforCenteredText(text);
+            y += gp.getTileSize()*3;
+            g2.drawString(text, x, y);
+        }
+
+        text = "Highscore: "+gp.getHighScore();
+        x = getXforCenteredText(text);
+        y += gp.getTileSize();
+        g2.drawString(text, x, y);
     }
     public void drawFPS(){
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 24F));
