@@ -134,13 +134,18 @@ public class KeyHandler implements KeyListener {
             // Set Player skin
         }else if (gp.getGameState() == gp.getTitleState() && gp.getUi().titleScreenState == gp.getUi().titleScreenCharacter) {
             if(code == KeyEvent.VK_ENTER || code == KeyEvent.VK_SPACE){
-                gp.getUi().titleScreenState = gp.getUi().titleScreenMenu;
-                gp.getPlayer1().setSkin(gp.getUi().playerSkins[gp.getUi().player1Skin]);
-                gp.getPlayer2().setSkin(gp.getUi().playerSkins[gp.getUi().player2Skin]);
-                gp.setGameState(gp.getPlayState());
-                gp.playMusic();
-            }
-            else if(code == KeyEvent.VK_W || code == KeyEvent.VK_A){
+                if (gp.getUi().player1Skin != gp.getUi().player2Skin){
+                    gp.getUi().titleScreenState = gp.getUi().titleScreenMenu;
+                    gp.getPlayer1().setSkin(gp.getUi().playerSkins[gp.getUi().player1Skin]);
+                    gp.getPlayer2().setSkin(gp.getUi().playerSkins[gp.getUi().player2Skin]);
+                    gp.setGameState(gp.getPlayState());
+                    gp.playMusic();
+                }
+            } else if (code == KeyEvent.VK_ESCAPE) {
+                    gp.setGameState(gp.getTitleState());
+                    gp.getUi().titleScreenState = gp.getUi().titleScreenMenu;
+
+            } else if(code == KeyEvent.VK_W || code == KeyEvent.VK_A){
                     gp.getUi().player1Skin--;
                     gp.playSFXCursorMove(2);
             } else if (code == KeyEvent.VK_S || code == KeyEvent.VK_D){

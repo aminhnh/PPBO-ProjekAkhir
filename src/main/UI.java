@@ -157,10 +157,10 @@ public class UI {
         int playerSize = gp.getTileSize()*4;
         x = (int)(gp.getScreenWidth()/3.5) - playerSize/2;
         y += gp.getTileSize()*1.5;
-        g2.drawImage(playerSkins[player1Skin].getUp1(), x, y, playerSize,playerSize, null);
+        g2.drawImage(playerSkins[player1Skin].getRun3(), x, y, playerSize,playerSize, null);
 
         x = (int)(gp.getScreenWidth()/3) + playerSize/2;
-        g2.drawImage(playerSkins[player2Skin].getUp1(), x, y, playerSize,playerSize, null);
+        g2.drawImage(playerSkins[player2Skin].getRun3(), x, y, playerSize,playerSize, null);
 
         // Options
         g2.setFont(fontMenu);
@@ -175,6 +175,18 @@ public class UI {
         g2.drawString(text, getQuarterX(text, true), y);
         text = ">             <";
         g2.drawString(text, getQuarterX(text, true), y);
+
+        if(player1Skin == player2Skin){
+            drawSkinError();
+        }
+    }
+    public void drawSkinError(){
+        g2.setFont(fontCredits);
+        String text = "Player skin cannot be the same!";
+        g2.setColor(Color.white);
+        int x = getXforCenteredText(text);
+        int y = gp.getTileSize()*9;
+        g2.drawString(text, x, y);
     }
     public int getQuarterX(String text, boolean right){
         int textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
@@ -321,7 +333,7 @@ public class UI {
 
         text = "Highscore: "+gp.getHighScore();
         x = getXforCenteredText(text);
-        y += gp.getTileSize();
+        y += gp.getTileSize()*2.5;
         g2.drawString(text, x, y);
     }
     public void drawFPS(){
@@ -334,6 +346,7 @@ public class UI {
         g2.setColor(Color.white);
         g2.drawString(String.format("%05d", gp.getScore()), gp.getScreenWidth()- (int) (gp.getTileSize()*2.5), (int)(gp.getTileSize()*0.7));
     }
+
     public int getXforCenteredText(String text){
         int textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         return gp.getScreenWidth()/2 - textLength/2;
