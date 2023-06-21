@@ -15,6 +15,7 @@ public class ObstacleManager {
     private ArrayList<Obstacle> obstacles;
     private ArrayList<Land> listLand;
     private Player player1, player2;
+    private boolean player1Died, player2Died;
     private int x, y, updateCounter, spawnCounter, speed;
     private final int defaultSpeed = 5;
 
@@ -185,16 +186,31 @@ public class ObstacleManager {
 
         // Intersection antara player dan obstacle
         if (p1x1 < ox2 && p1x2 > ox1 && p1y1 < oy2 && p1y2 > oy1){
+            player1Died = true;
+        }
+        if (p2x1 < ox2 && p2x2 > ox1 && p2y1 < oy2 + gp.getTileSize()*5 && p2y2 > oy1 + + gp.getTileSize()*5){
+            player2Died = true;
+        }
+
+        if (player1Died && player2Died){
+            // Both player died at the same time
+            player1Died = false;
+            player2Died = false;
+            gp.stopMusic();
+            gp.playSFX(3);
+            player1.playDamageAnimation();
+            player2.playDamageAnimation();
+            gp.setWinner("NOBODY");
+            gp.setGameState(gp.getGameOverState());
+        } else if (player1Died) {
+            player1Died = false;
             gp.stopMusic();
             gp.playSFX(3);
             player1.playDamageAnimation();
             gp.setWinner(player2.getSkin().getColor());
             gp.setGameState(gp.getGameOverState());
-
-            // DEBUG
-            //System.out.println("GAME OVER");
-            //System.out.println("PX1: "+px1+ " PX2: "+px2+" OX1: "+ox1+" OX2 "+ox2);
-        } else if (p2x1 < ox2 && p2x2 > ox1 && p2y1 < oy2 + gp.getTileSize()*5 && p2y2 > oy1 + + gp.getTileSize()*5){
+        } else if (player2Died) {
+            player2Died = false;
             gp.stopMusic();
             gp.playSFX(3);
             player2.playDamageAnimation();
