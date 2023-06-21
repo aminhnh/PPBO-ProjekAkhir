@@ -9,23 +9,24 @@ import java.io.InputStream;
 import java.util.List;
 
 public class UI {
-    GamePanel gp;
-    UIAssets uiAssets;
-    Graphics2D g2;
-    Font arial_16B;
-    Font pixellari, minecraft, upheavtt, fontMenu, fontCredits, fontTitle;
-    public int menuNum = 0;
-    public int player1Skin, player2Skin = 0;
-    public PlayerSkin[] playerSkins;
+//    Attribute
+    private GamePanel gp;
+    private UIAssets uiAssets;
+    private Graphics2D g2;
+    private Font arial_16B;
+    private Font pixellari, minecraft, upheavtt, fontMenu, fontCredits, fontTitle;
+    private int menuNum = 0;
+    private int player1Skin, player2Skin = 0;
+    private PlayerSkin[] playerSkins;
 
     // Title Screen Sub-state
-    public int titleScreenState = 0;
-    public final int titleScreenMenu = 0;
-    public final int titleScreenCredits = 1;
-    public final int titleScreenSettings = 2;
-    public final int titleScreenCharacter = 3;
+    private int titleScreenState = 0;
+    private final int titleScreenMenu = 0;
+    private final int titleScreenCredits = 1;
+    private final int titleScreenSettings = 2;
+    private final int titleScreenCharacter = 3;
 
-
+//    Constructor
     public UI(GamePanel gp) {
         this.gp = gp;
         this.uiAssets = new UIAssets();
@@ -38,6 +39,146 @@ public class UI {
         fontCredits = pixellari.deriveFont(Font.PLAIN, 20F);
         fontTitle = upheavtt.deriveFont(Font.PLAIN, 60F);
     }
+
+//    Getter Setter
+    public GamePanel getGp() {
+        return gp;
+    }
+
+    public void setGp(GamePanel gp) {
+        this.gp = gp;
+    }
+
+    public UIAssets getUiAssets() {
+        return uiAssets;
+    }
+
+    public void setUiAssets(UIAssets uiAssets) {
+        this.uiAssets = uiAssets;
+    }
+
+    public Graphics2D getG2() {
+        return g2;
+    }
+
+    public void setG2(Graphics2D g2) {
+        this.g2 = g2;
+    }
+
+    public Font getArial_16B() {
+        return arial_16B;
+    }
+
+    public void setArial_16B(Font arial_16B) {
+        this.arial_16B = arial_16B;
+    }
+
+    public Font getPixellari() {
+        return pixellari;
+    }
+
+    public void setPixellari(Font pixellari) {
+        this.pixellari = pixellari;
+    }
+
+    public Font getMinecraft() {
+        return minecraft;
+    }
+
+    public void setMinecraft(Font minecraft) {
+        this.minecraft = minecraft;
+    }
+
+    public Font getUpheavtt() {
+        return upheavtt;
+    }
+
+    public void setUpheavtt(Font upheavtt) {
+        this.upheavtt = upheavtt;
+    }
+
+    public Font getFontMenu() {
+        return fontMenu;
+    }
+
+    public void setFontMenu(Font fontMenu) {
+        this.fontMenu = fontMenu;
+    }
+
+    public Font getFontCredits() {
+        return fontCredits;
+    }
+
+    public void setFontCredits(Font fontCredits) {
+        this.fontCredits = fontCredits;
+    }
+
+    public Font getFontTitle() {
+        return fontTitle;
+    }
+
+    public void setFontTitle(Font fontTitle) {
+        this.fontTitle = fontTitle;
+    }
+
+    public int getMenuNum() {
+        return menuNum;
+    }
+
+    public void setMenuNum(int menuNum) {
+        this.menuNum = menuNum;
+    }
+
+    public int getPlayer1Skin() {
+        return player1Skin;
+    }
+
+    public void setPlayer1Skin(int player1Skin) {
+        this.player1Skin = player1Skin;
+    }
+
+    public int getPlayer2Skin() {
+        return player2Skin;
+    }
+
+    public void setPlayer2Skin(int player2Skin) {
+        this.player2Skin = player2Skin;
+    }
+
+    public PlayerSkin[] getPlayerSkins() {
+        return playerSkins;
+    }
+
+    public void setPlayerSkins(PlayerSkin[] playerSkins) {
+        this.playerSkins = playerSkins;
+    }
+
+    public int getTitleScreenState() {
+        return titleScreenState;
+    }
+
+    public void setTitleScreenState(int titleScreenState) {
+        this.titleScreenState = titleScreenState;
+    }
+
+    public int getTitleScreenMenu() {
+        return titleScreenMenu;
+    }
+
+    public int getTitleScreenCredits() {
+        return titleScreenCredits;
+    }
+
+    public int getTitleScreenSettings() {
+        return titleScreenSettings;
+    }
+
+    public int getTitleScreenCharacter() {
+        return titleScreenCharacter;
+    }
+
+
+//    Method
     public void draw(Graphics2D g2){
         this.g2 = g2;
         if (gp.getGameState() == gp.getTitleState()){
