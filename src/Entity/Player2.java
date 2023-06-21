@@ -15,6 +15,8 @@ public class Player2 extends Player{
         setY((getGp().getTileSize()+2)*7);
         setSpeed(5);
         setDirection("run");
+        isJumping = false;
+        onAir = false;
     }
     @Override
     public void update(){
@@ -66,6 +68,9 @@ public class Player2 extends Player{
         }
         if (velocity == 0 && onFloor()){
             isJumping = false;
+        }
+        if (getY() > floor){
+            setY((int) floor);
         }
 
     }

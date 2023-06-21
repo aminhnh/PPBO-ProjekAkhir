@@ -25,7 +25,7 @@ public abstract class Entity {
     }
 
     public int getY() {
-        return y;
+        return this.y;
     }
 
     public void setY(int y) {

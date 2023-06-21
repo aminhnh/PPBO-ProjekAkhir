@@ -103,6 +103,8 @@ public class Player extends Entity{
         setY((gp.getTileSize()+6)*2);
         setSpeed(5);
         setDirection("run");
+        isJumping = false;
+        onAir = false;
     }
 
     // Me-return lokasi solidArea pada layar
@@ -133,8 +135,9 @@ public class Player extends Entity{
         }
 
         // Kode dibawah ini mengatur dino lompat
+        System.out.println(floor+" - "+getY()+Math.random());
         if (keyHandler.isUpPressed1() && onFloor() && !isJumping){
-            // saat tekan naik & player di lantai:
+            System.out.println("MASUK SINI "+Math.random());
             gp.playSFX(1);
             velocity = 20;
             isJumping = true;
@@ -158,6 +161,9 @@ public class Player extends Entity{
         if (velocity == 0 && onFloor()){
             isJumping = false;
         }
+        if (getY() > floor){
+            setY((int) floor);
+        }
 
     }
     public void playDamageAnimation(){
@@ -167,7 +173,11 @@ public class Player extends Entity{
         setY((int) (getY()-v));
     }
     public boolean onFloor(){
-        return getY() <= floor;
+        if (getY() >= floor){
+            return true;
+        } else {
+            return false;
+        }
     }
     public void draw(Graphics2D g2){
 
