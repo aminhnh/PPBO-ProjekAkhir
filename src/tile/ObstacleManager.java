@@ -197,7 +197,7 @@ public class ObstacleManager {
         } else if (p2x1 < ox2 && p2x2 > ox1 && p2y1 < oy2 + gp.getTileSize()*5 && p2y2 > oy1 + + gp.getTileSize()*5){
             gp.stopMusic();
             gp.playSFX(3);
-            player1.playDamageAnimation();
+            player2.playDamageAnimation();
             gp.setWinner(player1.getSkin().getColor());
             gp.setGameState(gp.getGameOverState());
         }
