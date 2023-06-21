@@ -254,6 +254,15 @@ public class UI {
     public void drawSettingsScreen(){
         g2.setColor(new Color(80, 187, 255));
         g2.fillRect(0, 0, gp.getScreenWidth(), gp.getScreenHeight());
+
+        // Draw "SETTINGS" text
+        g2.setFont(fontTitle);
+        g2.setColor(Color.white);
+        String text = "SETTINGS";
+        int x = getXforCenteredText(text);
+        int y = (int)(gp.getTileSize() * 2.5);
+        g2.drawString(text, x, y);
+
         drawSettings();
     }
     public void drawSettings(){
