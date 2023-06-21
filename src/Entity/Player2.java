@@ -6,8 +6,17 @@ import main.KeyHandler;
 public class Player2 extends Player{
     public Player2(GamePanel gp, KeyHandler keyHandler, String color) {
         super(gp, keyHandler, color);
+        floor = (getGp().getTileSize()+2)*7;
     }
 
+    @Override
+    public void setDefaultValues(){
+        setX(getGp().getTileSize()*2);
+        setY((getGp().getTileSize()+2)*7);
+        setSpeed(5);
+        setDirection("run");
+    }
+    @Override
     public void update(){
         //System.out.println("Y = "+y+"  v = "+velocity);
         if(getKeyHandler().isUpPressed2() || isJumping){
