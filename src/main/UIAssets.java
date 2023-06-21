@@ -7,8 +7,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class UIAssets {
-    public BufferedImage button_w1, button_w2, button_s1, button_s2;
-    public ArrayList<BufferedImage> run;
+//    Attribute
+    private BufferedImage button_w1, button_w2, button_s1, button_s2;
+    private ArrayList<BufferedImage> run;
+
+//    Method
     public UIAssets(){
         getUIImage();
     }
