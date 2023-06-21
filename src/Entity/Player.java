@@ -135,9 +135,7 @@ public class Player extends Entity{
         }
 
         // Kode dibawah ini mengatur dino lompat
-        System.out.println(floor+" - "+getY()+Math.random());
         if (keyHandler.isUpPressed1() && onFloor() && !isJumping){
-            System.out.println("MASUK SINI "+Math.random());
             gp.playSFX(1);
             velocity = 20;
             isJumping = true;
