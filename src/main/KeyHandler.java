@@ -6,7 +6,6 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 //    Attribute
-//    private boolean upPressed11, downPressed11, leftPressed11, rightPressed11;
     private boolean upPressed1, downPressed1, leftPressed1, rightPressed1;
     private boolean upPressed2, downPressed2, leftPressed2, rightPressed2;
     private GamePanel gp;
@@ -162,7 +161,7 @@ public class KeyHandler implements KeyListener {
             }
             // Credits
         } else if (gp.getGameState() == gp.getTitleState() && gp.getUi().getTitleScreenState() == gp.getUi().getTitleScreenCredits()){
-            if (code == KeyEvent.VK_ENTER){
+            if (code == KeyEvent.VK_ENTER || code == KeyEvent.VK_ESCAPE || code == KeyEvent.VK_SPACE){
                 gp.playSFXCursorMove(2);
                 gp.getUi().setTitleScreenState(gp.getUi().getTitleScreenMenu());
             }
@@ -215,12 +214,15 @@ public class KeyHandler implements KeyListener {
                     gp.getUi().setMenuNum(0);
                 }
             }
-            if (code == KeyEvent.VK_ENTER){
+            if (code == KeyEvent.VK_ENTER || code == KeyEvent.VK_ESCAPE || code == KeyEvent.VK_SPACE){
                 if(gp.getUi().getMenuNum() == 0){
+                    gp.playSFXCursorMove(2);
                     gp.getUi().setTitleScreenState(gp.getUi().getTitleScreenMenu());
                 } else if (gp.getUi().getMenuNum() == 1){
+                    gp.playSFXCursorMove(2);
                     gp.getUi().setTitleScreenState(gp.getUi().getTitleScreenMenu());
                 } else if (gp.getUi().getMenuNum() == 2) {
+                    gp.playSFXCursorMove(2);
                     gp.getUi().setTitleScreenState(gp.getUi().getTitleScreenMenu());
                 }
             }
