@@ -16,6 +16,8 @@ public abstract class Entity {
     private Rectangle solidArea;
 
 //    Getter Setter
+    public abstract void update();
+    public abstract void setDefaultValues();
     public int getX() {
         return x;
     }
