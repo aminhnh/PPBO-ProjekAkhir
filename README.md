@@ -3,8 +3,8 @@
 ```
 Amanda Farliana Setyasari   22/499652/SV/21383
 Aminah Nurul Huda           22/494455/SV/20830
-Risma Saputri               22/504947/SV/21732
-Salwa Jasmine A'aliyah      22/505613/SV/21835
+Risma Saputri               22/505613/SV/21835
+Salwa Jasmine A'aliyah      22/504947/SV/21732
 ```
 <img src="https://github.com/aminhnh/PPBO-ProjekAkhir/assets/109867158/598863e8-dc07-4f75-9c36-bce0ff28ea18" height="300"> <img src="https://github.com/aminhnh/PPBO-ProjekAkhir/assets/109867158/d7c470bf-e73f-4164-82e0-3e4d4d858439" height="300">
 
