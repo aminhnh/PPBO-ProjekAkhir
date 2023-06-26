@@ -473,7 +473,6 @@ public class UI {
         y += gp.getTileSize();
         g2.drawString(text, x, y);
 
-        // TODO: INI KOK NGGA NAMPIL SIH
         if (gp.setHighScore(gp.getScore())){
             text = "NEW HIGHSCORE!!";
             x = getXforCenteredText(text);
